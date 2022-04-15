@@ -3,25 +3,23 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 
+import '../../models/event.dart';
 import '../../utils/constants/colors.dart';
-import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/cloud_marker.dart';
 
-enum EventType { tourist, politic, extravert, nurd }
-
-class Maps extends StatefulWidget {
-  Maps({Key? key}) : super(key: key);
+class MapScreen extends StatefulWidget {
+  MapScreen({Key? key}) : super(key: key);
 
   @override
-  _MapsState createState() => _MapsState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapsState extends State<Maps> with TickerProviderStateMixin {
+class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MapsController>(
-      init: MapsController(),
+    return GetBuilder<MapScreenController>(
+      init: MapScreenController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -45,7 +43,6 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.tourist,
                         onPressed: () => {},
                       ),
@@ -57,11 +54,8 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.extravert,
-                        onPressed: () => {
-                          Get.to(Event()),
-                        },
+                        onPressed: () => {},
                       ),
                     ),
                     Marker(
@@ -71,7 +65,6 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.nurd,
                         onPressed: () => {},
                       ),
@@ -83,7 +76,6 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.politic,
                         onPressed: () => {},
                       ),
@@ -95,7 +87,6 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.nurd,
                         onPressed: () => {},
                       ),
@@ -107,7 +98,6 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                       builder: (ctx) => CloudMarker(
                         id: '1',
                         title: 'Title example',
-                        introText: 'introText',
                         eventType: EventType.extravert,
                         onPressed: () => {},
                       ),

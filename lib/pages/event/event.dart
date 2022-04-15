@@ -3,16 +3,14 @@ import 'package:get/get.dart';
 
 import 'controller.dart';
 
-enum EventType { tourist, politic, extravert, nurd }
-
-class Event extends StatefulWidget {
-  Event({Key? key}) : super(key: key);
+class EventScreen extends StatefulWidget {
+  EventScreen({Key? key}) : super(key: key);
 
   @override
-  _EventState createState() => _EventState();
+  _EventScreenState createState() => _EventScreenState();
 }
 
-class _EventState extends State<Event> with TickerProviderStateMixin {
+class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EventController>(
@@ -21,8 +19,6 @@ class _EventState extends State<Event> with TickerProviderStateMixin {
         return Scaffold(
           backgroundColor: Colors.white,
           body: Container(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
-          floatingActionButton: Container(),
         );
       },
     );

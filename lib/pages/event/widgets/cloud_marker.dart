@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/event.dart';
 import '../../../utils/constants/colors.dart';
-import '../event.dart';
 
 // ignore: must_be_immutable
 class CloudMarker extends StatefulWidget {
   String id;
   String title;
-  String introText;
+
   EventType eventType;
   Function onPressed;
 
@@ -15,7 +15,6 @@ class CloudMarker extends StatefulWidget {
     Key? key,
     required this.id,
     required this.title,
-    required this.introText,
     required this.eventType,
     required this.onPressed,
   }) : super(key: key);

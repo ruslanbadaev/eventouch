@@ -1,9 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:eventouch/pages/map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
-import 'pages/map/map.dart';
+
 import 'pages/people/people.dart';
 import 'utils/constants/colors.dart';
 
@@ -61,7 +62,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                 IndexedStack(
                   index: controller.tabIndex,
                   children: [
-                    Maps(),
+                    MapScreen(),
                     People(),
                     People(),
                     People(),
