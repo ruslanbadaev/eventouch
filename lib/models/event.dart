@@ -1,5 +1,3 @@
-enum EventType { tourist, politic, extravert, nurd }
-
 class EventModel {
   final String id;
   final String title;

@@ -5,12 +5,15 @@ import 'package:latlong2/latlong.dart';
 import '../../models/event_marker.dart';
 
 class MapScreenController extends GetxController {
+  EventType? _selectedEventFilter;
   List<EventMarkerModel> events = [];
   @override
   void onInit() {
     super.onInit();
     fetchEvents(LatLng(51.521, -0.083));
   }
+
+  EventType? get selectedEventFilter => _selectedEventFilter;
 
   List<EventMarkerModel> fetchEvents(LatLng center) {
     List<EventMarkerModel> events = [];
@@ -61,6 +64,16 @@ class MapScreenController extends GetxController {
 
     for (Map<String, dynamic> event in jsonData) events.add(EventMarkerModel.fromJson(event));
 
-    return [];
+    return events;
+  }
+
+  void selectEventFilter(EventType event) {
+    print(event);
+    if (_selectedEventFilter == event) {
+      _selectedEventFilter = null;
+    } else {
+      _selectedEventFilter = event;
+    }
+    update();
   }
 }

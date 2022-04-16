@@ -3,8 +3,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 
-import '../../models/event.dart';
+import '../../models/event_marker.dart';
 import '../../utils/constants/colors.dart';
+import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/cloud_marker.dart';
 
@@ -36,72 +37,26 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 MarkerLayerOptions(
                   markers: [
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.52, -0.093),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.tourist,
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.524, -0.091),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.extravert,
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.521, -0.083),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.nurd,
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.511, -0.086),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.politic,
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.516, -0.08),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.nurd,
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Marker(
-                      width: 156.0,
-                      height: 56.0,
-                      point: latLng.LatLng(51.526, -0.07),
-                      builder: (ctx) => CloudMarker(
-                        id: '1',
-                        title: 'Title example',
-                        eventType: EventType.extravert,
-                        onPressed: () => {},
-                      ),
-                    ),
+                    for (EventMarkerModel event in controller.fetchEvents(latLng.LatLng(51.52, -0.093)))
+                      if (controller.selectedEventFilter == event.eventType || controller.selectedEventFilter == null)
+                        Marker(
+                          width: 156.0,
+                          height: 56.0,
+                          rotate: true,
+                          point: event.latLng,
+                          builder: (ctx) => CloudMarker(
+                            id: event.id,
+                            title: event.title,
+                            eventType: event.eventType,
+                            onPressed: () => {
+                              Get.to(
+                                EventScreen(
+                                  id: event.id,
+                                ),
+                              ),
+                            },
+                          ),
+                        ),
                   ],
                 ),
               ],
@@ -124,60 +79,77 @@ class _MapScreenState extends State<MapScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 12,
+                  for (EventType event in EventType.values.toList())
+                    _getFilterIcon(
+                      eventType: event,
+                      onPressed: controller.selectEventFilter,
+                      selectedEventFilter: controller.selectedEventFilter,
                     ),
-                    child: FloatingActionButton.extended(
-                      backgroundColor: AppColors.BLUE,
-                      onPressed: () {},
-                      icon: Icon(Icons.pedal_bike_rounded),
-                      label: Text('Tourists'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 12,
-                    ),
-                    child: FloatingActionButton.extended(
-                      backgroundColor: AppColors.PINK,
-                      onPressed: () {},
-                      icon: Icon(Icons.flag),
-                      label: Text('Politics'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 12,
-                    ),
-                    child: FloatingActionButton.extended(
-                      backgroundColor: AppColors.PURPLE,
-                      onPressed: () {},
-                      icon: Icon(Icons.music_note_rounded),
-                      label: Text('Extraverts'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 12,
-                    ),
-                    child: FloatingActionButton.extended(
-                      backgroundColor: AppColors.ORANGE,
-                      onPressed: () {},
-                      icon: Icon(Icons.computer_rounded),
-                      label: Text('Nurds'),
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _getFilterIcon({
+    required EventType eventType,
+    EventType? selectedEventFilter,
+    required Function(EventType) onPressed,
+  }) {
+    Widget? _avatarContent;
+    Color? _avatarColor = AppColors.SECONDARY;
+    String title = '';
+    switch (eventType) {
+      case EventType.tourist:
+        _avatarContent = Icon(
+          Icons.computer_rounded,
+          color: AppColors.BLACK,
+        );
+        title = 'Tourists';
+        _avatarColor = AppColors.BLUE;
+        break;
+      case EventType.politic:
+        _avatarContent = Icon(
+          Icons.pedal_bike_rounded,
+          color: AppColors.BLACK,
+        );
+        _avatarColor = AppColors.PINK;
+        title = 'Politics';
+        break;
+      case EventType.extravert:
+        _avatarContent = Icon(
+          Icons.music_note_rounded,
+          color: AppColors.BLACK,
+        );
+        _avatarColor = AppColors.PURPLE;
+        title = 'Extraverts';
+        break;
+      case EventType.nurd:
+        _avatarContent = Icon(
+          Icons.computer_rounded,
+          color: AppColors.BLACK,
+        );
+        _avatarColor = AppColors.ORANGE;
+        title = 'Nurds';
+        break;
+      default:
+    }
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 4,
+        vertical: 12,
+      ),
+      child: FloatingActionButton.extended(
+        backgroundColor:
+            _avatarColor!.withOpacity((selectedEventFilter == eventType || selectedEventFilter == null) ? 1 : .5),
+        onPressed: () => onPressed(eventType),
+        icon: _avatarContent,
+        label: Text(title),
+      ),
     );
   }
 }

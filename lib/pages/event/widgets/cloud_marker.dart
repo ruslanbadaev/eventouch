@@ -1,3 +1,4 @@
+import 'package:eventouch/models/event_marker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/event.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/event.dart';
+import '../../../models/event_marker.dart';
 import '../../../utils/constants/colors.dart';
 
 // ignore: must_be_immutable
@@ -38,9 +38,17 @@ class _CloudMarkerWidgetState extends State<CloudMarker> {
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            color: AppColors.WHITE,
-            boxShadow: [BoxShadow(color: AppColors.WHITE, offset: Offset(0, -5), blurRadius: 10.0)]),
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+          color: AppColors.WHITE,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.PRIMARY!.withOpacity(.7),
+              offset: Offset(2, 3),
+              blurRadius: 5.0,
+              spreadRadius: .4,
+            ),
+          ],
+        ),
         child: Row(
           children: [
             Padding(
@@ -60,7 +68,7 @@ class _CloudMarkerWidgetState extends State<CloudMarker> {
     );
   }
 
-  _getAvatar(EventType eventType) {
+  Widget _getAvatar(EventType eventType) {
     Widget? _avatarContent;
     Color? _avatarColor = AppColors.SECONDARY;
 

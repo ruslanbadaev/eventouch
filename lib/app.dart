@@ -1,10 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:eventouch/pages/map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
-
+import 'pages/map/map.dart';
 import 'pages/people/people.dart';
 import 'utils/constants/colors.dart';
 
@@ -31,6 +30,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
             backgroundColor: AppColors.LIGHT,
             elevation: 0,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 RichText(
                   text: TextSpan(
@@ -49,10 +49,9 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                // Text(
-                //   'EvenTouch',
-                //   style: TextStyle(color: AppColors.PRIMARY),
-                // ),
+                CircleAvatar(
+                  backgroundColor: AppColors.BLUE,
+                )
               ],
             ),
           ),
@@ -68,35 +67,6 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     People(),
                   ],
                 ),
-                // Align(
-                //   alignment: Alignment.topLeft,
-                //   child: Container(
-                //     height: 48,
-                //     width: 156,
-                //     padding: EdgeInsets.all(12),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.LIGHT,
-                //       borderRadius: BorderRadius.only(
-                //         bottomRight: Radius.circular(40),
-                //       ),
-                //     ),
-                //     child: Row(
-                //       children: [
-                //         Icon(
-                //           Icons.bike_scooter,
-                //           color: AppColors.PRIMARY,
-                //         ),
-                //         SizedBox(
-                //           width: 12,
-                //         ),
-                //         Text(
-                //           'EventME',
-                //           style: TextStyle(color: AppColors.PRIMARY),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -104,6 +74,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     child: CurvedNavigationBar(
                       color: AppColors.LIGHT,
                       backgroundColor: _bottomSheetBackgroundColor.withOpacity(.3),
+                      animationDuration: Duration(milliseconds: 400),
                       items: <Widget>[
                         Icon(Icons.map_rounded, size: 30, color: AppColors.PURPLE),
                         Icon(Icons.people_alt_rounded, size: 30, color: AppColors.PINK),
