@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
+import 'pages/friends/friends.dart';
 import 'pages/map/map.dart';
-import 'pages/people/people.dart';
+import 'pages/profile/profile.dart';
 import 'utils/constants/colors.dart';
 
 class App extends StatefulWidget {
@@ -15,7 +16,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with TickerProviderStateMixin {
-  Color _bottomSheetBackgroundColor = AppColors.PINK!;
+  Color _bottomSheetBackgroundColor = AppColors.PURPLE!;
   initState() {
     super.initState();
   }
@@ -49,9 +50,15 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                CircleAvatar(
-                  backgroundColor: AppColors.BLUE,
-                )
+                GestureDetector(
+                  onTap: () => {Get.to(ProfileScreen())},
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.BLUE,
+                    backgroundImage: NetworkImage(
+                      'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -62,24 +69,38 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                   index: controller.tabIndex,
                   children: [
                     MapScreen(),
-                    People(),
-                    People(),
-                    People(),
+                    FriendsScreen(),
+                    FriendsScreen(),
+                    FriendsScreen(),
+                    FriendsScreen(),
                   ],
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: 96,
+                    // height: 96,
                     child: CurvedNavigationBar(
                       color: AppColors.LIGHT,
-                      backgroundColor: _bottomSheetBackgroundColor.withOpacity(.3),
+                      backgroundColor: _bottomSheetBackgroundColor.withOpacity(0),
                       animationDuration: Duration(milliseconds: 400),
+                      buttonBackgroundColor: _bottomSheetBackgroundColor,
                       items: <Widget>[
-                        Icon(Icons.map_rounded, size: 30, color: AppColors.PURPLE),
-                        Icon(Icons.people_alt_rounded, size: 30, color: AppColors.PINK),
-                        Icon(Icons.menu_book_rounded, size: 30, color: AppColors.BLUE),
-                        Icon(Icons.settings_rounded, size: 30, color: AppColors.ORANGE),
+                        Icon(Icons.map_rounded,
+                            size: 30,
+                            color:
+                                _bottomSheetBackgroundColor == AppColors.PURPLE ? AppColors.WHITE : AppColors.PURPLE),
+                        Icon(
+                          Icons.people_alt_rounded,
+                          size: 30,
+                          color: _bottomSheetBackgroundColor == AppColors.PINK ? AppColors.WHITE : AppColors.PINK,
+                        ),
+                        Icon(Icons.menu_book_rounded,
+                            size: 30,
+                            color: _bottomSheetBackgroundColor == AppColors.BLUE ? AppColors.WHITE : AppColors.BLUE),
+                        Icon(Icons.settings_rounded,
+                            size: 30,
+                            color:
+                                _bottomSheetBackgroundColor == AppColors.ORANGE ? AppColors.WHITE : AppColors.ORANGE),
                       ],
                       onTap: (index) {
                         controller.changeTabIndex(index);
@@ -92,6 +113,9 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                               _bottomSheetBackgroundColor = AppColors.PINK!;
                               break;
                             case 2:
+                              //   _bottomSheetBackgroundColor = AppColors.PRIMARY!;
+                              //   break;
+                              // case 3:
                               _bottomSheetBackgroundColor = AppColors.BLUE!;
                               break;
                             case 3:
@@ -108,6 +132,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                 ),
               ],
             ),
+
             // floatingActionButton: GetBuilder<SessionController>(
             //   init: SessionController(),
             //   builder: (controller) {

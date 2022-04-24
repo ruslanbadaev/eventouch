@@ -36,6 +36,17 @@ class AppColors {
 
   static MaterialColor hex(String hex) => AppColors._factoryColor(AppColors._getColorHexFromStr(hex));
 
+  static final LinearGradient PRIMARY_GRADIENT = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomLeft,
+    colors: [
+      AppColors.BLUE!,
+      AppColors.PURPLE!,
+      AppColors.PINK!,
+      AppColors.ORANGE!,
+    ],
+  );
+
   static MaterialColor _factoryColor(int color) {
     return MaterialColor(color, <int, Color>{
       50: Color(color),

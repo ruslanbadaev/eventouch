@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:eventouch/pages/event/widgets/text_box.dart';
-import 'package:eventouch/widgets/user_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,19 +7,20 @@ import 'package:get/get.dart';
 
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
+import 'set_place.dart';
+import 'widgets/image_icon.dart';
+import 'widgets/text_box_field.dart';
 
-class EventScreen extends StatefulWidget {
-  String id;
-  EventScreen({
+class CreateEventScreen extends StatefulWidget {
+  CreateEventScreen({
     Key? key,
-    required this.id,
   }) : super(key: key);
 
   @override
-  _EventScreenState createState() => _EventScreenState();
+  _CreateEventScreenState createState() => _CreateEventScreenState();
 }
 
-class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin {
+class _CreateEventScreenState extends State<CreateEventScreen> with TickerProviderStateMixin {
   List<BoxShadow> shadow = [
     BoxShadow(
       color: AppColors.PRIMARY!.withOpacity(0.3),
@@ -32,8 +31,8 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
   ];
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<EventController>(
-      init: EventController(),
+    return GetBuilder<CreateEventController>(
+      init: CreateEventController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.WHITE,
@@ -55,41 +54,30 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                       scrollDirection: Axis.vertical,
                     ),
                     items: [
-                      'https://newsroom.mastercard.com/wp-content/uploads/2016/10/HACKATHON-162-of-477.jpg',
-                      'https://ria56.ru/wp-content/uploads/2021/07/0187LoULJ7M.jpg',
-                      'https://amazinghiring.ru/blog/wp-content/uploads/2017/10/SOSUEU17-207.jpg',
+                      // 'https://newsroom.mastercard.com/wp-content/uploads/2016/10/HACKATHON-162-of-477.jpg',
+                      // 'https://amazinghiring.ru/blog/wp-content/uploads/2017/10/SOSUEU17-207.jpg',
+                      'add_image',
                     ].map((String image) {
                       return Builder(
                         builder: (BuildContext context) {
                           return ClipRRect(
                             child: Container(
-                              height: 240.0,
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    AppColors.BLUE!,
-                                    AppColors.PURPLE!,
-                                    AppColors.PINK!,
-                                    AppColors.ORANGE!,
-                                  ],
-                                ),
+                                gradient: AppColors.PRIMARY_GRADIENT,
                               ),
+                              height: 240.0,
                               width: double.infinity,
-                              child: CachedNetworkImage(
-                                imageUrl: '$image',
-                                placeholder: (context, url) => SpinKitRipple(
-                                  color: AppColors.ORANGE,
-                                  size: 240.0,
-                                ),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.image_not_supported_rounded,
-                                  color: AppColors.PRIMARY,
-                                  size: 48,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
+                              child: image == 'add_image'
+                                  ? ImageIconWidget()
+                                  : CachedNetworkImage(
+                                      imageUrl: '$image',
+                                      placeholder: (context, url) => SpinKitRipple(
+                                        color: AppColors.ORANGE,
+                                        size: 240.0,
+                                      ),
+                                      errorWidget: (context, url, error) => Icon(Icons.error),
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           );
                         },
@@ -128,44 +116,24 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 24),
-                      Text(
-                        'Python hackathone',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: AppColors.PRIMARY,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 12),
-                      Text(
-                        'Organizer',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: AppColors.ORANGE,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      UserItemWidget(
-                        title: 'Till Lindenmann',
-                        subtitle: 'Master',
-                        imageUrl: 'https://i.pinimg.com/originals/64/cb/f6/64cbf6023a8576482f7782ce1d29cc01.jpg',
+                      TextBoxFieldWidget(
+                        title: 'App name',
+                        controller: TextEditingController(),
                         color: AppColors.ORANGE!,
                         shadow: shadow,
+                        maxLines: 1,
                       ),
                       SizedBox(height: 12),
-                      TextBoxWidget(
+                      TextBoxFieldWidget(
                         title: 'About event',
-                        body:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                        controller: TextEditingController(),
                         color: AppColors.PURPLE!,
                         shadow: shadow,
                       ),
                       SizedBox(height: 12),
-                      TextBoxWidget(
+                      TextBoxFieldWidget(
                         title: 'About you',
-                        body:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                        controller: TextEditingController(),
                         color: AppColors.BLUE!,
                         shadow: shadow,
                       ),
@@ -177,43 +145,18 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => {},
+            onPressed: () => {
+              Get.to(SetPlaceScreen()),
+            },
             backgroundColor: AppColors.PINK,
-            extendedPadding: EdgeInsets.all(4),
+            extendedPadding: EdgeInsets.all(24),
             elevation: 4,
-            label: Container(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              decoration: BoxDecoration(
-                color: AppColors.WHITE,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    '18',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.PINK,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Icon(
-                    Icons.people,
-                    color: AppColors.PINK,
-                    size: 16,
-                  ),
-                ],
-              ),
-            ),
-            icon: Padding(
-              padding: EdgeInsets.only(left: 12),
-              child: Text(
-                'I\'ll be there',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.PRIMARY,
-                  fontWeight: FontWeight.w600,
-                ),
+            label: Text(
+              'Set place',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.PRIMARY,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

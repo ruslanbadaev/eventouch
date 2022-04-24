@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 
 import '../../models/event_marker.dart';
 import '../../utils/constants/colors.dart';
+import '../create_event/create_event.dart';
 import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/cloud_marker.dart';
@@ -70,15 +71,18 @@ class _MapScreenState extends State<MapScreen> {
           //     color: AppColors.PRIMARY,
           //   ),
           // ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Container(
-            // width: MediaQuery.of(context).size.width,
-
+            padding: EdgeInsets.only(bottom: 96),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  _getFilterIcon(
+                    onPressed: controller.selectEventFilter,
+                    selectedEventFilter: controller.selectedEventFilter,
+                  ),
                   for (EventType event in EventType.values.toList())
                     _getFilterIcon(
                       eventType: event,
@@ -95,7 +99,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Widget _getFilterIcon({
-    required EventType eventType,
+    EventType? eventType,
     EventType? selectedEventFilter,
     required Function(EventType) onPressed,
   }) {
@@ -136,17 +140,22 @@ class _MapScreenState extends State<MapScreen> {
         title = 'Nurds';
         break;
       default:
+        _avatarContent = Icon(
+          Icons.add_rounded,
+          color: AppColors.BLACK,
+        );
+        _avatarColor = AppColors.WHITE;
+        title = 'Create celebration';
     }
-
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 4,
         vertical: 12,
       ),
       child: FloatingActionButton.extended(
-        backgroundColor:
-            _avatarColor!.withOpacity((selectedEventFilter == eventType || selectedEventFilter == null) ? 1 : .5),
-        onPressed: () => onPressed(eventType),
+        backgroundColor: _avatarColor!.withOpacity(
+            (selectedEventFilter == eventType || selectedEventFilter == null || eventType == null) ? 1 : .5),
+        onPressed: () => eventType == null ? Get.to(CreateEventScreen()) : onPressed(eventType),
         icon: _avatarContent,
         label: Text(title),
       ),

@@ -1,6 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-enum EventType { tourist, politic, extravert, nurd }
+enum EventType { extravert, politic, tourist, nurd }
 
 class EventMarkerModel {
   final String id;
