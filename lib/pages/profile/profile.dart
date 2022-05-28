@@ -1,10 +1,9 @@
-import 'package:eventouch/pages/profile/widgets/editible_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
+import 'widgets/editible_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({

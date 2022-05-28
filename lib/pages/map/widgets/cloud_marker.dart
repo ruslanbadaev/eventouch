@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/event_marker.dart';
@@ -7,7 +8,7 @@ import '../../../utils/constants/colors.dart';
 class CloudMarker extends StatefulWidget {
   String id;
   String title;
-
+  bool isLeftSide;
   EventType eventType;
   Function onPressed;
 
@@ -16,6 +17,7 @@ class CloudMarker extends StatefulWidget {
     required this.id,
     required this.title,
     required this.eventType,
+    this.isLeftSide = false,
     required this.onPressed,
   }) : super(key: key);
 
@@ -39,7 +41,7 @@ class _CloudMarkerWidgetState extends State<CloudMarker> {
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(30)),
-          color: AppColors.WHITE,
+          color: AdaptiveTheme.of(context).theme.primaryColor,
           boxShadow: [
             BoxShadow(
               color: AppColors.PRIMARY!.withOpacity(.7),
@@ -51,17 +53,25 @@ class _CloudMarkerWidgetState extends State<CloudMarker> {
         ),
         child: Row(
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: _getAvatar(widget.eventType),
-            ),
+            if (widget.isLeftSide)
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: _getAvatar(widget.eventType),
+              ),
             Expanded(
               child: Text(
                 widget.title,
-                maxLines: 3,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+                style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+                textAlign: widget.isLeftSide ? TextAlign.left : TextAlign.right,
               ),
             ),
+            if (!widget.isLeftSide)
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: _getAvatar(widget.eventType),
+              ),
           ],
         ),
       ),
@@ -75,21 +85,21 @@ class _CloudMarkerWidgetState extends State<CloudMarker> {
     switch (eventType) {
       case EventType.tourist:
         _avatarContent = Icon(
-          Icons.computer_rounded,
+          Icons.pedal_bike_rounded,
           color: AppColors.BLACK,
         );
         _avatarColor = AppColors.BLUE;
         break;
       case EventType.politic:
         _avatarContent = Icon(
-          Icons.pedal_bike_rounded,
+          Icons.flag_rounded,
           color: AppColors.BLACK,
         );
         _avatarColor = AppColors.PINK;
         break;
       case EventType.extravert:
         _avatarContent = Icon(
-          Icons.music_note_rounded,
+          Icons.skateboarding_rounded,
           color: AppColors.BLACK,
         );
         _avatarColor = AppColors.PURPLE;

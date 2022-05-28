@@ -1,10 +1,10 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../models/event_marker.dart';
 import '../../models/people.dart';
+import '../../widgets/user_item.dart';
 import 'controller.dart';
-import 'widgets/friend_item.dart';
 
 class FriendsScreen extends StatefulWidget {
   FriendsScreen({Key? key}) : super(key: key);
@@ -14,32 +14,30 @@ class FriendsScreen extends StatefulWidget {
 }
 
 class _FriendsScreenState extends State<FriendsScreen> with TickerProviderStateMixin {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
   List<UserModel> users = [
     UserModel(
       id: "6208ed5b8afbec974dc782f4",
       name: 'Ivan Ivanov',
       email: 'Ivanov-ivan@gmail.com',
-      role: 'student',
+      role: 'Master',
     ),
     UserModel(
       id: "6208ed5b8afbec974dc782f4",
       name: 'Petr Antonov',
       email: 'Ivanov-ivan@gmail.com',
-      role: 'student',
+      role: 'Junior',
     ),
     UserModel(
       id: "6208ed5b8afbec974dc782f4",
       name: 'Admin Petrovich',
       email: 'Ivanov-ivan@gmail.com',
-      role: 'student',
+      role: 'Middle',
     ),
     UserModel(
       id: "6208ed5b8afbec974dc782f4",
-      name: 'Simple Student',
+      name: 'Simple Bob',
       email: 'Ivanov-ivan@gmail.com',
-      role: 'student',
+      role: 'King of the Party',
     ),
   ];
 
@@ -57,16 +55,16 @@ class _FriendsScreenState extends State<FriendsScreen> with TickerProviderStateM
       init: FriendsScreenController(),
       builder: (controller) {
         return Scaffold(
+          backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
           body: SingleChildScrollView(
             child: Column(
               children: [
                 for (UserModel user in users)
-                  FriendItem(
-                    id: user.id,
+                  UserItemWidget(
                     title: user.name,
-                    eventType: EventType.nurd,
-                    onPressed: () => {},
-                  )
+                    subtitle: user.role,
+                    color: AdaptiveTheme.of(context).theme.cardColor,
+                  ),
               ],
             ),
           ),

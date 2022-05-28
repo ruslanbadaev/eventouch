@@ -1,6 +1,7 @@
-import 'package:eventouch/models/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+
+import '../../models/profile.dart';
 
 class ProfileController extends GetxController {
   Map<String, dynamic> profileJson = {

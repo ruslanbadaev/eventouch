@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utils/constants/colors.dart';
 
@@ -14,9 +15,9 @@ class OrganicButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: () => action,
-      color: AppColors.WHITE,
+      // color: AppColors.WHITE,
       child: Row(),
     );
   }

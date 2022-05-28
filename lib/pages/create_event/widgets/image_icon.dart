@@ -1,5 +1,6 @@
-import 'package:eventouch/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/constants/colors.dart';
 
 class ImageIconWidget extends StatelessWidget {
   const ImageIconWidget({Key? key}) : super(key: key);

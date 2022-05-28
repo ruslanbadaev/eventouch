@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/name_parser.dart';
@@ -62,7 +61,6 @@ class _UserWidgetState extends State<UserWidget> {
                   ),
                 ),
                 Container(
-                  // height: 96,
                   width: widget.descriptionWidth,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   child: Column(

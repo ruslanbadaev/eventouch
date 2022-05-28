@@ -1,7 +1,8 @@
-import 'package:eventouch/utils/constants/colors.dart';
-import 'package:eventouch/utils/constants/strings.dart';
-import 'package:eventouch/widgets/subtitle.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/constants/colors.dart';
+import '../utils/constants/strings.dart';
+import 'subtitle.dart';
 
 class UserAvatarWidget extends StatelessWidget {
   String? name;
@@ -23,7 +24,7 @@ class UserAvatarWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(100),
       child: Container(
         decoration: BoxDecoration(
-          gradient: color == null ? AppColors.PRIMARY_GRADIENT : null,
+          gradient: color == null ? AppColors.getShuffledGradient() : null,
           color: color,
         ),
         width: radius ?? 56,

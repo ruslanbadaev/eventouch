@@ -1,59 +1,64 @@
-import 'package:eventouch/utils/constants/colors.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/constants/colors.dart';
 import 'user_avatar.dart';
 
 class UserItemWidget extends StatelessWidget {
   String title;
   String subtitle;
   String? imageUrl;
-  Color color;
+  Color? color;
+  Color? overlayColor;
   List<BoxShadow>? shadow;
+  Function? onPressed;
 
   UserItemWidget({
     Key? key,
     required this.title,
     required this.subtitle,
     this.imageUrl,
-    required this.color,
-    required this.shadow,
+    this.color,
+    this.overlayColor,
+    this.shadow,
+    this.onPressed,
   }) : super(key: key);
+
+  List<BoxShadow> _defaultShadow = [
+    BoxShadow(
+      color: AppColors.PRIMARY!.withOpacity(0.1),
+      spreadRadius: 1,
+      blurRadius: .3,
+      offset: Offset(2, 2),
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      margin: EdgeInsets.all(8),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: color,
-        boxShadow: shadow,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: ListTile(
-        leading: UserAvatarWidget(
-          name: '   -',
+    return InkWell(
+      onTap: () => onPressed,
+      overlayColor: MaterialStateProperty.all(overlayColor ?? AppColors.PURPLE),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.all(8),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: color ?? AppColors.WHITE,
+          boxShadow: shadow ?? _defaultShadow,
+          borderRadius: BorderRadius.circular(12),
         ),
-        // child: ListTile(
-        //   leading: UserAvatarWidget(
-        //     name: title,
-        //     imageUrl: imageUrl,
-        //     color: AppColors.PURPLE,
-        //   ),
-        title: Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-            color: AppColors.PRIMARY,
-            fontWeight: FontWeight.w600,
+        child: ListTile(
+          leading: UserAvatarWidget(
+            name: title,
+            imageUrl: imageUrl,
           ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: TextStyle(
-            fontSize: 14,
-            color: AppColors.PRIMARY,
-            fontWeight: FontWeight.w400,
+          title: Text(
+            title,
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          ),
+          subtitle: Text(
+            subtitle,
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText2,
           ),
         ),
       ),

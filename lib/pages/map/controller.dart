@@ -20,14 +20,14 @@ class MapScreenController extends GetxController {
     List<Map<String, dynamic>> jsonData = [
       {
         "id": "1",
-        "title": "Title Example",
+        "title": "Title Example First",
         "lat": "51.52",
         "lng": "-0.093",
         "type": "tourist",
       },
       {
         "id": "2",
-        "title": "Title Example",
+        "title": "Title Example Second",
         "lat": "51.521",
         "lng": "-0.083",
         "type": "extravert",
@@ -55,7 +55,7 @@ class MapScreenController extends GetxController {
       },
       {
         "id": "6",
-        "title": "Title Example",
+        "title": "Title Example Last",
         "lat": "51.526",
         "lng": "-0.07",
         "type": "extravert",

@@ -1,4 +1,5 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,7 @@ import 'pages/friends/friends.dart';
 import 'pages/map/map.dart';
 import 'pages/profile/profile.dart';
 import 'utils/constants/colors.dart';
+import 'widgets/fade_indexed_stack.dart';
 
 class App extends StatefulWidget {
   App({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: AppColors.LIGHT,
+            backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,12 +42,16 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Even',
-                        style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
+                        text: 'PRES',
+                        style: AdaptiveTheme.of(context).theme.textTheme.headline1,
                       ),
                       TextSpan(
-                        text: 'Touch',
+                        text: '7',
                         style: TextStyle(color: AppColors.PURPLE, fontWeight: FontWeight.w600),
+                      ),
+                      TextSpan(
+                        text: 'T',
+                        style: AdaptiveTheme.of(context).theme.textTheme.headline1,
                       ),
                     ],
                   ),
@@ -65,8 +71,9 @@ class _AppState extends State<App> with TickerProviderStateMixin {
           body: SafeArea(
             child: Stack(
               children: [
-                IndexedStack(
+                FadeIndexedStack(
                   index: controller.tabIndex,
+                  duration: Duration(milliseconds: 800),
                   children: [
                     MapScreen(),
                     FriendsScreen(),
@@ -77,125 +84,72 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
-                    // height: 96,
-                    child: CurvedNavigationBar(
-                      color: AppColors.LIGHT,
-                      backgroundColor: _bottomSheetBackgroundColor.withOpacity(0),
-                      animationDuration: Duration(milliseconds: 400),
-                      buttonBackgroundColor: _bottomSheetBackgroundColor,
-                      items: <Widget>[
-                        Icon(Icons.map_rounded,
-                            size: 30,
-                            color:
-                                _bottomSheetBackgroundColor == AppColors.PURPLE ? AppColors.WHITE : AppColors.PURPLE),
-                        Icon(
-                          Icons.people_alt_rounded,
-                          size: 30,
-                          color: _bottomSheetBackgroundColor == AppColors.PINK ? AppColors.WHITE : AppColors.PINK,
-                        ),
-                        Icon(Icons.menu_book_rounded,
-                            size: 30,
-                            color: _bottomSheetBackgroundColor == AppColors.BLUE ? AppColors.WHITE : AppColors.BLUE),
-                        Icon(Icons.settings_rounded,
-                            size: 30,
-                            color:
-                                _bottomSheetBackgroundColor == AppColors.ORANGE ? AppColors.WHITE : AppColors.ORANGE),
-                      ],
-                      onTap: (index) {
-                        controller.changeTabIndex(index);
-                        setState(() {
-                          switch (index) {
-                            case 0:
-                              _bottomSheetBackgroundColor = AppColors.PURPLE!;
-                              break;
-                            case 1:
-                              _bottomSheetBackgroundColor = AppColors.PINK!;
-                              break;
-                            case 2:
-                              //   _bottomSheetBackgroundColor = AppColors.PRIMARY!;
-                              //   break;
-                              // case 3:
-                              _bottomSheetBackgroundColor = AppColors.BLUE!;
-                              break;
-                            case 3:
-                              _bottomSheetBackgroundColor = AppColors.ORANGE!;
-                              break;
-                            default:
-                          }
-                        });
-
-                        //Handle button tap
-                      },
-                    ),
-                  ),
+                  child: Container(),
                 ),
               ],
             ),
+          ),
+          bottomNavigationBar: CustomNavigationBar(
+            iconSize: 36.0,
+            opacity: 1,
+            strokeColor: _bottomSheetBackgroundColor,
+            backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
+            currentIndex: controller.tabIndex,
+            scaleFactor: .5,
+            items: [
+              CustomNavigationBarItem(
+                icon: Icon(
+                  Icons.map_rounded,
+                  size: controller.tabIndex == 0 ? 42 : 36,
+                  color: AppColors.PURPLE!.withOpacity(controller.tabIndex == 0 ? 1 : .5),
+                ),
+              ),
+              CustomNavigationBarItem(
+                icon: Icon(
+                  Icons.people_alt_rounded,
+                  size: controller.tabIndex == 1 ? 42 : 36,
+                  color: AppColors.PINK!.withOpacity(controller.tabIndex == 1 ? 1 : .5),
+                ),
+              ),
+              CustomNavigationBarItem(
+                icon: Icon(
+                  Icons.menu_book_rounded,
+                  size: controller.tabIndex == 2 ? 42 : 36,
+                  color: AppColors.BLUE!.withOpacity(controller.tabIndex == 2 ? 1 : .5),
+                ),
+              ),
+              CustomNavigationBarItem(
+                icon: Icon(
+                  Icons.settings_rounded,
+                  size: controller.tabIndex == 3 ? 42 : 36,
+                  color: AppColors.ORANGE!.withOpacity(controller.tabIndex == 3 ? 1 : .5),
+                ),
+              ),
+            ],
+            onTap: (index) {
+              controller.changeTabIndex(index);
 
-            // floatingActionButton: GetBuilder<SessionController>(
-            //   init: SessionController(),
-            //   builder: (controller) {
-            //     return FloatingActionButton(
-            //       onPressed: () {
-            //         Get.to(Settings());
-            //       },
-            //       child: Icon(
-            //         Icons.settings_rounded,
-            //         color: AppColors.PRIMARY,
-            //       ),
-            //       backgroundColor: Colors.white,
-            //     );
-            //   },
-            // ),
-            // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-
-            // bottomNavigationBar: BubbleBottomBar(
-            //   opacity: .2,
-            //   currentIndex: controller.tabIndex,
-            //   onTap: controller.changeTabIndex,
-            //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-            //   elevation: 8,
-            //   fabLocation: BubbleBottomBarFabLocation.end,
-            //   hasNotch: true,
-            //   hasInk: true,
-            //   inkColor: Colors.black12,
-            //   items: <BubbleBottomBarItem>[
-            //     BubbleBottomBarItem(
-            //         backgroundColor: AppColors.PRIMARY,
-            //         icon: Icon(
-            //           Icons.laptop_mac_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         activeIcon: Icon(
-            //           Icons.laptop_mac_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         title: Text("Map")),
-            //     BubbleBottomBarItem(
-            //         backgroundColor: AppColors.PRIMARY,
-            //         icon: Icon(
-            //           Icons.people_alt_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         activeIcon: Icon(
-            //           Icons.people_alt_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         title: Text("Messages")),
-            //     BubbleBottomBarItem(
-            //         backgroundColor: AppColors.PRIMARY,
-            //         icon: Icon(
-            //           Icons.calendar_today_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         activeIcon: Icon(
-            //           Icons.calendar_today_rounded,
-            //           color: AppColors.PRIMARY,
-            //         ),
-            //         title: Text("Profile"))
-            //   ],
-            // ),
+              setState(() {
+                switch (index) {
+                  case 0:
+                    _bottomSheetBackgroundColor = AppColors.PURPLE!;
+                    break;
+                  case 1:
+                    _bottomSheetBackgroundColor = AppColors.PINK!;
+                    break;
+                  case 2:
+                    //   _bottomSheetBackgroundColor = AppColors.PRIMARY!;
+                    //   break;
+                    // case 3:
+                    _bottomSheetBackgroundColor = AppColors.BLUE!;
+                    break;
+                  case 3:
+                    _bottomSheetBackgroundColor = AppColors.ORANGE!;
+                    break;
+                  default:
+                }
+              });
+            },
           ),
         );
       },

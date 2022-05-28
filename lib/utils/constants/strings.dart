@@ -1,6 +1,6 @@
 class AppStrings {
-  static const String APP_NAME_TITLE = "СКФ МТУСИ";
-  static const String APP_NAME = "mtuci";
+  static const String APP_NAME_TITLE = "PRES7T";
+  static const String APP_NAME = "pres7t";
   static const String COULD_NOT_LAUNCH = "Could not launch";
   static const String OPTIONS = 'Options';
 

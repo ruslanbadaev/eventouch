@@ -1,7 +1,6 @@
-import 'package:eventouch/models/event_marker.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/event.dart';
+import '../../../models/event_marker.dart';
 import '../../../utils/constants/colors.dart';
 
 // ignore: must_be_immutable

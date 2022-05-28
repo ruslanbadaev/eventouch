@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:pres7t/app.dart';
 
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
@@ -17,27 +18,22 @@ class SetPlaceScreen extends StatefulWidget {
 }
 
 class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStateMixin {
-  List<BoxShadow> shadow = [
-    BoxShadow(
-      color: AppColors.PRIMARY!.withOpacity(0.3),
-      spreadRadius: 1,
-      blurRadius: 3,
-      offset: Offset(3, 3), // changes position of shadow
-    )
-  ];
+  MapController _mapController = MapController();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateEventController>(
       init: CreateEventController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.WHITE,
-          body: Scaffold(
-            backgroundColor: Colors.white,
-            body: Container(
-              child: FlutterMap(
+          backgroundColor: Colors.white,
+          body: Container(
+              child: Stack(
+            children: [
+              FlutterMap(
+                mapController: _mapController,
                 options: MapOptions(
-                  center: latLng.LatLng(51.5, -0.09),
+                  maxZoom: 18,
+                  center: latLng.LatLng(51.52, -0.086),
                   zoom: 13.0,
                 ),
                 layers: [
@@ -46,20 +42,163 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                     subdomains: ['a', 'b', 'c'],
                   ),
                   MarkerLayerOptions(
-                    markers: [],
+                    markers: [
+                      Marker(
+                        width: 64.0,
+                        height: 64.0,
+                        rotate: true,
+                        point: latLng.LatLng(51.52, -0.086),
+                        builder: (ctx) => Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            gradient: RadialGradient(
+                              colors: [
+                                AppColors.BLUE!.withOpacity(.8),
+                                AppColors.BLUE!.withOpacity(.5),
+                                AppColors.PURPLE!.withOpacity(.5),
+                                AppColors.PINK!,
+                              ],
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.directions_walk_rounded,
+                            color: AppColors.PRIMARY,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ),
-            // floatingActionButton: FloatingActionButton(
-            //   onPressed: () => {},
-            //   child: Icon(
-            //     Icons.add_rounded,
-            //     size: 36,
-            //     color: AppColors.PRIMARY,
-            //   ),
-            // ),
-          ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
+                  child: FadeInRight(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () => {
+                            _mapController.move(
+                              _mapController.center,
+                              _mapController.zoom + 1,
+                            ),
+                          },
+                          child: Icon(
+                            Icons.zoom_in_rounded,
+                            color: AppColors.PRIMARY,
+                            size: 32,
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        FloatingActionButton(
+                          onPressed: () => {
+                            _mapController.move(
+                              _mapController.center,
+                              _mapController.zoom - 1,
+                            ),
+                          },
+                          child: Icon(
+                            Icons.zoom_out_rounded,
+                            color: AppColors.PRIMARY,
+                            size: 32,
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        FloatingActionButton(
+                          backgroundColor: AppColors.PURPLE!.withOpacity(.8),
+                          onPressed: () => {
+                            _mapController.move(
+                              latLng.LatLng(51.52, -0.086),
+                              _mapController.zoom,
+                            ),
+                          },
+                          child: Icon(
+                            Icons.location_searching_rounded,
+                            color: AppColors.WHITE,
+                            size: 32,
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        FloatingActionButton.extended(
+                          onPressed: () => {
+                            Get.offAll(App()),
+                          },
+                          backgroundColor: AppColors.ORANGE,
+                          extendedPadding: EdgeInsets.all(24),
+                          elevation: 4,
+                          label: Text(
+                            'Set location',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.PRIMARY,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                child: Container(
+                  height: 128,
+                  width: 128,
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    gradient: RadialGradient(
+                      colors: [
+                        AppColors.WHITE.withOpacity(.8),
+                        AppColors.WHITE.withOpacity(.5),
+                        AppColors.BLUE!.withOpacity(1),
+                        // AppColors.PINK!,
+                      ],
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.place_rounded,
+                    size: 36,
+                    color: AppColors.RED,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
+                  child: FadeInLeft(
+                    child: FloatingActionButton.extended(
+                      onPressed: () => {
+                        Get.back(),
+                      },
+                      backgroundColor: AppColors.PINK,
+                      extendedPadding: EdgeInsets.all(24),
+                      elevation: 4,
+                      label: Text(
+                        '< Back',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.PRIMARY,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
         );
       },
     );

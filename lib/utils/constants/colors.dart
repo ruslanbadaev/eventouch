@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static final Color? PRIMARY = _factoryColor(0xff2d223e);
+  static final Color? PRIMARY_DARK = _factoryColor(0xFF221832);
   static final Color? SECONDARY = _factoryColor(0xfff8f7ff);
   static final Color? PURPLE = _factoryColor(0xffbaaafe);
   static final Color? PINK = _factoryColor(0xfffdbbe4);
@@ -46,6 +47,20 @@ class AppColors {
       AppColors.ORANGE!,
     ],
   );
+  static LinearGradient getShuffledGradient() {
+    List<Color> _primaryColors = [
+      AppColors.BLUE!,
+      AppColors.PURPLE!,
+      AppColors.PINK!,
+      AppColors.ORANGE!,
+    ];
+    _primaryColors.shuffle();
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomLeft,
+      colors: _primaryColors,
+    );
+  }
 
   static MaterialColor _factoryColor(int color) {
     return MaterialColor(color, <int, Color>{
