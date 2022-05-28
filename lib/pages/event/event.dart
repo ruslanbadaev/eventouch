@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -36,7 +37,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
       init: EventController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.WHITE,
+          backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
           body: Column(
             children: [
               Stack(
@@ -136,11 +137,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                       SizedBox(height: 24),
                       Text(
                         'Python hackathone',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: AppColors.PRIMARY,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AdaptiveTheme.of(context).theme.textTheme.headline1,
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 12),
@@ -158,6 +155,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                           subtitle: 'Master',
                           imageUrl: 'https://i.pinimg.com/originals/64/cb/f6/64cbf6023a8576482f7782ce1d29cc01.jpg',
                           color: AppColors.ORANGE!,
+                          textColor: AppColors.PRIMARY,
                           shadow: shadow,
                         ),
                       ),
@@ -197,18 +195,14 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
               label: Container(
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.WHITE,
+                  color: AdaptiveTheme.of(context).theme.backgroundColor,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Row(
                   children: [
                     Text(
                       '18',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.PINK,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
                     ),
                     Icon(
                       Icons.people,

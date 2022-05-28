@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -35,7 +36,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
       init: CreateEventController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.WHITE,
+          backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
           body: Column(
             children: [
               Stack(

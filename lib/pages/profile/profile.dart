@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       init: ProfileController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.WHITE,
+          backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
           body: SafeArea(
             child: Column(
               children: [

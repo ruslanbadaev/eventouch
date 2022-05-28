@@ -10,6 +10,7 @@ class UserItemWidget extends StatelessWidget {
   String? imageUrl;
   Color? color;
   Color? overlayColor;
+  Color? textColor;
   List<BoxShadow>? shadow;
   Function? onPressed;
 
@@ -20,6 +21,7 @@ class UserItemWidget extends StatelessWidget {
     this.imageUrl,
     this.color,
     this.overlayColor,
+    this.textColor,
     this.shadow,
     this.onPressed,
   }) : super(key: key);
@@ -54,11 +56,11 @@ class UserItemWidget extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1!.copyWith(color: textColor),
           ),
           subtitle: Text(
             subtitle,
-            style: AdaptiveTheme.of(context).theme.textTheme.bodyText2,
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText2!.copyWith(color: textColor),
           ),
         ),
       ),

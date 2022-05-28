@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -84,6 +85,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         FloatingActionButton(
+                          backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                           onPressed: () => {
                             _mapController.move(
                               _mapController.center,
@@ -92,12 +94,13 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                           },
                           child: Icon(
                             Icons.zoom_in_rounded,
-                            color: AppColors.PRIMARY,
+                            color: AdaptiveTheme.of(context).theme.iconTheme.color,
                             size: 32,
                           ),
                         ),
                         SizedBox(height: 14),
                         FloatingActionButton(
+                          backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                           onPressed: () => {
                             _mapController.move(
                               _mapController.center,
@@ -106,7 +109,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                           },
                           child: Icon(
                             Icons.zoom_out_rounded,
-                            color: AppColors.PRIMARY,
+                            color: AdaptiveTheme.of(context).theme.iconTheme.color,
                             size: 32,
                           ),
                         ),

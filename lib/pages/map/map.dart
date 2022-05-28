@@ -298,7 +298,9 @@ class _MapScreenState extends State<MapScreen> {
         icon: _avatarContent,
         label: Text(
           title,
-          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1!.copyWith(
+                color: eventType == null ? null : AppColors.PRIMARY,
+              ),
         ),
       ),
     );

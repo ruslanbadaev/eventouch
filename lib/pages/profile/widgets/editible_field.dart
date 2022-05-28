@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -34,11 +35,7 @@ class _EditebleFieldWidgetState extends State<EditebleField> {
     return ListTile(
       title: Text(
         widget.title,
-        style: TextStyle(
-          fontSize: 16,
-          color: AppColors.PRIMARY,
-          fontWeight: FontWeight.w400,
-        ),
+        style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
       ),
       subtitle: isEdited
           ? TextField(
@@ -54,18 +51,11 @@ class _EditebleFieldWidgetState extends State<EditebleField> {
                 hoverColor: AppColors.BLUE,
                 focusColor: AppColors.BLUE,
               ),
-              style: TextStyle(
-                color: AppColors.PURPLE,
-                fontWeight: FontWeight.w600,
-              ),
+              style: AdaptiveTheme.of(context).theme.textTheme.bodyText2!.copyWith(color: AppColors.BLUE),
             )
           : Text(
               widget.subtitle,
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.PRIMARY,
-                fontWeight: FontWeight.w600,
-              ),
+              style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
             ),
       trailing: isEdited
           ? Row(
