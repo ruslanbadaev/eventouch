@@ -51,6 +51,9 @@ class MyApp extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: AppColors.PRIMARY),
           backgroundColor: AppColors.WHITE,
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.WHITE,
+          ),
           bottomSheetTheme: BottomSheetThemeData(
             backgroundColor: AppColors.WHITE,
           ),
@@ -76,6 +79,9 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: AppColors.WHITE),
           backgroundColor: AppColors.PRIMARY_DARK,
           bottomAppBarColor: AppColors.PRIMARY,
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.PRIMARY,
+          ),
           bottomSheetTheme: BottomSheetThemeData(
             backgroundColor: AppColors.PRIMARY,
           ),

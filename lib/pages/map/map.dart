@@ -106,14 +106,11 @@ class _MapScreenState extends State<MapScreen> {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
-                            // color: AppColors.BLUE!.withOpacity(.5),
-
                             gradient: RadialGradient(
                               colors: [
-                                AppColors.BLUE!.withOpacity(.8),
-                                AppColors.BLUE!.withOpacity(.5),
+                                AppColors.PURPLE!.withOpacity(.6),
                                 AppColors.PURPLE!.withOpacity(.5),
-                                AppColors.PINK!,
+                                AppColors.PURPLE!.withOpacity(.9),
                               ],
                             ),
                           ),
@@ -187,12 +184,10 @@ class _MapScreenState extends State<MapScreen> {
                         child: FloatingActionButton(
                           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                           onPressed: () => {
-                            // _mapController.move(
-                            //   _mapController.center,
-                            //   _mapController.zoom - 1,
-                            // ),
-
-                            AdaptiveTheme.of(context).toggleThemeMode(),
+                            _mapController.move(
+                              _mapController.center,
+                              _mapController.zoom - 1,
+                            ),
                           },
                           child: Icon(
                             Icons.zoom_out_rounded,

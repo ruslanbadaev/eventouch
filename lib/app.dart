@@ -2,11 +2,13 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/pages/events/events.dart';
 
 import 'controller.dart';
 import 'pages/friends/friends.dart';
 import 'pages/map/map.dart';
 import 'pages/profile/profile.dart';
+import 'pages/settings/settings.dart';
 import 'utils/constants/colors.dart';
 import 'widgets/fade_indexed_stack.dart';
 
@@ -77,9 +79,8 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                   children: [
                     MapScreen(),
                     FriendsScreen(),
-                    FriendsScreen(),
-                    FriendsScreen(),
-                    FriendsScreen(),
+                    EventsScreen(),
+                    SettingsScreen(),
                   ],
                 ),
                 Align(

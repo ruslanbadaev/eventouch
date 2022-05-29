@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
-import '../../models/people.dart';
+import '../../models/user.dart';
 
 enum AuthType { signIn, signUp, welcome }
 

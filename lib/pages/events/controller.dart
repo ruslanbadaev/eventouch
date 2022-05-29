@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
-import '../../models/people.dart';
+import '../../models/user.dart';
 
-class PeopleController extends GetxController {
+class EventsScreenController extends GetxController {
   UserModel? _selectedUser;
 
   TextEditingController nameController = TextEditingController();

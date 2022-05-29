@@ -1,20 +1,18 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/pages/settings/languages.dart';
 
 import '../../controllers/session_controller.dart';
-import '../../utils/constants/colors.dart';
 import 'controller.dart';
 
-class SettingsScreen extends StatefulWidget {
-  SettingsScreen({Key? key}) : super(key: key);
+class LanguagesScreen extends StatefulWidget {
+  LanguagesScreen({Key? key}) : super(key: key);
 
   @override
-  _SettingsScreensState createState() => _SettingsScreensState();
+  _LanguagesScreensState createState() => _LanguagesScreensState();
 }
 
-class _SettingsScreensState extends State<SettingsScreen> with TickerProviderStateMixin {
+class _LanguagesScreensState extends State<LanguagesScreen> with TickerProviderStateMixin {
   final SessionController sessionController = Get.find();
 
   initState() {
@@ -27,47 +25,46 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
       init: SettingsController(),
       builder: (controller) {
         return Scaffold(
+          appBar: AppBar(
+            backgroundColor: AdaptiveTheme.of(context).theme.appBarTheme.backgroundColor,
+            title: Text(
+              'Select language',
+              style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+            ),
+            iconTheme: AdaptiveTheme.of(context).theme.iconTheme,
+          ),
           backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
           body: SingleChildScrollView(
             child: Column(
               children: [
                 ListTile(
-                  onTap: (() => controller.toggleThemeMode(context)),
                   title: Text(
-                    'App Theme',
-                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-                  ),
-                  trailing: Icon(
-                    controller.isDarkTheme ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
-                    color: AdaptiveTheme.of(context).theme.iconTheme.color,
-                  ),
-                ),
-                ListTile(
-                  onTap: (() => Get.to(LanguagesScreen())),
-                  title: Text(
-                    'Language',
-                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-                  ),
-                  subtitle: Text(
                     'English',
-                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText2,
+                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
                   ),
                   trailing: Icon(
-                    Icons.language_rounded,
+                    Icons.flag_rounded,
                     color: AdaptiveTheme.of(context).theme.iconTheme.color,
                   ),
                 ),
                 ListTile(
-                  onTap: () => {
-                    Get.back(),
-                    sessionController.logout(),
-                  },
                   title: Text(
-                    'Logout',
-                    style: Theme.of(context).textTheme.headline2?.copyWith(
-                          color: AppColors.ORANGE,
-                          fontSize: 24,
-                        ),
+                    'Vietnamese',
+                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+                  ),
+                  trailing: Icon(
+                    Icons.flag_rounded,
+                    color: AdaptiveTheme.of(context).theme.iconTheme.color,
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Russian',
+                    style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+                  ),
+                  trailing: Icon(
+                    Icons.flag_rounded,
+                    color: AdaptiveTheme.of(context).theme.iconTheme.color,
                   ),
                 ),
               ],
