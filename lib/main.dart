@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SessionController());
-
     return ScreenUtilInit(
       designSize: Size(360, 690),
       minTextAdapt: true,

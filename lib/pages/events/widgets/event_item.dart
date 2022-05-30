@@ -1,7 +1,10 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:pres7t/utils/app_date.dart';
 
 import '../../../models/event_marker.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/icons.dart';
 
 // ignore: must_be_immutable
 class EventItemWidget extends StatefulWidget {
@@ -45,14 +48,7 @@ class _EventItemWidgetState extends State<EventItemWidget> {
         margin: EdgeInsets.all(8),
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomLeft,
-            colors: [
-              AppColors.WHITE,
-              AppColors.WHITE,
-            ],
-          ),
+          color: AdaptiveTheme.of(context).theme.cardColor,
           boxShadow: [
             BoxShadow(
               color: AppColors.PRIMARY!.withOpacity(0.1),
@@ -65,26 +61,40 @@ class _EventItemWidgetState extends State<EventItemWidget> {
         ),
         child: Column(
           children: [
-            Container(
-              height: 240,
-              width: double.infinity,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 8,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  height: 240,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: AppColors.getShuffledGradient(),
+                  ),
+                  child: widget.image != null
+                      ? Image.network(
+                          widget.image!,
+                          fit: BoxFit.fill,
+                        )
+                      : AppIcons.getAvatar(
+                          widget.eventType,
+                          radius: 36,
+                          borderSize: 3,
+                          borderColor: AdaptiveTheme.of(context).theme.primaryColor,
+                        ),
+                ),
+              ),
             ),
             ListTile(
               title: Text(
                 widget.title,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.PRIMARY,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
               ),
               subtitle: Text(
-                widget.title,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.PRIMARY,
-                  fontWeight: FontWeight.w400,
-                ),
+                AppDate.getFormattedDateString(widget.date),
+                style: AdaptiveTheme.of(context).theme.textTheme.bodyText2,
               ),
             ),
           ],

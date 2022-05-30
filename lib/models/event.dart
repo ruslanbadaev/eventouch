@@ -8,7 +8,7 @@ class EventModel {
   final String aboutEvent;
   final String aboutYou;
   final int visitors;
-  final double date;
+  final String date;
 
   List<String>? images;
 

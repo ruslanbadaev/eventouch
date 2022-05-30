@@ -30,127 +30,131 @@ class _AppState extends State<App> with TickerProviderStateMixin {
     return GetBuilder<AppController>(
       init: AppController(),
       builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
-            elevation: 0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 21.0,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
+              elevation: 0,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 21.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'PRES',
+                          style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+                        ),
+                        TextSpan(
+                          text: '7',
+                          style: TextStyle(color: AppColors.PURPLE, fontWeight: FontWeight.w600),
+                        ),
+                        TextSpan(
+                          text: 'T',
+                          style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'PRES',
-                        style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+                  ),
+                  GestureDetector(
+                    onTap: () => {Get.to(ProfileScreen())},
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.BLUE,
+                      backgroundImage: NetworkImage(
+                        'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
                       ),
-                      TextSpan(
-                        text: '7',
-                        style: TextStyle(color: AppColors.PURPLE, fontWeight: FontWeight.w600),
-                      ),
-                      TextSpan(
-                        text: 'T',
-                        style: AdaptiveTheme.of(context).theme.textTheme.headline1,
-                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            body: SafeArea(
+              child: Stack(
+                children: [
+                  FadeIndexedStack(
+                    index: controller.tabIndex,
+                    duration: Duration(milliseconds: 800),
+                    children: [
+                      MapScreen(),
+                      FriendsScreen(),
+                      EventsScreen(),
+                      SettingsScreen(),
                     ],
                   ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: CustomNavigationBar(
+              iconSize: 36.0,
+              opacity: 1,
+              strokeColor: _bottomSheetBackgroundColor,
+              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
+              currentIndex: controller.tabIndex,
+              scaleFactor: .5,
+              items: [
+                CustomNavigationBarItem(
+                  icon: Icon(
+                    Icons.map_rounded,
+                    size: controller.tabIndex == 0 ? 42 : 36,
+                    color: AppColors.PURPLE!.withOpacity(controller.tabIndex == 0 ? 1 : .5),
+                  ),
                 ),
-                GestureDetector(
-                  onTap: () => {Get.to(ProfileScreen())},
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.BLUE,
-                    backgroundImage: NetworkImage(
-                      'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
-                    ),
+                CustomNavigationBarItem(
+                  icon: Icon(
+                    Icons.people_alt_rounded,
+                    size: controller.tabIndex == 1 ? 42 : 36,
+                    color: AppColors.PINK!.withOpacity(controller.tabIndex == 1 ? 1 : .5),
+                  ),
+                ),
+                CustomNavigationBarItem(
+                  icon: Icon(
+                    Icons.menu_book_rounded,
+                    size: controller.tabIndex == 2 ? 42 : 36,
+                    color: AppColors.BLUE!.withOpacity(controller.tabIndex == 2 ? 1 : .5),
+                  ),
+                ),
+                CustomNavigationBarItem(
+                  icon: Icon(
+                    Icons.settings_rounded,
+                    size: controller.tabIndex == 3 ? 42 : 36,
+                    color: AppColors.ORANGE!.withOpacity(controller.tabIndex == 3 ? 1 : .5),
                   ),
                 ),
               ],
-            ),
-          ),
-          body: SafeArea(
-            child: Stack(
-              children: [
-                FadeIndexedStack(
-                  index: controller.tabIndex,
-                  duration: Duration(milliseconds: 800),
-                  children: [
-                    MapScreen(),
-                    FriendsScreen(),
-                    EventsScreen(),
-                    SettingsScreen(),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(),
-                ),
-              ],
-            ),
-          ),
-          bottomNavigationBar: CustomNavigationBar(
-            iconSize: 36.0,
-            opacity: 1,
-            strokeColor: _bottomSheetBackgroundColor,
-            backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
-            currentIndex: controller.tabIndex,
-            scaleFactor: .5,
-            items: [
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.map_rounded,
-                  size: controller.tabIndex == 0 ? 42 : 36,
-                  color: AppColors.PURPLE!.withOpacity(controller.tabIndex == 0 ? 1 : .5),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.people_alt_rounded,
-                  size: controller.tabIndex == 1 ? 42 : 36,
-                  color: AppColors.PINK!.withOpacity(controller.tabIndex == 1 ? 1 : .5),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.menu_book_rounded,
-                  size: controller.tabIndex == 2 ? 42 : 36,
-                  color: AppColors.BLUE!.withOpacity(controller.tabIndex == 2 ? 1 : .5),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.settings_rounded,
-                  size: controller.tabIndex == 3 ? 42 : 36,
-                  color: AppColors.ORANGE!.withOpacity(controller.tabIndex == 3 ? 1 : .5),
-                ),
-              ),
-            ],
-            onTap: (index) {
-              controller.changeTabIndex(index);
+              onTap: (index) {
+                controller.changeTabIndex(index);
 
-              setState(() {
-                switch (index) {
-                  case 0:
-                    _bottomSheetBackgroundColor = AppColors.PURPLE!;
-                    break;
-                  case 1:
-                    _bottomSheetBackgroundColor = AppColors.PINK!;
-                    break;
-                  case 2:
-                    //   _bottomSheetBackgroundColor = AppColors.PRIMARY!;
-                    //   break;
-                    // case 3:
-                    _bottomSheetBackgroundColor = AppColors.BLUE!;
-                    break;
-                  case 3:
-                    _bottomSheetBackgroundColor = AppColors.ORANGE!;
-                    break;
-                  default:
-                }
-              });
-            },
+                setState(() {
+                  switch (index) {
+                    case 0:
+                      _bottomSheetBackgroundColor = AppColors.PURPLE!;
+                      break;
+                    case 1:
+                      _bottomSheetBackgroundColor = AppColors.PINK!;
+                      break;
+                    case 2:
+                      //   _bottomSheetBackgroundColor = AppColors.PRIMARY!;
+                      //   break;
+                      // case 3:
+                      _bottomSheetBackgroundColor = AppColors.BLUE!;
+                      break;
+                    case 3:
+                      _bottomSheetBackgroundColor = AppColors.ORANGE!;
+                      break;
+                    default:
+                  }
+                });
+              },
+            ),
           ),
         );
       },
