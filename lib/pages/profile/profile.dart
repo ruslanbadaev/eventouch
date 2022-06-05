@@ -1,10 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/widgets/single_line_tile.dart';
 
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
-import 'widgets/editible_field.dart';
+import '../../widgets/editible_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({
@@ -60,10 +61,20 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 SizedBox(height: 28),
                 EditebleField(
                   id: '1',
-                  title: 'Email:',
-                  subtitle: 'r.badaeff@gmail.com',
-                  onSaved: () => {},
-                )
+                  title: 'About you:',
+                  subtitle:
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                ),
+                SingleLineTile(
+                  id: '1',
+                  title: 'Events created:',
+                  subtitle: '4',
+                ),
+                SingleLineTile(
+                  id: '1',
+                  title: 'Events attended:',
+                  subtitle: '12',
+                ),
               ],
             ),
           ),

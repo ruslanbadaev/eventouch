@@ -4,7 +4,7 @@ import 'package:get/state_manager.dart';
 
 import '../../models/user.dart';
 
-class EventsScreenController extends GetxController {
+class EventsHistoryScreenController extends GetxController {
   UserModel? _selectedUser;
 
   TextEditingController nameController = TextEditingController();

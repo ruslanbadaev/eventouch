@@ -7,14 +7,14 @@ import '../../models/event_marker.dart';
 import 'controller.dart';
 import 'widgets/event_item.dart';
 
-class EventsScreen extends StatefulWidget {
-  EventsScreen({Key? key}) : super(key: key);
+class EventsHistoryScreen extends StatefulWidget {
+  EventsHistoryScreen({Key? key}) : super(key: key);
 
   @override
-  _EventsScreenState createState() => _EventsScreenState();
+  _EventsHistoryScreenState createState() => _EventsHistoryScreenState();
 }
 
-class _EventsScreenState extends State<EventsScreen> with TickerProviderStateMixin {
+class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerProviderStateMixin {
   List<EventModel> events = [
     EventModel(
       id: "6208ed5b8afbec974dc782f4",
@@ -83,8 +83,8 @@ class _EventsScreenState extends State<EventsScreen> with TickerProviderStateMix
     final double _screenWidth = MediaQuery.of(context).size.width;
     final double _screenHeight = MediaQuery.of(context).size.height;
 
-    return GetBuilder<EventsScreenController>(
-      init: EventsScreenController(),
+    return GetBuilder<EventsHistoryScreenController>(
+      init: EventsHistoryScreenController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
