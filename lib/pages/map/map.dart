@@ -69,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
                                       eventType: event.eventType,
                                       onPressed: () => {
                                         Get.to(
-                                          EventScreen(
+                                          () => EventScreen(
                                             id: event.id,
                                           ),
                                           transition: Transition.downToUp,
@@ -88,7 +88,7 @@ class _MapScreenState extends State<MapScreen> {
                                       eventType: event.eventType,
                                       onPressed: () => {
                                         Get.to(
-                                          EventScreen(
+                                          () => EventScreen(
                                             id: event.id,
                                           ),
                                           transition: Transition.downToUp,
@@ -286,7 +286,7 @@ class _MapScreenState extends State<MapScreen> {
             (selectedEventFilter == eventType || selectedEventFilter == null || eventType == null) ? 1 : .5),
         onPressed: () => eventType == null
             ? Get.to(
-                CreateEventScreen(),
+                () => CreateEventScreen(),
                 transition: Transition.upToDown,
               )
             : onPressed(eventType),

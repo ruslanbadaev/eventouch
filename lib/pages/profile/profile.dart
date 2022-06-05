@@ -8,8 +8,10 @@ import 'controller.dart';
 import '../../widgets/editible_field.dart';
 
 class ProfileScreen extends StatefulWidget {
+  String id;
   ProfileScreen({
     Key? key,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,6 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 ),
                 SizedBox(height: 28),
                 EditebleField(
-                  id: '1',
                   title: 'About you:',
                   subtitle:
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',

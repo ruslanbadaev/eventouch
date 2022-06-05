@@ -62,7 +62,14 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {Get.to(ProfileScreen())},
+                    onTap: () => {
+                      Get.to(
+                        () => ProfileScreen(
+                          id: 'xxx',
+                        ),
+                        transition: Transition.upToDown,
+                      ),
+                    },
                     child: CircleAvatar(
                       backgroundColor: AppColors.BLUE,
                       backgroundImage: NetworkImage(

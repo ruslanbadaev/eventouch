@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/pages/profile/profile.dart';
 
 import '../../models/user.dart';
 import '../../widgets/user_item.dart';
@@ -48,9 +49,6 @@ class _FriendsScreenState extends State<FriendsScreen> with TickerProviderStateM
   int? x;
   @override
   Widget build(BuildContext context) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
-    final double _screenHeight = MediaQuery.of(context).size.height;
-
     return GetBuilder<FriendsScreenController>(
       init: FriendsScreenController(),
       builder: (controller) {
@@ -64,6 +62,14 @@ class _FriendsScreenState extends State<FriendsScreen> with TickerProviderStateM
                     title: user.name,
                     subtitle: user.role,
                     color: AdaptiveTheme.of(context).theme.cardColor,
+                    onPressed: () => {
+                      Get.to(
+                        () => ProfileScreen(
+                          id: 'xxx',
+                        ),
+                        transition: Transition.size,
+                      ),
+                    },
                   ),
               ],
             ),

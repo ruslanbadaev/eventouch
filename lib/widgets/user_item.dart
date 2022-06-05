@@ -38,7 +38,12 @@ class UserItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onPressed,
+      onTap: () {
+        print('====$onPressed');
+        if (onPressed != null) {
+          onPressed!();
+        }
+      },
       overlayColor: MaterialStateProperty.all(overlayColor ?? AppColors.PURPLE),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8),

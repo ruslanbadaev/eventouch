@@ -162,7 +162,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
           floatingActionButton: FadeInRight(
             child: FloatingActionButton.extended(
               onPressed: () => {
-                Get.to(SetPlaceScreen()),
+                Get.to(() => SetPlaceScreen()),
               },
               backgroundColor: AppColors.PINK,
               extendedPadding: EdgeInsets.all(24),

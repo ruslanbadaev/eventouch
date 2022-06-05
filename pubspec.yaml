@@ -26,7 +26,6 @@ dependencies:
   flutter_slidable: 1.2.0
   carousel_slider: 4.0.0
   dio: 4.0.4
-  awesome_dialog: 2.1.2
   liquid_pull_to_refresh: 3.0.1
   flutter_easyrefresh: 2.2.1
   flutter_map: 0.14.0
@@ -36,6 +35,7 @@ dependencies:
   custom_navigation_bar: 0.8.2
   animate_do: 2.1.0
   adaptive_theme: 3.0.0
+  awesome_dialog: 2.2.1
 
 dev_dependencies:
   flutter_test:

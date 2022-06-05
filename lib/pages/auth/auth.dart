@@ -16,9 +16,6 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> with TickerProviderStateMixin {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-
   initState() {
     super.initState();
   }

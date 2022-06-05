@@ -5,7 +5,6 @@ import '../utils/constants/colors.dart';
 
 // ignore: must_be_immutable
 class EditebleField extends StatefulWidget {
-  String id;
   String title;
   String subtitle;
   bool? isSingleLine;
@@ -14,7 +13,6 @@ class EditebleField extends StatefulWidget {
 
   EditebleField({
     Key? key,
-    required this.id,
     required this.title,
     required this.subtitle,
     this.isSingleLine = false,

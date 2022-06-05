@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../models/event.dart';
 import '../../models/event_marker.dart';
+import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/event_item.dart';
 
@@ -80,9 +81,6 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
   int? x;
   @override
   Widget build(BuildContext context) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
-    final double _screenHeight = MediaQuery.of(context).size.height;
-
     return GetBuilder<EventsHistoryScreenController>(
       init: EventsHistoryScreenController(),
       builder: (controller) {
@@ -98,7 +96,9 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
                     date: event.date.toString(),
                     eventType: event.type,
                     image: (event.images == null || event.images?.length == 0) ? null : event.images?.first,
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Get.to(() => EventScreen(id: 'xxx'), transition: Transition.size),
+                    },
                   ),
               ],
             ),
