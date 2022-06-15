@@ -131,7 +131,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                         SizedBox(height: 14),
                         FloatingActionButton.extended(
                           onPressed: () => {
-                            Get.off(App()),
+                            Get.close(2),
                           },
                           backgroundColor: AppColors.ORANGE,
                           extendedPadding: EdgeInsets.all(24),
