@@ -1,9 +1,14 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../../models/event.dart';
-import '../../models/event_marker.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/event_type.dart';
 import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/event_item.dart';
@@ -21,64 +26,70 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
       id: "6208ed5b8afbec974dc782f4",
       title: 'Python hackathon',
       type: EventType.nurd,
-      creator: '6208ed5b8afbec974dc782f4',
+      creatorId: '6208ed5b8afbec974dc782f4',
       aboutEvent: 'About event text',
       aboutYou: 'About you text',
       visitors: 18,
+      location: {},
       date: '2022-01-03T21:21:38.032Z',
       images: ['https://amazinghiring.ru/blog/wp-content/uploads/2017/10/SOSUEU17-207.jpg'],
+      createdAt: '',
+      updatedAt: '',
     ),
-    EventModel(
-      id: "6208ed5b8afbec974dc782f4",
-      title: 'Python hackathon',
-      type: EventType.nurd,
-      creator: '6208ed5b8afbec974dc782f4',
-      aboutEvent: 'About event text',
-      aboutYou: 'About you text',
-      visitors: 18,
-      date: '2022-01-03T21:21:38.032Z',
-      images: [],
-    ),
-    EventModel(
-      id: "6208ed5b8afbec974dc782f4",
-      title: 'Python hackathon',
-      type: EventType.extravert,
-      creator: '6208ed5b8afbec974dc782f4',
-      aboutEvent: 'About event text',
-      aboutYou: 'About you text',
-      visitors: 18,
-      date: '2022-01-03T21:21:38.032Z',
-      images: [],
-    ),
-    EventModel(
-      id: "6208ed5b8afbec974dc782f4",
-      title: 'Python hackathon',
-      type: EventType.politic,
-      creator: '6208ed5b8afbec974dc782f4',
-      aboutEvent: 'About event text',
-      aboutYou: 'About you text',
-      visitors: 18,
-      date: '2022-01-03T21:21:38.032Z',
-      images: [],
-    ),
-    EventModel(
-      id: "6208ed5b8afbec974dc782f4",
-      title: 'Python hackathon',
-      type: EventType.tourist,
-      creator: '6208ed5b8afbec974dc782f4',
-      aboutEvent: 'About event text',
-      aboutYou: 'About you text',
-      visitors: 18,
-      date: '2022-01-03T21:21:38.032Z',
-      images: [],
-    ),
+
+    // EventModel(
+    //   id: "6208ed5b8afbec974dc782f4",
+    //   title: 'Python hackathon',
+    //   type: EventType.nurd,
+    //   creatorId: '6208ed5b8afbec974dc782f4',
+    //   aboutEvent: 'About event text',
+    //   aboutYou: 'About you text',
+    //   visitors: 18,
+    //   date: '2022-01-03T21:21:38.032Z',
+    //   images: [],
+    // ),
+    // EventModel(
+    //   id: "6208ed5b8afbec974dc782f4",
+    //   title: 'Python hackathon',
+    //   type: EventType.extravert,
+    //   creatorId: '6208ed5b8afbec974dc782f4',
+    //   aboutEvent: 'About event text',
+    //   aboutYou: 'About you text',
+    //   visitors: 18,
+    //   date: '2022-01-03T21:21:38.032Z',
+    //   images: [],
+    // ),
+    // EventModel(
+    //   id: "6208ed5b8afbec974dc782f4",
+    //   title: 'Python hackathon',
+    //   type: EventType.politic,
+    //   creatorId: '6208ed5b8afbec974dc782f4',
+    //   aboutEvent: 'About event text',
+    //   aboutYou: 'About you text',
+    //   visitors: 18,
+    //   date: '2022-01-03T21:21:38.032Z',
+    //   images: [],
+    // ),
+    // EventModel(
+    //   id: "6208ed5b8afbec974dc782f4",
+    //   title: 'Python hackathon',
+    //   type: EventType.tourist,
+    //   creatorId: '6208ed5b8afbec974dc782f4',
+    //   aboutEvent: 'About event text',
+    //   aboutYou: 'About you text',
+    //   visitors: 18,
+    //   date: '2022-01-03T21:21:38.032Z',
+    //   images: [],
+    // ),
   ];
 
   initState() {
     super.initState();
   }
 
-  int? x;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey = GlobalKey<LiquidPullToRefreshState>();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EventsHistoryScreenController>(
@@ -86,21 +97,31 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                for (EventModel event in events)
-                  EventItemWidget(
-                    id: event.id,
-                    title: event.title,
-                    date: event.date.toString(),
-                    eventType: event.type,
-                    image: (event.images == null || event.images?.length == 0) ? null : event.images?.first,
-                    onPressed: () => {
-                      Get.to(() => EventScreen(id: 'xxx'), transition: Transition.size),
-                    },
-                  ),
-              ],
+          body: LiquidPullToRefresh(
+            key: _refreshIndicatorKey,
+            showChildOpacityTransition: false,
+            color: AppColors.PRIMARY,
+            backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
+            springAnimationDurationInMilliseconds: 260,
+            onRefresh: controller.getEventsHistory,
+            child: ListView.builder(
+              padding: kMaterialListPadding,
+              itemCount: controller.events.length,
+              itemBuilder: (BuildContext context, int index) {
+                List<EventModel> events = controller.events;
+                return EventItemWidget(
+                  id: events[index].id,
+                  title: events[index].title,
+                  date: events[index].date.toString(),
+                  eventType: events[index].type,
+                  image: (events[index].images == null || events[index].images?.length == 0)
+                      ? null
+                      : events[index].images?.first,
+                  onPressed: () => {
+                    Get.to(() => EventScreen(id: 'xxx'), transition: Transition.size),
+                  },
+                );
+              },
             ),
           ),
         );

@@ -4,6 +4,7 @@ import 'package:pres7t/utils/constants/icons.dart';
 
 import '../../../models/event_marker.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/event_type.dart';
 
 // ignore: must_be_immutable
 class CloudMarker extends StatefulWidget {

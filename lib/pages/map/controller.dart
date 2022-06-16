@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../models/event_marker.dart';
+import '../../utils/event_type.dart';
 
 class MapScreenController extends GetxController {
   EventType? _selectedEventFilter;

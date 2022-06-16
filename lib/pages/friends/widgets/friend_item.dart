@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/event_marker.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/event_type.dart';
 
 // ignore: must_be_immutable
 class FriendItem extends StatefulWidget {

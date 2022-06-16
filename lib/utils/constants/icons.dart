@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/event_marker.dart';
+import '../event_type.dart';
 import 'colors.dart';
 
 class AppIcons {

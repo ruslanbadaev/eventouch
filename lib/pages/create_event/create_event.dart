@@ -123,7 +123,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                       SizedBox(height: 24),
                       FadeInLeft(
                         child: TextBoxFieldWidget(
-                          title: 'App name',
+                          title: 'Event name',
                           controller: TextEditingController(),
                           color: AppColors.ORANGE!,
                           shadow: shadow,
@@ -152,6 +152,17 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                           ),
                         ),
                       ),
+                      SizedBox(height: 12),
+                      FadeInRight(
+                        child: FadeInRight(
+                          child: TextBoxFieldWidget(
+                            title: 'About location',
+                            controller: TextEditingController(),
+                            color: AppColors.PINK!,
+                            shadow: shadow,
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 128),
                     ],
                   ),
@@ -164,14 +175,14 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
               onPressed: () => {
                 Get.to(() => SetPlaceScreen()),
               },
-              backgroundColor: AppColors.PINK,
+              backgroundColor: AdaptiveTheme.of(context).theme.accentColor,
               extendedPadding: EdgeInsets.all(24),
               elevation: 4,
               label: Text(
                 'Set place',
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.PRIMARY,
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),

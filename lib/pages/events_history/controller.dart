@@ -1,32 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
-import '../../models/user.dart';
+import '../../controllers/network_controller.dart';
+import '../../models/event.dart';
+import '../../models/response.dart';
 
 class EventsHistoryScreenController extends GetxController {
-  UserModel? _selectedUser;
+  List<EventModel> events = [];
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-
-  UserModel? get selectedUser => _selectedUser;
-
-  void selectUser(UserModel user) {
-    _selectedUser = user;
-    nameController.text = user.name;
-    emailController.text = user.email;
-    update();
+  @override
+  void onInit() {
+    super.onInit();
+    getEventsHistory();
   }
 
-  void changeUserRole(String role) {
-    _selectedUser?.role = role;
-    print(selectedUser!.role.toString());
-    print(selectedUser.toString());
+  Future<void> getEventsHistory() async {
+    ResponseModel<List<EventModel>> result = await NetworkController.getEvents();
+    print('-_--_--_--_---_---__');
+    print(result.response);
+    print(result.error);
+    if (result.error == null) {
+      events = result.response!;
+    }
     update();
-  }
-
-  void saveUserData() {
-    // set data to server
   }
 }

@@ -27,13 +27,19 @@ class ResponseModel<T> {
               : ErrorMessageModel.fromJson(json['error']),
         );
       }
-      if (json['result']['docs'] != null) {
-        response = fromJson(json['result']['docs']);
-      } else if (json['result'] != null) {
-        response = fromJson(json['result']);
-      } else {
-        response = fromJson(json);
-      }
+      print('-0-0-0');
+
+      print(json);
+      response = fromJson(json['docs']);
+      print('-0-0-0');
+
+      // if (json['result']['docs'] != null) {
+      //   response = fromJson(json['result']['docs']);
+      // } else if (json['result'] != null) {
+      //   response = fromJson(json['result']);
+      // } else {
+      //   response = fromJson(json);
+      // }
       print(response);
 
       return ResponseModel(

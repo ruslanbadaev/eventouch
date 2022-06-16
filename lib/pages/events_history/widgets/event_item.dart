@@ -1,10 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:pres7t/utils/app_date.dart';
 
-import '../../../models/event_marker.dart';
+import '../../../utils/app_date.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/icons.dart';
+import '../../../utils/event_type.dart';
 
 // ignore: must_be_immutable
 class EventItemWidget extends StatefulWidget {

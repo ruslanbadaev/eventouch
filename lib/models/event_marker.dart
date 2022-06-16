@@ -1,6 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-enum EventType { extravert, politic, tourist, nurd }
+import '../utils/event_type.dart';
 
 class EventMarkerModel {
   final String id;
@@ -20,22 +20,7 @@ class EventMarkerModel {
       id: json['id'],
       title: json['title'],
       latLng: LatLng(double.parse(json['lat']), double.parse(json['lng'])),
-      eventType: _getEventType(json['type']),
+      eventType: getEventTypeFromString(json['type']),
     );
-  }
-}
-
-EventType _getEventType(String type) {
-  switch (type) {
-    case 'tourist':
-      return EventType.tourist;
-    case 'politic':
-      return EventType.politic;
-    case 'extravert':
-      return EventType.extravert;
-    case 'nurd':
-      return EventType.nurd;
-    default:
-      return EventType.tourist;
   }
 }

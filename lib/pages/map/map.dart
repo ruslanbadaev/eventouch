@@ -9,6 +9,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 
 import '../../models/event_marker.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/event_type.dart';
 import '../create_event/create_event.dart';
 import '../event/event.dart';
 import 'controller.dart';

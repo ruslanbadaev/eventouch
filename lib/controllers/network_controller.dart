@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pres7t/models/event.dart';
 
 import '../models/image.dart';
 import '../models/post.dart';
@@ -34,17 +35,17 @@ class NetworkController {
     }
   }
 
-  static Future<ResponseModel<List<PostModel>>> getNews() async {
+  static Future<ResponseModel<List<EventModel>>> getEvents() async {
     try {
-      Response response = await Dio().get('${AppLinks.HOST}/news');
+      Response response = await Dio().get('${AppLinks.HOST}/events');
 
-      return ResponseModel<List<PostModel>>.fromJson(
+      return ResponseModel<List<EventModel>>.fromJson(
         response.data as Map<String, dynamic>,
-        fromJson: PostModel.listFromJson,
+        fromJson: EventModel.listFromJson,
       );
     } on DioError catch (error) {
       print('getNews :: $error');
-      return ResponseModel<List<PostModel>>.fromJson(
+      return ResponseModel<List<EventModel>>.fromJson(
         error.response?.data as Map<String, dynamic>,
         fromJson: null,
       );
