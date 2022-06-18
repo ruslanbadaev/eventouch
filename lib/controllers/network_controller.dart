@@ -44,7 +44,6 @@ class NetworkController {
         fromJson: EventModel.listFromJson,
       );
     } on DioError catch (error) {
-      print('getNews :: $error');
       return ResponseModel<List<EventModel>>.fromJson(
         error.response?.data as Map<String, dynamic>,
         fromJson: null,

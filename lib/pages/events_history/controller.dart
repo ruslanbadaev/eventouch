@@ -16,9 +16,6 @@ class EventsHistoryScreenController extends GetxController {
 
   Future<void> getEventsHistory() async {
     ResponseModel<List<EventModel>> result = await NetworkController.getEvents();
-    print('-_--_--_--_---_---__');
-    print(result.response);
-    print(result.error);
     if (result.error == null) {
       events = result.response!;
     }

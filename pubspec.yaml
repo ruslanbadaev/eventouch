@@ -37,6 +37,7 @@ dependencies:
   adaptive_theme: 3.0.0
   awesome_dialog: 2.2.1
   # google_maps_flutter: 2.1.7
+  animated_text_kit: 4.2.2
 
 dev_dependencies:
   flutter_test:
