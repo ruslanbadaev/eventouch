@@ -2,12 +2,11 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:pres7t/widgets/empty_widget.dart';
-import 'package:pres7t/widgets/loading_screen.dart';
 
 import '../../models/event.dart';
 import '../../utils/constants/colors.dart';
-import '../../utils/event_type.dart';
+import '../../widgets/empty_widget.dart';
+import '../../widgets/loading_screen.dart';
 import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/event_item.dart';
@@ -20,73 +19,10 @@ class EventsHistoryScreen extends StatefulWidget {
 }
 
 class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerProviderStateMixin {
-  List<EventModel> events = [
-    EventModel(
-      id: "6208ed5b8afbec974dc782f4",
-      title: 'Python hackathon',
-      type: EventType.nurd,
-      creatorId: '6208ed5b8afbec974dc782f4',
-      aboutEvent: 'About event text',
-      aboutYou: 'About you text',
-      visitors: 18,
-      location: {},
-      date: '2022-01-03T21:21:38.032Z',
-      images: ['https://amazinghiring.ru/blog/wp-content/uploads/2017/10/SOSUEU17-207.jpg'],
-      createdAt: '',
-      updatedAt: '',
-    ),
-
-    // EventModel(
-    //   id: "6208ed5b8afbec974dc782f4",
-    //   title: 'Python hackathon',
-    //   type: EventType.nurd,
-    //   creatorId: '6208ed5b8afbec974dc782f4',
-    //   aboutEvent: 'About event text',
-    //   aboutYou: 'About you text',
-    //   visitors: 18,
-    //   date: '2022-01-03T21:21:38.032Z',
-    //   images: [],
-    // ),
-    // EventModel(
-    //   id: "6208ed5b8afbec974dc782f4",
-    //   title: 'Python hackathon',
-    //   type: EventType.extravert,
-    //   creatorId: '6208ed5b8afbec974dc782f4',
-    //   aboutEvent: 'About event text',
-    //   aboutYou: 'About you text',
-    //   visitors: 18,
-    //   date: '2022-01-03T21:21:38.032Z',
-    //   images: [],
-    // ),
-    // EventModel(
-    //   id: "6208ed5b8afbec974dc782f4",
-    //   title: 'Python hackathon',
-    //   type: EventType.politic,
-    //   creatorId: '6208ed5b8afbec974dc782f4',
-    //   aboutEvent: 'About event text',
-    //   aboutYou: 'About you text',
-    //   visitors: 18,
-    //   date: '2022-01-03T21:21:38.032Z',
-    //   images: [],
-    // ),
-    // EventModel(
-    //   id: "6208ed5b8afbec974dc782f4",
-    //   title: 'Python hackathon',
-    //   type: EventType.tourist,
-    //   creatorId: '6208ed5b8afbec974dc782f4',
-    //   aboutEvent: 'About event text',
-    //   aboutYou: 'About you text',
-    //   visitors: 18,
-    //   date: '2022-01-03T21:21:38.032Z',
-    //   images: [],
-    // ),
-  ];
-
   initState() {
     super.initState();
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey = GlobalKey<LiquidPullToRefreshState>();
 
   @override
@@ -94,13 +30,57 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
     return GetBuilder<EventsHistoryScreenController>(
       init: EventsHistoryScreenController(),
       builder: (controller) {
-        getDialog() {
-          print('getDialog');
-        }
-
         return controller.isLoading
             ? LoadingScreen()
             : Scaffold(
+                appBar: AppBar(
+                  backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () => {controller.changeTab(EventStatus.visited)},
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                          child: Text(
+                            'Visited',
+                            style: controller.selectedStatusTab == EventStatus.visited
+                                ? TextStyle(
+                                    color: AppColors.WHITE,
+                                    fontWeight: FontWeight.w600,
+                                  )
+                                : TextStyle(
+                                    color: AppColors.BLUE,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => {controller.changeTab(EventStatus.created)},
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                          child: Container(
+                            child: Text(
+                              'Created',
+                              style: controller.selectedStatusTab == EventStatus.created
+                                  ? TextStyle(
+                                      color: AppColors.WHITE,
+                                      fontWeight: FontWeight.w600,
+                                    )
+                                  : TextStyle(
+                                      color: AppColors.BLUE,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
                 body: controller.events.isEmpty
                     ? EmptyWidget(onPressed: () => controller.getEventsHistory())
