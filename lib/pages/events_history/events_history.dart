@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:animate_do/animate_do.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:pres7t/widgets/empty_widget.dart';
+import 'package:pres7t/widgets/loading_screen.dart';
 
 import '../../models/event.dart';
 import '../../utils/constants/colors.dart';
@@ -98,94 +94,44 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
     return GetBuilder<EventsHistoryScreenController>(
       init: EventsHistoryScreenController(),
       builder: (controller) {
-        return Scaffold(
-          backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
-          body: controller.events.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Icon(
-                      //   Icons.not_interested_rounded,
-                      //   size: 50,
-                      //   color: AppColors.ORANGE,
-                      // ),
-                      SizedBox(
-                        child: DefaultTextStyle(
-                          style: const TextStyle(
-                            fontSize: 35,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 7.0,
-                                color: Colors.white,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            pause: Duration(milliseconds: 1000),
-                            animatedTexts: [
-                              FlickerAnimatedText(
-                                'No data, tap to reload',
-                                textAlign: TextAlign.center,
-                                textStyle: TextStyle(color: AppColors.BLUE),
-                              ),
-                              FlickerAnimatedText(
-                                'or',
-                                textAlign: TextAlign.center,
-                                textStyle: TextStyle(color: AppColors.PINK),
-                              ),
-                              FlickerAnimatedText(
-                                'create or visit',
-                                textAlign: TextAlign.center,
-                                textStyle: TextStyle(color: AppColors.ORANGE),
-                              ),
-                              FlickerAnimatedText(
-                                'some event',
-                                textAlign: TextAlign.center,
-                                textStyle: TextStyle(color: AppColors.PURPLE),
-                              ),
-                            ],
-                            onTap: () {
-                              controller.getEventsHistory();
-                            },
-                          ),
+        getDialog() {
+          print('getDialog');
+        }
+
+        return controller.isLoading
+            ? LoadingScreen()
+            : Scaffold(
+                backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
+                body: controller.events.isEmpty
+                    ? EmptyWidget(onPressed: () => controller.getEventsHistory())
+                    : LiquidPullToRefresh(
+                        key: _refreshIndicatorKey,
+                        showChildOpacityTransition: false,
+                        color: AppColors.PRIMARY,
+                        backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
+                        springAnimationDurationInMilliseconds: 260,
+                        onRefresh: controller.getEventsHistory,
+                        child: ListView.builder(
+                          padding: kMaterialListPadding,
+                          itemCount: controller.events.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            List<EventModel> events = controller.events;
+                            return EventItemWidget(
+                              id: events[index].id,
+                              title: events[index].title,
+                              date: events[index].date.toString(),
+                              eventType: events[index].type,
+                              image: (events[index].images == null || events[index].images?.length == 0)
+                                  ? null
+                                  : events[index].images?.first,
+                              onPressed: () => {
+                                Get.to(() => EventScreen(id: 'xxx'), transition: Transition.size),
+                              },
+                            );
+                          },
                         ),
                       ),
-                    ],
-                  ),
-                )
-              : LiquidPullToRefresh(
-                  key: _refreshIndicatorKey,
-                  showChildOpacityTransition: false,
-                  color: AppColors.PRIMARY,
-                  backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
-                  springAnimationDurationInMilliseconds: 260,
-                  onRefresh: controller.getEventsHistory,
-                  child: ListView.builder(
-                    padding: kMaterialListPadding,
-                    itemCount: controller.events.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      List<EventModel> events = controller.events;
-                      return EventItemWidget(
-                        id: events[index].id,
-                        title: events[index].title,
-                        date: events[index].date.toString(),
-                        eventType: events[index].type,
-                        image: (events[index].images == null || events[index].images?.length == 0)
-                            ? null
-                            : events[index].images?.first,
-                        onPressed: () => {
-                          Get.to(() => EventScreen(id: 'xxx'), transition: Transition.size),
-                        },
-                      );
-                    },
-                  ),
-                ),
-        );
+              );
       },
     );
   }
