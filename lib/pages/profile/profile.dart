@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/controllers/session_controller.dart';
 import 'package:pres7t/widgets/single_line_tile.dart';
 
 import '../../utils/constants/colors.dart';
@@ -19,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
+  final SessionController sessionController = Get.put(SessionController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(

@@ -9,12 +9,11 @@ class EventModel {
   final String creatorId;
   final String aboutEvent;
   final String aboutYou;
-  final int visitors;
   final String date;
   final Map location;
   final String createdAt;
   final String updatedAt;
-
+  List? visitors;
   List? images;
 
   EventModel({
@@ -24,11 +23,11 @@ class EventModel {
     required this.creatorId,
     required this.aboutEvent,
     required this.aboutYou,
-    required this.visitors,
     required this.date,
     required this.location,
     required this.createdAt,
     required this.updatedAt,
+    this.visitors,
     this.images,
   });
   static List<EventModel> listFromJson(List<dynamic> list) {

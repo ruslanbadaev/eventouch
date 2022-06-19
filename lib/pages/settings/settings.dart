@@ -65,7 +65,7 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
                 ListTile(
                   onTap: () => {
                     Get.back(),
-                    sessionController.logout(),
+                    sessionController.logOut(),
                   },
                   title: Text(
                     'Logout',

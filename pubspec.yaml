@@ -38,6 +38,7 @@ dependencies:
   awesome_dialog: 2.2.1
   # google_maps_flutter: 2.1.7
   animated_text_kit: 4.2.2
+  get_storage: 2.0.3
 
 dev_dependencies:
   flutter_test:

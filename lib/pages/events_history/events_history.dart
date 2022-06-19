@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -18,7 +19,7 @@ class EventsHistoryScreen extends StatefulWidget {
   _EventsHistoryScreenState createState() => _EventsHistoryScreenState();
 }
 
-class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerProviderStateMixin {
+class _EventsHistoryScreenState extends State<EventsHistoryScreen> with SingleTickerProviderStateMixin {
   initState() {
     super.initState();
   }
@@ -34,7 +35,7 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
             ? LoadingScreen()
             : Scaffold(
                 appBar: AppBar(
-                  backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
+                  backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -51,7 +52,7 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
                                     fontWeight: FontWeight.w600,
                                   )
                                 : TextStyle(
-                                    color: AppColors.BLUE,
+                                    color: AppColors.PURPLE,
                                     fontWeight: FontWeight.w400,
                                   ),
                           ),
@@ -71,7 +72,7 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with TickerPr
                                       fontWeight: FontWeight.w600,
                                     )
                                   : TextStyle(
-                                      color: AppColors.BLUE,
+                                      color: AppColors.PURPLE,
                                       fontWeight: FontWeight.w400,
                                     ),
                             ),

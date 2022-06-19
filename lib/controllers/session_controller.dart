@@ -1,24 +1,27 @@
 import 'package:get/get.dart';
 
-class SessionController extends GetxController {
-  bool? _isAuth;
+import '../mixins/cache_manager.dart';
 
-  bool? get isAuth => _isAuth;
+class SessionController extends GetxController with CacheManager {
+  // final isLogged = false.obs;
 
-  void checkAuth() {
-    Future.delayed(Duration(seconds: 2), () {
-      _isAuth = false;
-      update();
-    });
+  void logOut() {
+    // isLogged.value = false;
+    removeToken();
   }
 
-  void login() {
-    _isAuth = true;
-    update();
+  void login(String? token) async {
+    // isLogged.value = true;
+    await saveToken(token);
   }
 
-  void logout() {
-    _isAuth = false;
-    update();
+  bool isLogged() {
+    final token = getToken();
+    if (token != null) {
+      // isLogged.value = true;
+      return true;
+    } else {
+      return false;
+    }
   }
 }

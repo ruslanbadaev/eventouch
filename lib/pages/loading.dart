@@ -18,7 +18,6 @@ class _LoadingState extends State<Loading> with TickerProviderStateMixin {
   final SessionController sessionController = Get.find();
 
   initState() {
-    sessionController.checkAuth();
     super.initState();
   }
 

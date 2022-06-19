@@ -1,20 +1,22 @@
 import 'package:dio/dio.dart';
-import 'package:pres7t/models/event.dart';
-import 'package:pres7t/pages/events_history/controller.dart';
+import 'package:get/get.dart' hide Response;
 
-import '../models/image.dart';
-import '../models/post.dart';
+import '../mixins/cache_manager.dart';
+import '../models/event.dart';
 import '../models/response.dart';
 import '../models/token.dart';
+import '../pages/events_history/controller.dart';
 import '../utils/constants/links.dart';
 
-class NetworkController {
-  static Future<ResponseModel<TokenPairModel>> signIn({
+class NetworkController extends GetxController with CacheManager {
+  final dio = Dio();
+
+  Future<ResponseModel<TokenPairModel>> signIn({
     required String login,
     required String password,
   }) async {
     try {
-      Response response = await Dio().post(
+      Response response = await dio.post(
         '${AppLinks.HOST}/login',
         data: {
           'email': login,
@@ -22,13 +24,11 @@ class NetworkController {
         },
       );
 
-      // print(response.data);
       return ResponseModel<TokenPairModel>.fromJson(
         response.data as Map<String, dynamic>,
         fromJson: TokenPairModel.fromJson,
       );
     } on DioError catch (error) {
-      print('signIn :: $error');
       return ResponseModel<TokenPairModel>.fromJson(
         error.response?.data as Map<String, dynamic>,
         fromJson: null,
@@ -36,9 +36,9 @@ class NetworkController {
     }
   }
 
-  static Future<ResponseModel<List<EventModel>>> getEventsHistory({required EventStatus status}) async {
+  Future<ResponseModel<List<EventModel>>> getEventsHistory({required EventStatus status}) async {
     try {
-      Response response = await Dio().get('${AppLinks.HOST}/events?status=${status.name}');
+      Response response = await dio.get('${AppLinks.HOST}/events?status=${status.name}');
 
       return ResponseModel<List<EventModel>>.fromJson(
         response.data as Map<String, dynamic>,
@@ -52,38 +52,38 @@ class NetworkController {
     }
   }
 
-  static Future<ResponseModel<List<PostModel>>> updatePost({
-    required String id,
-    required String title,
-    required String introText,
-    required String fullText,
-    required String date,
-    required int views,
-    required List<ImageModel> images,
-  }) async {
-    try {
-      Response response = await Dio().patch(
-        '${AppLinks.HOST}/news/$id',
-        data: {
-          "title": title,
-          "introText": introText,
-          "fullText": fullText,
-          "date": date,
-          "views": views,
-          "images": [for (ImageModel image in images) ImageModel.toJson(image)],
-        },
-      );
+  // static Future<ResponseModel<List<PostModel>>> updatePost({
+  //   required String id,
+  //   required String title,
+  //   required String introText,
+  //   required String fullText,
+  //   required String date,
+  //   required int views,
+  //   required List<ImageModel> images,
+  // }) async {
+  //   try {
+  //     Response response = await Dio().patch(
+  //       '${AppLinks.HOST}/news/$id',
+  //       data: {
+  //         "title": title,
+  //         "introText": introText,
+  //         "fullText": fullText,
+  //         "date": date,
+  //         "views": views,
+  //         "images": [for (ImageModel image in images) ImageModel.toJson(image)],
+  //       },
+  //     );
 
-      return ResponseModel<List<PostModel>>.fromJson(
-        response.data as Map<String, dynamic>,
-        fromJson: PostModel.listFromJson,
-      );
-    } on DioError catch (error) {
-      print(error);
-      return ResponseModel<List<PostModel>>.fromJson(
-        error.response?.data as Map<String, dynamic>,
-        fromJson: null,
-      );
-    }
-  }
+  //     return ResponseModel<List<PostModel>>.fromJson(
+  //       response.data as Map<String, dynamic>,
+  //       fromJson: PostModel.listFromJson,
+  //     );
+  //   } on DioError catch (error) {
+  //     print(error);
+  //     return ResponseModel<List<PostModel>>.fromJson(
+  //       error.response?.data as Map<String, dynamic>,
+  //       fromJson: null,
+  //     );
+  //   }
+  // }
 }
