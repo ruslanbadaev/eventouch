@@ -1,23 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:pres7t/mixins/valiadations.dart';
 
 import '../../models/user.dart';
 
-enum AuthType { signIn, signUp, welcome }
+enum AuthScreenType { signIn, signUp, welcome }
 
-class AuthController extends GetxController {
-  bool _isAuth = false;
+class AuthScreenController extends GetxController with Validation {
+  bool _isAuthScreen = false;
   UserModel? _selectedUser;
-  AuthType _authType = AuthType.welcome;
+  AuthScreenType _authType = AuthScreenType.welcome;
   TextEditingController loginController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool get isAuth => _isAuth;
+  bool get isAuthScreen => _isAuthScreen;
   UserModel? get selectedUser => _selectedUser;
-  AuthType get authType => _authType;
+  AuthScreenType get authType => _authType;
 
-  void setAuthType(AuthType type) {
+  void setAuthScreenType(AuthScreenType type) {
     _authType = type;
     update();
   }

@@ -101,13 +101,13 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget _getAppScreen(bool? isAuth) {
-    if (isAuth == null) {
+  Widget _getAppScreen(bool? isAuthScreen) {
+    if (isAuthScreen == null) {
       return Loading();
-    } else if (isAuth) {
+    } else if (isAuthScreen) {
       return App();
     } else {
-      return Auth();
+      return AuthScreen();
     }
   }
 }

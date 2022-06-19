@@ -18,10 +18,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final double _screenHeight = MediaQuery.of(context).size.height;
-
-    return GetBuilder<AuthController>(
-      init: AuthController(),
+    return GetBuilder<AuthScreenController>(
+      init: AuthScreenController(),
       builder: (controller) {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 36),
@@ -34,10 +32,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> with TickerProviderStateM
               TextButton(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 onPressed: () => {
-                  controller.setAuthType(AuthType.signIn),
+                  controller.setAuthScreenType(AuthScreenType.signIn),
                 },
                 child: Text(
-                  'Вход',
+                  'Sign In',
                   style: Theme.of(context).textTheme.headline2?.copyWith(
                         color: AppColors.PRIMARY,
                         fontSize: 24,
@@ -47,10 +45,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> with TickerProviderStateM
               TextButton(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 onPressed: () => {
-                  controller.setAuthType(AuthType.signUp),
+                  controller.setAuthScreenType(AuthScreenType.signUp),
                 },
                 child: Text(
-                  'Регистрация',
+                  'Registration',
                   style: Theme.of(context).textTheme.headline2?.copyWith(
                         color: AppColors.BLACK.withOpacity(.5),
                         fontSize: 24,

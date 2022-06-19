@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/constants/colors.dart';
 import '../controller.dart';
+import 'auth_confirm_button.dart';
+import 'password_field.dart';
 
 class SignUpWidget extends StatefulWidget {
-  SignUpWidget({Key? key}) : super(key: key);
+  Function onConfirm;
+  Function onBack;
+  SignUpWidget({
+    Key? key,
+    required this.onConfirm,
+    required this.onBack,
+  }) : super(key: key);
 
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
@@ -14,6 +21,8 @@ class SignUpWidget extends StatefulWidget {
 class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMixin {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _repeatPasswordController = TextEditingController();
 
   initState() {
     super.initState();
@@ -21,8 +30,8 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
-      init: AuthController(),
+    return GetBuilder<AuthScreenController>(
+      init: AuthScreenController(),
       builder: (controller) {
         return Container(
           width: double.infinity,
@@ -37,11 +46,11 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
+                  controller: _nameController,
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    hintText: "Введите логин",
-                    fillColor: AppColors.BLACK.withOpacity(.12),
+                    labelText: "Name",
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18.0),
@@ -52,16 +61,40 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                   height: 24,
                 ),
                 TextFormField(
+                  controller: _emailController,
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    hintText: "Введите пароль",
-                    fillColor: AppColors.BLACK.withOpacity(.12),
+                    labelText: "Email",
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                PasswordFieldWidget(
+                  labelText: 'Password',
+                  controller: _passwordController,
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                PasswordFieldWidget(
+                  labelText: 'Repeat password',
+                  controller: _repeatPasswordController,
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                AuthConfirmWidget(
+                  onConfirm: () => controller.setAuthScreenType(AuthScreenType.welcome),
+                  onBack: () => {
+                    print('onBack'),
+                    widget.onBack(),
+                  },
                 ),
               ],
             ),

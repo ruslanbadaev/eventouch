@@ -5,6 +5,8 @@ import 'package:pres7t/controllers/session_controller.dart';
 import 'package:pres7t/widgets/single_line_tile.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../widgets/empty_widget.dart';
+import '../../widgets/unauth_widget.dart';
 import 'controller.dart';
 import '../../widgets/editible_field.dart';
 
@@ -28,59 +30,61 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
-          body: SafeArea(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.close_rounded,
-                        color: AppColors.PINK,
-                        size: 36,
+          body: !sessionController.isLogged()
+              ? UnauthWidget(onPressed: () => {})
+              : SafeArea(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.close_rounded,
+                              color: AppColors.PINK,
+                              size: 36,
+                            ),
+                            onPressed: () => {Get.back()},
+                          ),
+                          GestureDetector(
+                            onTap: () => {},
+                            child: CircleAvatar(
+                              radius: 64,
+                              backgroundColor: AppColors.BLUE,
+                              backgroundImage: NetworkImage(
+                                'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.share_rounded,
+                              color: AppColors.BLUE,
+                              size: 28,
+                            ),
+                            onPressed: () => {Get.back()},
+                          ),
+                        ],
                       ),
-                      onPressed: () => {Get.back()},
-                    ),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: CircleAvatar(
-                        radius: 64,
-                        backgroundColor: AppColors.BLUE,
-                        backgroundImage: NetworkImage(
-                          'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
-                        ),
+                      SizedBox(height: 28),
+                      EditebleField(
+                        title: 'About you:',
+                        subtitle:
+                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
                       ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.share_rounded,
-                        color: AppColors.BLUE,
-                        size: 28,
+                      SingleLineTile(
+                        id: '1',
+                        title: 'Events created:',
+                        subtitle: '4',
                       ),
-                      onPressed: () => {Get.back()},
-                    ),
-                  ],
+                      SingleLineTile(
+                        id: '1',
+                        title: 'Events attended:',
+                        subtitle: '12',
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 28),
-                EditebleField(
-                  title: 'About you:',
-                  subtitle:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-                ),
-                SingleLineTile(
-                  id: '1',
-                  title: 'Events created:',
-                  subtitle: '4',
-                ),
-                SingleLineTile(
-                  id: '1',
-                  title: 'Events attended:',
-                  subtitle: '12',
-                ),
-              ],
-            ),
-          ),
         );
       },
     );

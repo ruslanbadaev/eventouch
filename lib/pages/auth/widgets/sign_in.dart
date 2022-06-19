@@ -21,8 +21,8 @@ class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
-      init: AuthController(),
+    return GetBuilder<AuthScreenController>(
+      init: AuthScreenController(),
       builder: (controller) {
         return Container(
           width: double.infinity,
@@ -80,7 +80,7 @@ class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMix
                           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))),
                         ),
                         onPressed: () {
-                          controller.setAuthType(AuthType.welcome);
+                          controller.setAuthScreenType(AuthScreenType.welcome);
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 18),
