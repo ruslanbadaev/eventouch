@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pres7t/utils/constants/colors.dart';
 
 class PasswordFieldWidget extends StatefulWidget {
   String labelText;
+  String? errorText;
   TextEditingController controller;
+  Function? onChanged;
 
   PasswordFieldWidget({
     Key? key,
     required this.labelText,
+    this.errorText,
     required this.controller,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -56,7 +61,10 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),
+        errorText: widget.errorText,
+        errorStyle: TextStyle(),
       ),
+      onChanged: (value) => widget.onChanged != null ? widget.onChanged!() : {},
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/utils/validator.dart';
 
+import '../../../utils/app_dialog.dart';
 import '../controller.dart';
 import 'auth_confirm_button.dart';
 import 'password_field.dart';
@@ -55,6 +57,9 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
+                    errorText: Validator.nameError(
+                      _nameController.text,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -70,6 +75,9 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
+                    errorText: Validator.emailError(
+                      _emailController.text,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -77,22 +85,53 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 ),
                 PasswordFieldWidget(
                   labelText: 'Password',
+                  errorText: Validator.passwordError(
+                    _passwordController.text,
+                    _repeatPasswordController.text,
+                  ),
                   controller: _passwordController,
+                  onChanged: () => setState(() {}),
                 ),
                 SizedBox(
                   height: 24,
                 ),
                 PasswordFieldWidget(
                   labelText: 'Repeat password',
+                  errorText: Validator.passwordError(
+                    _passwordController.text,
+                    _repeatPasswordController.text,
+                  ),
                   controller: _repeatPasswordController,
+                  onChanged: () => setState(() {}),
                 ),
                 SizedBox(
                   height: 24,
                 ),
                 AuthConfirmWidget(
-                  onConfirm: () => controller.setAuthScreenType(AuthScreenType.welcome),
+                  onConfirm: () => {
+                    if (Validator.registrationDataError(
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          password1: _passwordController.text,
+                          password2: _repeatPasswordController.text,
+                        ) ==
+                        null)
+                      {
+                        controller.setAuthScreenType(AuthScreenType.welcome),
+                      }
+                    else
+                      {
+                        AppDialog.getErrorDialog(
+                          Validator.registrationDataError(
+                            name: _nameController.text,
+                            email: _emailController.text,
+                            password1: _passwordController.text,
+                            password2: _repeatPasswordController.text,
+                          )!,
+                        ),
+                      }
+                  },
                   onBack: () => {
-                    print('onBack'),
                     widget.onBack(),
                   },
                 ),

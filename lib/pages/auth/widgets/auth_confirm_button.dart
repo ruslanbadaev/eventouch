@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../utils/constants/colors.dart';
 
 class AuthConfirmWidget extends StatelessWidget {
+  String? confirmTitle;
+  String? backTitle;
   Function onConfirm;
   Function onBack;
   AuthConfirmWidget({
     Key? key,
+    this.confirmTitle,
+    this.backTitle,
     required this.onConfirm,
     required this.onBack,
   }) : super(key: key);
@@ -30,7 +34,7 @@ class AuthConfirmWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 18),
               child: Text(
-                'Back',
+                backTitle ?? 'Back',
                 style: Theme.of(context).textTheme.headline2?.copyWith(
                       color: AppColors.BLACK,
                       fontSize: 24,
@@ -56,7 +60,7 @@ class AuthConfirmWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(18),
               child: Text(
-                'Confirm',
+                confirmTitle ?? 'Confirm',
                 style: Theme.of(context).textTheme.headline2?.copyWith(
                       color: AppColors.PRIMARY,
                       fontSize: 24,

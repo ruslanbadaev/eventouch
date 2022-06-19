@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:pres7t/mixins/valiadations.dart';
+import 'package:pres7t/mixins/valiadation.dart';
 
 import '../../models/user.dart';
 
