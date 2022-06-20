@@ -51,4 +51,14 @@ class Validator {
     }
     return errorText;
   }
+
+  static String? verificationCodeError(String email) {
+    String? errorText;
+    if (email.length != 6) {
+      if (!email.contains('@')) {
+        errorText = 'CODE_LENGTH_IS_NOT_VALID';
+      }
+    }
+    return errorText;
+  }
 }

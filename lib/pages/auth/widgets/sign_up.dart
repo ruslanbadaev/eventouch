@@ -21,11 +21,6 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMixin {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _repeatPasswordController = TextEditingController();
-
   initState() {
     super.initState();
   }
@@ -48,7 +43,7 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
-                  controller: _nameController,
+                  controller: controller.nameController,
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
@@ -58,7 +53,7 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                       borderRadius: BorderRadius.circular(18.0),
                     ),
                     errorText: Validator.nameError(
-                      _nameController.text,
+                      controller.nameController.text,
                     ),
                   ),
                 ),
@@ -66,7 +61,7 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                   height: 24,
                 ),
                 TextFormField(
-                  controller: _emailController,
+                  controller: controller.emailController,
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
@@ -76,7 +71,7 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                       borderRadius: BorderRadius.circular(18.0),
                     ),
                     errorText: Validator.emailError(
-                      _emailController.text,
+                      controller.emailController.text,
                     ),
                   ),
                 ),
@@ -86,10 +81,10 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 PasswordFieldWidget(
                   labelText: 'Password',
                   errorText: Validator.passwordError(
-                    _passwordController.text,
-                    _repeatPasswordController.text,
+                    controller.passwordController.text,
+                    controller.repeatPasswordController.text,
                   ),
-                  controller: _passwordController,
+                  controller: controller.passwordController,
                   onChanged: () => setState(() {}),
                 ),
                 SizedBox(
@@ -98,10 +93,10 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 PasswordFieldWidget(
                   labelText: 'Repeat password',
                   errorText: Validator.passwordError(
-                    _passwordController.text,
-                    _repeatPasswordController.text,
+                    controller.passwordController.text,
+                    controller.repeatPasswordController.text,
                   ),
-                  controller: _repeatPasswordController,
+                  controller: controller.repeatPasswordController,
                   onChanged: () => setState(() {}),
                 ),
                 SizedBox(
@@ -110,10 +105,10 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 AuthConfirmWidget(
                   onConfirm: () => {
                     if (Validator.registrationDataError(
-                          name: _nameController.text,
-                          email: _emailController.text,
-                          password1: _passwordController.text,
-                          password2: _repeatPasswordController.text,
+                          name: controller.nameController.text,
+                          email: controller.emailController.text,
+                          password1: controller.passwordController.text,
+                          password2: controller.repeatPasswordController.text,
                         ) ==
                         null)
                       {
@@ -123,10 +118,10 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                       {
                         AppDialog.getErrorDialog(
                           Validator.registrationDataError(
-                            name: _nameController.text,
-                            email: _emailController.text,
-                            password1: _passwordController.text,
-                            password2: _repeatPasswordController.text,
+                            name: controller.nameController.text,
+                            email: controller.emailController.text,
+                            password1: controller.passwordController.text,
+                            password2: controller.repeatPasswordController.text,
                           )!,
                         ),
                       }

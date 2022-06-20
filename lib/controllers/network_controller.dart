@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:pres7t/models/user.dart';
 
 import '../mixins/cache_manager.dart';
 import '../models/event.dart';
@@ -31,6 +34,46 @@ class NetworkController extends GetxController with CacheManager {
     } on DioError catch (error) {
       return ResponseModel<TokenPairModel>.fromJson(
         error.response?.data as Map<String, dynamic>,
+        fromJson: null,
+      );
+    }
+  }
+
+  Future<ResponseModel<UserModel>> register({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      Response response = await dio.post(
+        '${AppLinks.HOST}/register',
+        data: {
+          'name': name,
+          'email': email,
+          'password': password,
+        },
+      );
+
+      if (response.data['token'] == null) throw 'TOKEN_IS_EMPTY';
+      saveToken(response.data['token']);
+      log('||||||||||4 ${response.data}');
+
+      return ResponseModel<UserModel>.fromJson(
+        response.data['user'] as Map<String, dynamic>,
+        fromJson: UserModel.fromJson,
+      );
+    } on DioError catch (error) {
+      log('||||||||||3 $error');
+
+      return ResponseModel<UserModel>.fromJson(
+        error.response?.data as Map<String, dynamic>,
+        fromJson: null,
+      );
+    } catch (error) {
+      log('||||||||||2 $error');
+
+      return ResponseModel<UserModel>.fromJson(
+        {'error': error},
         fromJson: null,
       );
     }

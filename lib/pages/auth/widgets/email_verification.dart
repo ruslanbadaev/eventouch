@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/app_dialog.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/validator.dart';
 import '../controller.dart';
 import 'auth_confirm_button.dart';
 
@@ -19,8 +20,6 @@ class EmailVerificationWidget extends StatefulWidget {
 }
 
 class _EmailVerificationWidgetState extends State<EmailVerificationWidget> with TickerProviderStateMixin {
-  TextEditingController _codeController = TextEditingController();
-
   initState() {
     super.initState();
   }
@@ -42,33 +41,43 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget> with 
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextFormField(
-                  controller: _codeController,
-                  style: TextStyle(fontSize: 24),
+                Text(
+                  'Hello ${controller.nameController.text}!',
+                  style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600, fontSize: 24),
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    labelText: "Verification code",
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 48.0,
                     ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Please check your email ',
+                        style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400, fontSize: 24),
+                      ),
+                      TextSpan(
+                        text: '${controller.emailController.text}',
+                        style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600, fontSize: 24),
+                      ),
+                      TextSpan(
+                        text: ' and confirm the verification.',
+                        style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400, fontSize: 24),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
                   height: 24,
                 ),
                 AuthConfirmWidget(
+                  confirmTitle: 'Check',
                   backTitle: 'Repeat',
-                  onConfirm: () => {
-                    if (_codeController.text.isNotEmpty)
-                      {
-                        widget.onConfirm(),
-                      }
-                    else
-                      {
-                        AppDialog.getErrorDialog('CONFIRMATION_CODE_IS_REQUIRED'),
-                      }
-                  },
+                  onConfirm: () => {},
                   onBack: () => {
                     widget.onBack(),
                   },

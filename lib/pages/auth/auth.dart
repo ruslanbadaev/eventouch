@@ -125,7 +125,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       return SignInWidget();
     } else if (authType == AuthScreenType.signUp) {
       return SignUpWidget(
-        onConfirm: () => controller.setAuthScreenType(AuthScreenType.emailVerification),
+        onConfirm: () => controller.register(),
         onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
       );
     } else if (authType == AuthScreenType.emailVerification) {

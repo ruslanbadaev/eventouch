@@ -37,7 +37,7 @@ class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
-                  controller: controller.loginController,
+                  controller: controller.emailController,
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
@@ -106,7 +106,7 @@ class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMix
                           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))),
                         ),
                         onPressed: () {
-                          controller.signIn(sessionController.login);
+                          // controller.signIn(sessionController.login);
                         },
                         child: Padding(
                           padding: EdgeInsets.all(18),

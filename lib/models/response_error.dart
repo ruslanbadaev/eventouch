@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 abstract class ErrorMessage {
   String? get code;
   List? get messages;
@@ -15,16 +17,23 @@ class ErrorMessageModel extends ErrorMessage {
   });
 
   factory ErrorMessageModel.fromJson(Map<String, dynamic> data) {
-    if (data['msg'] is List) {}
-    if (data['msg'] is String) {
-      data['msg'] = [data['msg']];
-    }
-    if (data['msg'] == null) {}
+    try {
+      if (data['msg'] is List) {}
+      if (data['msg'] is String) {
+        data['msg'] = [data['msg']];
+      }
+      if (data['msg'] == null) {}
 
-    return ErrorMessageModel(
-      code: data['code'],
-      messages: data['msg'],
-    );
+      return ErrorMessageModel(
+        code: data['code'],
+        messages: data['msg'],
+      );
+    } catch (e) {
+      return ErrorMessageModel(
+        code: data['code'],
+        messages: [data.toString()],
+      );
+    }
   }
 
   @override

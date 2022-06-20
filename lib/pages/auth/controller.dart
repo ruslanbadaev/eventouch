@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:pres7t/mixins/valiadation.dart';
 
+import '../../controllers/network_controller.dart';
+import '../../models/event.dart';
+import '../../models/response.dart';
 import '../../models/user.dart';
+import '../../utils/app_dialog.dart';
 
 enum AuthScreenType { signIn, signUp, welcome, emailVerification }
 
@@ -11,8 +17,10 @@ class AuthScreenController extends GetxController with Validation {
   bool _isAuthScreen = false;
   UserModel? _selectedUser;
   AuthScreenType _authType = AuthScreenType.welcome;
-  TextEditingController loginController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController repeatPasswordController = TextEditingController();
 
   bool get isAuthScreen => _isAuthScreen;
   UserModel? get selectedUser => _selectedUser;
@@ -23,12 +31,42 @@ class AuthScreenController extends GetxController with Validation {
     update();
   }
 
-  void signIn(Function onSignedIn) async {
-    // print(
-    //     'response::: ${(await NetworkController.signIn(login: loginController.text, password: passwordController.text)).response}');
-    // print(
-    //     'error::: ${(await NetworkController.signIn(login: loginController.text, password: passwordController.text)).error}');
-    onSignedIn();
-    update();
+  bool _isLoading = false;
+  UserModel? user;
+
+  bool get isLoading => _isLoading;
+
+  Future<void> register() async {
+    try {
+      _isLoading = true;
+      update();
+      ResponseModel<UserModel> result = await NetworkController()
+          .register(name: nameController.text, email: emailController.text, password: passwordController.text);
+      if (result.response != null) {
+        user = result.response!;
+      } else if (result.error?.messages?.first != null) {
+        throw result.error?.messages?.first;
+      } else if (result.error == null) {
+        throw 'UNKNOWN_ERROR';
+      } else {
+        throw result.error.toString();
+      }
+      _isLoading = false;
+      setAuthScreenType(AuthScreenType.emailVerification);
+      update();
+    } catch (e) {
+      print(e);
+
+      AppDialog.getErrorDialog(
+        e.toString(),
+      );
+
+      // AppDialog.getErrorDialog(
+      //   'Oops! Unknown error. Please try again later.',
+      //   details: e.toString(),
+      // );
+      _isLoading = false;
+      update();
+    }
   }
 }

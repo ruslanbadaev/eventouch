@@ -30,7 +30,7 @@ class ResponseModel<T> {
       print('-0-0-0');
 
       print(json);
-      response = fromJson(json['docs']);
+      response = fromJson(json['docs'] ?? json);
       print('-0-0-0');
 
       // if (json['result']['docs'] != null) {
