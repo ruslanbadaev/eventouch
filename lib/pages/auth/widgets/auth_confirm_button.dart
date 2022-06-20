@@ -21,7 +21,7 @@ class AuthConfirmWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Expanded(
-          flex: 1,
+          flex: 2,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               primary: Colors.white,
@@ -47,7 +47,7 @@ class AuthConfirmWidget extends StatelessWidget {
           width: 12,
         ),
         Expanded(
-          flex: 2,
+          flex: 3,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               primary: Colors.white,

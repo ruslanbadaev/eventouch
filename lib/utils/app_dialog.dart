@@ -146,4 +146,41 @@ class AppDialog {
       radius: 10.0,
     );
   }
+
+  static void getInfoDialog(String text) {
+    Get.defaultDialog(
+      title: 'Info',
+      titleStyle: TextStyle(color: AppColors.ORANGE),
+      titlePadding: EdgeInsets.only(top: 24),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+      backgroundColor: AppColors.PRIMARY,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 18),
+          Text(
+            text,
+            style: TextStyle(
+              color: AppColors.ORANGE,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 12),
+          Divider(color: AppColors.PINK!.withOpacity(.5)),
+          InkWell(
+            onTap: () => Get.back(),
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+              child: Text(
+                'Confirm',
+                style: TextStyle(color: AppColors.BLUE),
+              ),
+            ),
+          ),
+        ],
+      ),
+      radius: 10.0,
+    );
+  }
 }

@@ -117,7 +117,7 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                         ) ==
                         null)
                       {
-                        controller.setAuthScreenType(AuthScreenType.welcome),
+                        widget.onConfirm(),
                       }
                     else
                       {

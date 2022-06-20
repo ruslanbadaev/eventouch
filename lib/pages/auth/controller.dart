@@ -5,7 +5,7 @@ import 'package:pres7t/mixins/valiadation.dart';
 
 import '../../models/user.dart';
 
-enum AuthScreenType { signIn, signUp, welcome }
+enum AuthScreenType { signIn, signUp, welcome, emailVerification }
 
 class AuthScreenController extends GetxController with Validation {
   bool _isAuthScreen = false;
