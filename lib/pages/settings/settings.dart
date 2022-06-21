@@ -1,7 +1,9 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/app.dart';
 import 'package:pres7t/pages/settings/languages.dart';
+import 'package:pres7t/utils/app_dialog.dart';
 import 'package:pres7t/widgets/editible_field.dart';
 
 import '../../controllers/session_controller.dart';
@@ -64,7 +66,10 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
                 ),
                 ListTile(
                   onTap: () => {
-                    Get.back(),
+                    AppDialog.getSelectDialog(
+                      text: 'text',
+                      onSuccess: () => {Get.close(2)},
+                    ),
                     sessionController.logOut(),
                   },
                   title: Text(

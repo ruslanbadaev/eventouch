@@ -94,7 +94,7 @@ class AppDialog {
     );
   }
 
-  static void getSelectDialog(String text) {
+  static void getSelectDialog({required String text, required Function onSuccess, Function? onCancel}) {
     Get.defaultDialog(
       title: 'Select',
       titleStyle: TextStyle(color: AppColors.ORANGE),
@@ -118,7 +118,7 @@ class AppDialog {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: () => Get.back(),
+                onTap: () => (onCancel ?? Get.back)(),
                 borderRadius: BorderRadius.circular(10),
                 child: Padding(
                   padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
@@ -129,7 +129,7 @@ class AppDialog {
                 ),
               ),
               InkWell(
-                onTap: () => Get.back(),
+                onTap: () => onSuccess(),
                 borderRadius: BorderRadius.circular(10),
                 child: Padding(
                   padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
