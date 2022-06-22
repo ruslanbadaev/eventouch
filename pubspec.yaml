@@ -40,6 +40,7 @@ dependencies:
   animated_text_kit: 4.2.2
   get_storage: 2.0.3
   flutter_easyloading: 3.0.5
+  geolocator: 8.2.1
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/app.dart';
-import 'package:pres7t/pages/settings/languages.dart';
-import 'package:pres7t/utils/app_dialog.dart';
-import 'package:pres7t/widgets/editible_field.dart';
 
 import '../../controllers/session_controller.dart';
 import '../../utils/constants/colors.dart';
+import '../../widgets/editible_field.dart';
 import 'controller.dart';
+import 'languages.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({Key? key}) : super(key: key);
@@ -65,12 +64,20 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
                   subtitle: 'r.badaeff@gmail.com',
                 ),
                 ListTile(
-                  onTap: () => {
-                    AppDialog.getSelectDialog(
-                      text: 'text',
-                      onSuccess: () => {Get.close(2)},
-                    ),
-                    sessionController.logOut(),
+                  onTap: () async {
+                    await EasyLoading.showSuccess(
+                      'sss',
+                      maskType: EasyLoadingMaskType.custom,
+                    );
+
+                    // AppDialog.getSelectDialog(
+                    //   text: 'text',
+                    //   onSuccess: () => {
+                    //     Get.back(),
+                    //     EasyLoading.showSuccess('Great Success!'),
+                    //   },
+                    // ),
+                    // sessionController.logOut();
                   },
                   title: Text(
                     'Logout',

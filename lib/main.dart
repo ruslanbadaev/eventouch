@@ -1,18 +1,31 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/utils/constants/colors.dart';
 
 import 'app.dart';
 import 'controllers/session_controller.dart';
 import 'pages/auth/auth.dart';
 import 'pages/loading.dart';
+import 'utils/constants/colors.dart';
 import 'utils/constants/strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.red.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
@@ -88,6 +101,7 @@ class MyApp extends StatelessWidget {
         ),
         initial: savedThemeMode ?? AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => GetMaterialApp(
+          builder: EasyLoading.init(),
           debugShowCheckedModeBanner: false,
           title: AppStrings.APP_NAME_TITLE,
           home: GetBuilder<SessionController>(
