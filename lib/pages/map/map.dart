@@ -23,7 +23,11 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  MapController _mapController = MapController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MapScreenController>(
@@ -35,10 +39,10 @@ class _MapScreenState extends State<MapScreen> {
               child: Stack(
             children: [
               FlutterMap(
-                mapController: _mapController,
+                mapController: controller.mapController,
                 options: MapOptions(
-                  maxZoom: 18,
-                  center: latLng.LatLng(51.5, -0.09),
+                  maxZoom: 17,
+                  center: controller.currentLocation,
                   zoom: 13.0,
                 ),
                 layers: [
@@ -59,7 +63,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 56.0,
                             rotate: true,
                             point: event.latLng,
-                            builder: (ctx) => event.latLng.longitude < _mapController.center.longitude
+                            builder: (ctx) => event.latLng.longitude < controller.mapController.center.longitude
                                 ? FadeInLeft(
                                     duration: Duration(
                                       milliseconds: 300 + Random().nextInt(500),
@@ -102,7 +106,7 @@ class _MapScreenState extends State<MapScreen> {
                         width: 64.0,
                         height: 64.0,
                         rotate: true,
-                        point: latLng.LatLng(51.52, -0.086),
+                        point: controller.currentLocation,
                         builder: (ctx) => Container(
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -166,9 +170,9 @@ class _MapScreenState extends State<MapScreen> {
                         child: FloatingActionButton(
                           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                           onPressed: () => {
-                            _mapController.move(
-                              _mapController.center,
-                              _mapController.zoom + 1,
+                            controller.mapController.move(
+                              controller.mapController.center,
+                              controller.mapController.zoom + 1,
                             ),
                           },
                           child: Icon(
@@ -185,9 +189,9 @@ class _MapScreenState extends State<MapScreen> {
                         child: FloatingActionButton(
                           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
                           onPressed: () => {
-                            _mapController.move(
-                              _mapController.center,
-                              _mapController.zoom - 1,
+                            controller.mapController.move(
+                              controller.mapController.center,
+                              controller.mapController.zoom - 1,
                             ),
                           },
                           child: Icon(
@@ -205,9 +209,9 @@ class _MapScreenState extends State<MapScreen> {
                         child: FloatingActionButton(
                           backgroundColor: AppColors.PURPLE!.withOpacity(.8),
                           onPressed: () => {
-                            _mapController.move(
-                              latLng.LatLng(51.52, -0.086),
-                              _mapController.zoom,
+                            controller.mapController.move(
+                              controller.currentLocation,
+                              controller.mapController.zoom,
                             ),
                           },
                           child: Icon(

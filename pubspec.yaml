@@ -41,6 +41,7 @@ dependencies:
   get_storage: 2.0.3
   flutter_easyloading: 3.0.5
   geolocator: 8.2.1
+  app_settings: 4.1.8
 
 dev_dependencies:
   flutter_test:

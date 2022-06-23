@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 import 'constants/colors.dart';
 
 class AppDialog {
-  static void getErrorDialog(String text, {String? details}) {
+  static void getErrorDialog(
+    String text, {
+    String? details,
+    String? eventText,
+    Function? onEventPressed,
+  }) {
     Get.defaultDialog(
       title: 'Error',
       titleStyle: TextStyle(color: AppColors.ORANGE),
@@ -47,6 +52,21 @@ class AppDialog {
                     padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
                     child: Text(
                       'Details',
+                      style: TextStyle(color: AppColors.BLUE),
+                    ),
+                  ),
+                ),
+              if (onEventPressed != null)
+                InkWell(
+                  onTap: () => {
+                    onEventPressed(),
+                    Get.back(),
+                  },
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                    child: Text(
+                      eventText ?? 'Ok',
                       style: TextStyle(color: AppColors.BLUE),
                     ),
                   ),
