@@ -25,6 +25,13 @@ class _AppState extends State<App> with TickerProviderStateMixin {
     super.initState();
   }
 
+  final List<Widget> _screens = [
+    MapScreen(),
+    FriendsScreen(),
+    EventsHistoryScreen(),
+    SettingsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppController>(
@@ -86,12 +93,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                   FadeIndexedStack(
                     index: controller.tabIndex,
                     duration: Duration(milliseconds: 800),
-                    children: [
-                      MapScreen(),
-                      FriendsScreen(),
-                      EventsHistoryScreen(),
-                      SettingsScreen(),
-                    ],
+                    children: _screens,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,

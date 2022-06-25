@@ -38,99 +38,101 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
             padding: EdgeInsets.symmetric(
               horizontal: 24,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextFormField(
-                  controller: controller.nameController,
-                  style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    errorText: Validator.nameError(
-                      controller.nameController.text,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                TextFormField(
-                  controller: controller.emailController,
-                  style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    errorText: Validator.emailError(
-                      controller.emailController.text,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    controller: controller.nameController,
+                    style: TextStyle(fontSize: 24),
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      labelText: "Name",
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                      errorText: Validator.nameError(
+                        controller.nameController.text,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                PasswordFieldWidget(
-                  labelText: 'Password',
-                  errorText: Validator.passwordError(
-                    controller.passwordController.text,
-                    controller.repeatPasswordController.text,
+                  SizedBox(
+                    height: 24,
                   ),
-                  controller: controller.passwordController,
-                  onChanged: () => setState(() {}),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                PasswordFieldWidget(
-                  labelText: 'Repeat password',
-                  errorText: Validator.passwordError(
-                    controller.passwordController.text,
-                    controller.repeatPasswordController.text,
+                  TextFormField(
+                    controller: controller.emailController,
+                    style: TextStyle(fontSize: 24),
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                      errorText: Validator.emailError(
+                        controller.emailController.text,
+                      ),
+                    ),
                   ),
-                  controller: controller.repeatPasswordController,
-                  onChanged: () => setState(() {}),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                AuthConfirmWidget(
-                  onConfirm: () => {
-                    if (Validator.registrationDataError(
-                          name: controller.nameController.text,
-                          email: controller.emailController.text,
-                          password1: controller.passwordController.text,
-                          password2: controller.repeatPasswordController.text,
-                        ) ==
-                        null)
-                      {
-                        widget.onConfirm(),
-                      }
-                    else
-                      {
-                        AppDialog.getErrorDialog(
-                          Validator.registrationDataError(
+                  SizedBox(
+                    height: 24,
+                  ),
+                  PasswordFieldWidget(
+                    labelText: 'Password',
+                    errorText: Validator.passwordError(
+                      controller.passwordController.text,
+                      controller.repeatPasswordController.text,
+                    ),
+                    controller: controller.passwordController,
+                    onChanged: () => setState(() {}),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  PasswordFieldWidget(
+                    labelText: 'Repeat password',
+                    errorText: Validator.passwordError(
+                      controller.passwordController.text,
+                      controller.repeatPasswordController.text,
+                    ),
+                    controller: controller.repeatPasswordController,
+                    onChanged: () => setState(() {}),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  AuthConfirmWidget(
+                    onConfirm: () => {
+                      if (Validator.registrationDataError(
                             name: controller.nameController.text,
                             email: controller.emailController.text,
                             password1: controller.passwordController.text,
                             password2: controller.repeatPasswordController.text,
-                          )!,
-                        ),
-                      }
-                  },
-                  onBack: () => {
-                    widget.onBack(),
-                  },
-                ),
-              ],
+                          ) ==
+                          null)
+                        {
+                          widget.onConfirm(),
+                        }
+                      else
+                        {
+                          AppDialog.getErrorDialog(
+                            Validator.registrationDataError(
+                              name: controller.nameController.text,
+                              email: controller.emailController.text,
+                              password1: controller.passwordController.text,
+                              password2: controller.repeatPasswordController.text,
+                            )!,
+                          ),
+                        }
+                    },
+                    onBack: () => {
+                      widget.onBack(),
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

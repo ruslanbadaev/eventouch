@@ -52,6 +52,25 @@ class Validator {
     return errorText;
   }
 
+  static String? loginDataError({
+    required String email,
+    required String password,
+  }) {
+    String? errorText;
+
+    if (email.length < 6) {
+      return 'EMAIL_LENGTH_IS_NOT_ALLOWED';
+    }
+    if (emailError(email) != null) {
+      return emailError(email);
+    }
+    if (password.length < 6) {
+      return 'PASSWORD_LENGTH_IS_NOT_ALLOWED';
+    }
+
+    return errorText;
+  }
+
   static String? verificationCodeError(String email) {
     String? errorText;
     if (email.length != 6) {

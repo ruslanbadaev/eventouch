@@ -1,17 +1,16 @@
 import 'dart:ui';
 
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/pages/auth/widgets/email_verification.dart';
-import 'package:pres7t/utils/app_dialog.dart';
+import 'package:pres7t/pages/auth/widgets/sign_in.dart';
 
 import '../../app.dart';
+import '../../utils/app_dialog.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
-import 'widgets/sign_in.dart';
+import 'widgets/email_verification.dart';
+
 import 'widgets/sign_up.dart';
 import 'widgets/welcome.dart';
 
@@ -51,7 +50,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                     color: AppColors.PRIMARY,
                     size: 36,
                   ),
-                  onPressed: () => {Get.off(App())},
+                  onPressed: () => {Get.close(2)},
                 ),
               ),
               Align(
@@ -86,7 +85,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                       ),
                       FadeInUp(
                         child: Text(
-                          'Registration',
+                          _getSubtitle(controller.authType),
                           style: TextStyle(
                               color: AppColors.WHITE.withOpacity(.7), fontWeight: FontWeight.w400, fontSize: 24),
                         ),
@@ -122,7 +121,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     required AuthScreenController controller,
   }) {
     if (authType == AuthScreenType.signIn) {
-      return SignInWidget();
+      return SignInWidget(
+        onConfirm: () => controller.login(),
+        onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
+      );
     } else if (authType == AuthScreenType.signUp) {
       return SignUpWidget(
         onConfirm: () => controller.register(),
@@ -135,6 +137,23 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       );
     } else {
       return WelcomeWidget();
+    }
+  }
+
+  String _getSubtitle(AuthScreenType type) {
+    switch (type) {
+      case AuthScreenType.signUp:
+        return 'Registration';
+      case AuthScreenType.signIn:
+        return 'Login';
+      case AuthScreenType.emailVerification:
+        return 'Verification';
+      case AuthScreenType.welcome:
+        return 'Welcome!';
+      case AuthScreenType.success:
+        return 'Success!';
+      default:
+        return '';
     }
   }
 }

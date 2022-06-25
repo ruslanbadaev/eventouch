@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/utils/validator.dart';
 
-import '../../../controllers/session_controller.dart';
-import '../../../utils/constants/colors.dart';
+import '../../../utils/app_dialog.dart';
 import '../controller.dart';
+import 'auth_confirm_button.dart';
+import 'password_field.dart';
 
 class SignInWidget extends StatefulWidget {
-  SignInWidget({Key? key}) : super(key: key);
+  Function onConfirm;
+  Function onBack;
+  SignInWidget({
+    Key? key,
+    required this.onConfirm,
+    required this.onBack,
+  }) : super(key: key);
 
   @override
   _SignInWidgetState createState() => _SignInWidgetState();
 }
 
 class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMixin {
-  final SessionController sessionController = Get.find();
-
   initState() {
     super.initState();
   }
@@ -41,86 +47,54 @@ class _SignInWidgetState extends State<SignInWidget> with TickerProviderStateMix
                   style: TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    hintText: "Введите логин",
-                    fillColor: AppColors.BLACK.withOpacity(.12),
+                    labelText: "Email",
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    errorText: Validator.emailError(
+                      controller.emailController.text,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 24,
                 ),
-                TextFormField(
+                PasswordFieldWidget(
+                  labelText: 'Password',
+                  errorText: Validator.passwordError(
+                    controller.passwordController.text,
+                    controller.repeatPasswordController.text,
+                  ),
                   controller: controller.passwordController,
-                  style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    hintText: "Введите пароль",
-                    fillColor: AppColors.BLACK.withOpacity(.12),
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                  ),
+                  onChanged: () => setState(() {}),
                 ),
                 SizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: AppColors.BLACK.withOpacity(.24),
-                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))),
+                AuthConfirmWidget(
+                  onConfirm: () => {
+                    if (Validator.loginDataError(
+                          email: controller.emailController.text,
+                          password: controller.passwordController.text,
+                        ) ==
+                        null)
+                      {
+                        widget.onConfirm(),
+                      }
+                    else
+                      {
+                        AppDialog.getErrorDialog(
+                          Validator.loginDataError(
+                            email: controller.emailController.text,
+                            password: controller.passwordController.text,
+                          )!,
                         ),
-                        onPressed: () {
-                          controller.setAuthScreenType(AuthScreenType.welcome);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 18),
-                          child: Text(
-                            '<',
-                            style: Theme.of(context).textTheme.headline2?.copyWith(
-                                  color: AppColors.BLACK,
-                                  fontSize: 24,
-                                ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: AppColors.BLACK.withOpacity(.24),
-                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))),
-                        ),
-                        onPressed: () {
-                          // controller.signIn(sessionController.login);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(18),
-                          child: Text(
-                            'Отправить',
-                            style: Theme.of(context).textTheme.headline2?.copyWith(
-                                  color: AppColors.BLACK,
-                                  fontSize: 24,
-                                ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                      }
+                  },
+                  onBack: () => {
+                    widget.onBack(),
+                  },
                 ),
               ],
             ),
