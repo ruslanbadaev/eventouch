@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:get_storage/get_storage.dart';
 import 'package:pres7t/models/user.dart';
 
 import '../mixins/cache_manager.dart';
@@ -94,7 +95,7 @@ class NetworkController extends GetxController with CacheManager {
 
       if (response.data['token'] == null) throw 'TOKEN_IS_EMPTY';
       saveToken(response.data['token']);
-      log('||||||||||4 ${response.data}');
+      saveUser(UserModel.fromJson(response.data['user']));
 
       return ResponseModel<UserModel>.fromJson(
         response.data['user'] as Map<String, dynamic>,

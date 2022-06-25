@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/pages/auth/widgets/auth_success.dart';
 import 'package:pres7t/pages/auth/widgets/sign_in.dart';
 
 import '../../app.dart';
@@ -134,6 +135,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       return EmailVerificationWidget(
         onConfirm: () => Get.off(App()),
         onBack: () => {AppDialog.getInfoDialog('The confirmation code was sent again')},
+      );
+    } else if (authType == AuthScreenType.success) {
+      return AuthSuccessWidget(
+        onConfirm: () => Get.back(),
       );
     } else {
       return WelcomeWidget();

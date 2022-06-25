@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/session_controller.dart';
+import '../../utils/app_dialog.dart';
 import '../../utils/constants/colors.dart';
 import '../../widgets/editible_field.dart';
 import 'controller.dart';
@@ -65,19 +66,14 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
                 ),
                 ListTile(
                   onTap: () async {
-                    await EasyLoading.showSuccess(
-                      'sss',
-                      maskType: EasyLoadingMaskType.custom,
+                    AppDialog.getSelectDialog(
+                      text: 'Logout?',
+                      onSuccess: () => {
+                        Get.back(),
+                        sessionController.logOut(),
+                        EasyLoading.showSuccess('Great Success!'),
+                      },
                     );
-
-                    // AppDialog.getSelectDialog(
-                    //   text: 'text',
-                    //   onSuccess: () => {
-                    //     Get.back(),
-                    //     EasyLoading.showSuccess('Great Success!'),
-                    //   },
-                    // ),
-                    // sessionController.logOut();
                   },
                   title: Text(
                     'Logout',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/widgets/button.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../controller.dart';
@@ -7,11 +8,10 @@ import 'auth_confirm_button.dart';
 
 class AuthSuccessWidget extends StatefulWidget {
   Function onConfirm;
-  Function onBack;
+
   AuthSuccessWidget({
     Key? key,
     required this.onConfirm,
-    required this.onBack,
   }) : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class _AuthSuccessWidgetState extends State<AuthSuccessWidget> with TickerProvid
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Hello ${controller.nameController.text}!',
+                  'Thanks for authorization',
                   style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600, fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
@@ -56,31 +56,22 @@ class _AuthSuccessWidgetState extends State<AuthSuccessWidget> with TickerProvid
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Please check your email ',
+                        text: 'Now ',
                         style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400, fontSize: 24),
                       ),
                       TextSpan(
-                        text: '${controller.emailController.text}',
+                        text: 'You',
                         style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600, fontSize: 24),
                       ),
                       TextSpan(
-                        text: ' and confirm the verification.',
+                        text: ' can create events and register in them.',
                         style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400, fontSize: 24),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 24,
-                ),
-                AuthConfirmWidget(
-                  confirmTitle: 'Check',
-                  backTitle: 'Repeat',
-                  onConfirm: () => {},
-                  onBack: () => {
-                    widget.onBack(),
-                  },
-                ),
+                SizedBox(height: 24),
+                ButtonWidget(onPressed: () => widget.onConfirm()),
               ],
             ),
           ),

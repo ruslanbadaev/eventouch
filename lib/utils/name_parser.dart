@@ -11,4 +11,5 @@ String? getAbbreviation(String name) {
   if (nameList.length > 1) {
     return nameList[0][0] + nameList[1][0];
   }
+  return null;
 }

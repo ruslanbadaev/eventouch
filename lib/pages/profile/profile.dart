@@ -1,14 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/controllers/session_controller.dart';
-import 'package:pres7t/widgets/single_line_tile.dart';
 
+import '../../controllers/session_controller.dart';
 import '../../utils/constants/colors.dart';
-import '../../widgets/empty_widget.dart';
+import '../../widgets/editible_field.dart';
+import '../../widgets/single_line_tile.dart';
 import '../../widgets/unauth_widget.dart';
 import 'controller.dart';
-import '../../widgets/editible_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   String id;
@@ -68,9 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                       ),
                       SizedBox(height: 28),
                       EditebleField(
-                        title: 'About you:',
-                        subtitle:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                        title: controller.getUserData().name,
+                        subtitle: controller.getUserData().description ?? '',
                       ),
                       SingleLineTile(
                         id: '1',

@@ -1,4 +1,5 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:pres7t/models/user.dart';
 
 mixin CacheManager {
   Future<bool> saveToken(String? token) async {
@@ -16,6 +17,12 @@ mixin CacheManager {
     final box = GetStorage();
     await box.remove(CacheManagerKey.TOKEN.toString());
   }
+
+  Future<bool> saveUser(UserModel user) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.USER.toString(), user);
+    return true;
+  }
 }
 
-enum CacheManagerKey { TOKEN }
+enum CacheManagerKey { TOKEN, USER }
