@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:pres7t/app.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../utils/constants/icons.dart';
+import '../../utils/event_type.dart';
 import 'controller.dart';
 
 class SetPlaceScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class SetPlaceScreen extends StatefulWidget {
 
 class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStateMixin {
   MapController _mapController = MapController();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateEventController>(
@@ -35,7 +37,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                 options: MapOptions(
                   maxZoom: 18,
                   center: latLng.LatLng(51.52, -0.086),
-                  zoom: 13.0,
+                  zoom: 18.0,
                 ),
                 layers: [
                   TileLayerOptions(
@@ -150,6 +152,27 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                   ),
                 ),
               ),
+              FadeInDown(
+                child: Container(
+                  padding: EdgeInsets.only(top: 48),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (EventType event in EventType.values.toList())
+                          AppIcons.getFilterIcon(
+                            context,
+                            eventType: event,
+                            onPressed: (selectedEventType) => {
+                              controller.selectEventType(selectedEventType),
+                            },
+                            selectedEventFilter: controller.selectedEventType,
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Align(
                 child: Container(
                   height: 128,
@@ -161,7 +184,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                       colors: [
                         AppColors.WHITE.withOpacity(.8),
                         AppColors.WHITE.withOpacity(.5),
-                        AppColors.BLUE!.withOpacity(1),
+                        _getColorBySelectedType(controller.selectedEventType),
                         // AppColors.PINK!,
                       ],
                     ),
@@ -205,6 +228,22 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
         );
       },
     );
+  }
+
+  Color _getColorBySelectedType(EventType type) {
+    switch (type) {
+      case EventType.extravert:
+        return AppColors.PURPLE!;
+      case EventType.politic:
+        return AppColors.PINK!;
+      case EventType.tourist:
+        return AppColors.BLUE!;
+      case EventType.nurd:
+        return AppColors.ORANGE!;
+
+      default:
+        return AppColors.PURPLE!;
+    }
   }
 }
 
