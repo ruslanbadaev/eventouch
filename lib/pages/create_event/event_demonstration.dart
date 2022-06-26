@@ -7,34 +7,45 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../widgets/text_box.dart';
 import '../../widgets/user_item.dart';
 import 'controller.dart';
-import '../../widgets/text_box.dart';
 
-class EventScreen extends StatefulWidget {
-  String id;
-  EventScreen({
+class EventDemonstrationScreen extends StatefulWidget {
+  String creatorName;
+  String creatorDescription;
+  String eventName;
+  String aboutEvent;
+  String aboutYou;
+  String aboutLocation;
+
+  EventDemonstrationScreen({
     Key? key,
-    required this.id,
+    required this.creatorName,
+    required this.creatorDescription,
+    required this.eventName,
+    required this.aboutEvent,
+    required this.aboutYou,
+    required this.aboutLocation,
   }) : super(key: key);
 
   @override
-  _EventScreenState createState() => _EventScreenState();
+  _EventDemonstrationScreenState createState() => _EventDemonstrationScreenState();
 }
 
-class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin {
+class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> with TickerProviderStateMixin {
   List<BoxShadow> shadow = [
     BoxShadow(
       color: AppColors.PRIMARY!.withOpacity(0.3),
       spreadRadius: 1,
       blurRadius: 3,
-      offset: Offset(3, 3), // changes position of shadow
+      offset: Offset(3, 3),
     )
   ];
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<EventController>(
-      init: EventController(),
+    return GetBuilder<CreateEventController>(
+      init: CreateEventController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
@@ -56,11 +67,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                         onPageChanged: (_, __) => {},
                         scrollDirection: Axis.vertical,
                       ),
-                      items: [
-                        'https://newsroom.mastercard.com/wp-content/uploads/2016/10/HACKATHON-162-of-477.jpg',
-                        'https://ria56.ru/wp-content/uploads/2021/07/0187LoULJ7M.jpg',
-                        'https://amazinghiring.ru/blog/wp-content/uploads/2017/10/SOSUEU17-207.jpg',
-                      ].map((String image) {
+                      items: [''].map((String image) {
                         return Builder(
                           builder: (BuildContext context) {
                             return ClipRRect(
@@ -230,7 +237,6 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
     );
   }
 }
-
 
 // Wrap(
 //                           alignment: WrapAlignment.center,

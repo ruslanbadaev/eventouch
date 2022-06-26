@@ -9,6 +9,7 @@ import '../../utils/constants/colors.dart';
 import '../../utils/constants/icons.dart';
 import '../../utils/event_type.dart';
 import 'controller.dart';
+import 'event_demonstration.dart';
 
 class SetPlaceScreen extends StatefulWidget {
   SetPlaceScreen({
@@ -133,7 +134,14 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                         SizedBox(height: 14),
                         FloatingActionButton.extended(
                           onPressed: () => {
-                            Get.close(2),
+                            Get.to(EventDemonstrationScreen(
+                              creatorName: '',
+                              creatorDescription: '',
+                              eventName: '',
+                              aboutEvent: '',
+                              aboutYou: '',
+                              aboutLocation: '',
+                            )),
                           },
                           backgroundColor: AppColors.ORANGE,
                           extendedPadding: EdgeInsets.all(24),
@@ -185,7 +193,6 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                         AppColors.WHITE.withOpacity(.8),
                         AppColors.WHITE.withOpacity(.5),
                         _getColorBySelectedType(controller.selectedEventType),
-                        // AppColors.PINK!,
                       ],
                     ),
                   ),
@@ -246,179 +253,3 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
     }
   }
 }
-
-// Wrap(
-//                           alignment: WrapAlignment.center,
-//                           children: [
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Сost of entry:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Free',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Dress code:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Any',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Who is invited:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Python developers',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Alcohol:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Yes',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Food:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Fastfood',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
