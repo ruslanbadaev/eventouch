@@ -29,7 +29,7 @@ class TextBoxWidget extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
           margin: EdgeInsets.all(8),
           width: double.infinity,
           decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class TextBoxWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            body,
             style: TextStyle(
               fontSize: 14,
               color: AppColors.PRIMARY,

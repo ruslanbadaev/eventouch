@@ -7,6 +7,7 @@ import 'package:pres7t/pages/auth/widgets/auth_success.dart';
 import 'package:pres7t/pages/auth/widgets/sign_in.dart';
 
 import '../../app.dart';
+import '../../controllers/session_controller.dart';
 import '../../utils/app_dialog.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
@@ -30,6 +31,35 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final double _screenHeight = MediaQuery.of(context).size.height;
+    final SessionController sessionController = Get.put(SessionController());
+    Widget _authWidget({
+      required AuthScreenType authType,
+      required AuthScreenController controller,
+    }) {
+      sessionController.checkLogged();
+      if (authType == AuthScreenType.signIn) {
+        return SignInWidget(
+          onConfirm: () => controller.login(),
+          onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
+        );
+      } else if (authType == AuthScreenType.signUp) {
+        return SignUpWidget(
+          onConfirm: () => controller.register(),
+          onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
+        );
+      } else if (authType == AuthScreenType.emailVerification) {
+        return EmailVerificationWidget(
+          onConfirm: () => Get.off(App()),
+          onBack: () => {AppDialog.getInfoDialog('The confirmation code was sent again')},
+        );
+      } else if (authType == AuthScreenType.success) {
+        return AuthSuccessWidget(
+          onConfirm: () => Get.back(),
+        );
+      } else {
+        return WelcomeWidget();
+      }
+    }
 
     return GetBuilder<AuthScreenController>(
       init: AuthScreenController(),
@@ -115,34 +145,6 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         );
       },
     );
-  }
-
-  Widget _authWidget({
-    required AuthScreenType authType,
-    required AuthScreenController controller,
-  }) {
-    if (authType == AuthScreenType.signIn) {
-      return SignInWidget(
-        onConfirm: () => controller.login(),
-        onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
-      );
-    } else if (authType == AuthScreenType.signUp) {
-      return SignUpWidget(
-        onConfirm: () => controller.register(),
-        onBack: () => controller.setAuthScreenType(AuthScreenType.welcome),
-      );
-    } else if (authType == AuthScreenType.emailVerification) {
-      return EmailVerificationWidget(
-        onConfirm: () => Get.off(App()),
-        onBack: () => {AppDialog.getInfoDialog('The confirmation code was sent again')},
-      );
-    } else if (authType == AuthScreenType.success) {
-      return AuthSuccessWidget(
-        onConfirm: () => Get.back(),
-      );
-    } else {
-      return WelcomeWidget();
-    }
   }
 
   String _getSubtitle(AuthScreenType type) {

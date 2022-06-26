@@ -7,8 +7,9 @@ class EventModel {
   final EventType type;
   final String title;
   final String creatorId;
-  final String aboutEvent;
-  final String aboutYou;
+  final String? aboutEvent;
+  final String? aboutYou;
+  final String? aboutLocation;
   final String date;
   final Map location;
   final String createdAt;
@@ -21,8 +22,9 @@ class EventModel {
     required this.type,
     required this.title,
     required this.creatorId,
-    required this.aboutEvent,
-    required this.aboutYou,
+    this.aboutEvent,
+    this.aboutYou,
+    this.aboutLocation,
     required this.date,
     required this.location,
     required this.createdAt,
@@ -44,6 +46,7 @@ class EventModel {
         creatorId: json['creatorId'],
         aboutEvent: json['aboutEvent'],
         aboutYou: json['aboutYou'],
+        aboutLocation: json['aboutLocation'],
         visitors: json['visitors'],
         date: json['date'],
         location: json['location'],
@@ -61,6 +64,7 @@ class EventModel {
         creatorId: json['creatorId'],
         aboutEvent: json['aboutEvent'],
         aboutYou: json['aboutYou'],
+        aboutLocation: json['aboutLocation'],
         visitors: json['visitors'],
         date: json['date'],
         location: json['location'],

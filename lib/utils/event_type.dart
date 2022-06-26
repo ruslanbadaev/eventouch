@@ -1,4 +1,4 @@
-enum EventType { extravert, politic, tourist, nurd }
+enum EventType { tourist, extravert, nurd, politic }
 
 EventType getEventTypeFromString(String typeString) {
   switch (typeString) {

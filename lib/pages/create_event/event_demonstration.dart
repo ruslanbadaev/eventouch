@@ -51,99 +51,99 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
           backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
           body: Column(
             children: [
-              Stack(
-                children: [
-                  FadeInDown(
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        height: 240.0,
-                        viewportFraction: 1,
-                        initialPage: 0,
-                        enableInfiniteScroll: false,
-                        reverse: false,
-                        autoPlay: false,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        onPageChanged: (_, __) => {},
-                        scrollDirection: Axis.vertical,
-                      ),
-                      items: [''].map((String image) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return ClipRRect(
-                              child: Container(
-                                height: 240.0,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      AppColors.BLUE!,
-                                      AppColors.PURPLE!,
-                                      AppColors.PINK!,
-                                      AppColors.ORANGE!,
-                                    ],
-                                  ),
-                                ),
-                                width: double.infinity,
-                                child: CachedNetworkImage(
-                                  imageUrl: '$image',
-                                  placeholder: (context, url) => SpinKitRipple(
-                                    color: AppColors.ORANGE,
-                                    size: 240.0,
-                                  ),
-                                  errorWidget: (context, url, error) => Icon(
-                                    Icons.image_not_supported_rounded,
-                                    color: AppColors.PRIMARY,
-                                    size: 48,
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 8,
-                    left: 8,
-                    child: FadeInLeft(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.close_rounded,
-                          color: AppColors.PRIMARY,
-                          size: 36,
-                        ),
-                        onPressed: () => {Get.back()},
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 8,
-                    right: 8,
-                    child: FadeInRight(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.share_rounded,
-                          color: AppColors.PRIMARY,
-                          size: 28,
-                        ),
-                        onPressed: () => {Get.back()},
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Stack(
+                        children: [
+                          FadeInDown(
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                height: 240.0,
+                                viewportFraction: 1,
+                                initialPage: 0,
+                                enableInfiniteScroll: false,
+                                reverse: false,
+                                autoPlay: false,
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                onPageChanged: (_, __) => {},
+                                scrollDirection: Axis.vertical,
+                              ),
+                              items: [''].map((String image) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return ClipRRect(
+                                      child: Container(
+                                        height: 240.0,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomLeft,
+                                            colors: [
+                                              AppColors.BLUE!,
+                                              AppColors.PURPLE!,
+                                              AppColors.PINK!,
+                                              AppColors.ORANGE!,
+                                            ],
+                                          ),
+                                        ),
+                                        width: double.infinity,
+                                        child: CachedNetworkImage(
+                                          imageUrl: '$image',
+                                          placeholder: (context, url) => SpinKitRipple(
+                                            color: AppColors.ORANGE,
+                                            size: 240.0,
+                                          ),
+                                          errorWidget: (context, url, error) => Icon(
+                                            Icons.image_not_supported_rounded,
+                                            color: AppColors.PRIMARY,
+                                            size: 48,
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 8,
+                            left: 8,
+                            child: FadeInLeft(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.close_rounded,
+                                  color: AppColors.PRIMARY,
+                                  size: 36,
+                                ),
+                                onPressed: () => {Get.back()},
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 8,
+                            right: 8,
+                            child: FadeInRight(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.share_rounded,
+                                  color: AppColors.PRIMARY,
+                                  size: 28,
+                                ),
+                                onPressed: () => {Get.back()},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: 24),
                       Text(
-                        'Python hackathone',
+                        widget.eventName,
                         style: AdaptiveTheme.of(context).theme.textTheme.headline1,
                         textAlign: TextAlign.center,
                       ),
@@ -158,9 +158,9 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                       ),
                       FadeInLeft(
                         child: UserItemWidget(
-                          title: 'Till Lindenmann',
-                          subtitle: 'Master',
-                          imageUrl: 'https://i.pinimg.com/originals/64/cb/f6/64cbf6023a8576482f7782ce1d29cc01.jpg',
+                          title: widget.creatorName,
+                          subtitle: widget.creatorDescription,
+                          imageUrl: '',
                           color: AppColors.ORANGE!,
                           textColor: AppColors.PRIMARY,
                           shadow: shadow,
@@ -170,8 +170,7 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                       FadeInRight(
                         child: TextBoxWidget(
                           title: 'About event',
-                          body:
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                          body: widget.aboutEvent,
                           color: AppColors.PURPLE!,
                           shadow: shadow,
                         ),
@@ -180,9 +179,17 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                       FadeInLeft(
                         child: TextBoxWidget(
                           title: 'About you',
-                          body:
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                          body: widget.aboutYou,
                           color: AppColors.BLUE!,
+                          shadow: shadow,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      FadeInRight(
+                        child: TextBoxWidget(
+                          title: 'About location',
+                          body: widget.aboutLocation,
+                          color: AppColors.PINK!,
                           shadow: shadow,
                         ),
                       ),
@@ -196,33 +203,13 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
           floatingActionButton: FadeInRight(
             child: FloatingActionButton.extended(
               onPressed: () => {},
-              backgroundColor: AppColors.PINK,
+              backgroundColor: AppColors.WHITE,
               extendedPadding: EdgeInsets.all(4),
               elevation: 4,
-              label: Container(
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AdaptiveTheme.of(context).theme.backgroundColor,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      '18',
-                      style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-                    ),
-                    Icon(
-                      Icons.people,
-                      color: AppColors.PINK,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-              icon: Padding(
-                padding: EdgeInsets.only(left: 12),
+              label: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  'I\'ll be there',
+                  'Continue',
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.PRIMARY,
@@ -237,179 +224,3 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
     );
   }
 }
-
-// Wrap(
-//                           alignment: WrapAlignment.center,
-//                           children: [
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Сost of entry:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Free',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Dress code:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Any',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Who is invited:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Python developers',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Alcohol:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Yes',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-//                               margin: EdgeInsets.all(4),
-//                               decoration: BoxDecoration(
-//                                 gradient: LinearGradient(
-//                                   begin: Alignment.topCenter,
-//                                   end: Alignment.bottomLeft,
-//                                   colors: [
-//                                     AppColors.BLUE!,
-//                                     AppColors.BLUE!,
-//                                     // AppColors.BLUE!.withOpacity(.6),
-//                                   ],
-//                                 ),
-//                                 boxShadow: shadow,
-//                                 borderRadius: BorderRadius.circular(12),
-//                               ),
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   style: TextStyle(
-//                                     fontSize: 16.0,
-//                                   ),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                       text: 'Food:',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w600),
-//                                     ),
-//                                     TextSpan(
-//                                       text: ' Fastfood',
-//                                       style: TextStyle(color: AppColors.PRIMARY, fontWeight: FontWeight.w400),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),

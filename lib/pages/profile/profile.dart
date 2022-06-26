@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
-          body: !sessionController.isLogged()
+          body: !sessionController.isLogged.value
               ? UnauthWidget(onPressed: () => {})
               : SafeArea(
                   child: Column(

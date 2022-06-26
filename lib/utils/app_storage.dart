@@ -1,12 +1,16 @@
-import 'package:intl/intl.dart';
+import 'package:get_storage/get_storage.dart';
 
-class AppDate {
-  static String getFormattedDateString(String date) {
-    try {
-      DateTime dateTime = DateTime.parse(date);
-      return DateFormat('yyyy-MM-dd kk:mm').format(dateTime);
-    } catch (e) {
-      return date;
-    }
+import '../mixins/cache_manager.dart';
+import '../models/user.dart';
+
+class AppStorage {
+  static UserModel getCurrentUserData() {
+    return GetStorage().read(CacheManagerKey.USER.toString()) ??
+        UserModel(
+          id: '0',
+          name: '--',
+          email: '--',
+          role: '--',
+        );
   }
 }
