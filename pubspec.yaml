@@ -42,6 +42,7 @@ dependencies:
   flutter_easyloading: 3.0.5
   geolocator: 8.2.1
   app_settings: 4.1.8
+  date_time_picker: 2.1.0
 
 dev_dependencies:
   flutter_test:

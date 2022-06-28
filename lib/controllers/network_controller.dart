@@ -118,6 +118,44 @@ class NetworkController extends GetxController with CacheManager {
     }
   }
 
+  Future<ResponseModel<UserModel>> createEvent({
+    required String type,
+    required String title,
+    required String aboutEvent,
+    required String aboutYou,
+    required String aboutLocation,
+    required double lat,
+    required double long,
+    required List<String> images,
+    required String date,
+  }) async {
+    try {
+      Response response = await dio.post(
+        '${AppLinks.HOST}/login',
+        data: {},
+      );
+
+      return ResponseModel<UserModel>.fromJson(
+        response.data['user'] as Map<String, dynamic>,
+        fromJson: UserModel.fromJson,
+      );
+    } on DioError catch (error) {
+      log('||||||||||3 $error');
+
+      return ResponseModel<UserModel>.fromJson(
+        error.response?.data as Map<String, dynamic>,
+        fromJson: null,
+      );
+    } catch (error) {
+      log('||||||||||2 $error');
+
+      return ResponseModel<UserModel>.fromJson(
+        {'error': error},
+        fromJson: null,
+      );
+    }
+  }
+
   Future<ResponseModel<List<EventModel>>> getEventsHistory({required EventStatus status}) async {
     try {
       Response response = await dio.get('${AppLinks.HOST}/events?status=${status.name}');

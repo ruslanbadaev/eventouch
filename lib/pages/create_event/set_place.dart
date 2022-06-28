@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:pres7t/pages/create_event/set_datetime.dart';
 import 'package:pres7t/utils/app_storage.dart';
 
 import '../../utils/constants/colors.dart';
@@ -135,22 +136,23 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                         SizedBox(height: 14),
                         FloatingActionButton.extended(
                           onPressed: () => {
-                            Get.to(
-                              () => EventDemonstrationScreen(
-                                creatorName: AppStorage.getCurrentUserData().name,
-                                creatorDescription: AppStorage.getCurrentUserData().description ?? '',
-                                eventName: controller.nameController.text,
-                                aboutEvent: controller.aboutEventController.text,
-                                aboutYou: controller.aboutYouController.text,
-                                aboutLocation: controller.aboutLocationController.text,
-                              ),
-                            ),
+                            Get.to(SetDatetimeScreen())
+                            // Get.to(
+                            //   () => EventDemonstrationScreen(
+                            //     creatorName: AppStorage.getCurrentUserData().name,
+                            //     creatorDescription: AppStorage.getCurrentUserData().description ?? '',
+                            //     eventName: controller.nameController.text,
+                            //     aboutEvent: controller.aboutEventController.text,
+                            //     aboutYou: controller.aboutYouController.text,
+                            //     aboutLocation: controller.aboutLocationController.text,
+                            //   ),
+                            // ),
                           },
                           backgroundColor: AppColors.ORANGE,
                           extendedPadding: EdgeInsets.all(24),
                           elevation: 4,
                           label: Text(
-                            'Set location',
+                            'Set date',
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.PRIMARY,
