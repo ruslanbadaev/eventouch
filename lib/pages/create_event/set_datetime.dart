@@ -20,6 +20,8 @@ class SetDatetimeScreen extends StatefulWidget {
 }
 
 class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProviderStateMixin {
+  final _backgroundGradient = AppColors.getShuffledGradient();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateEventController>(
@@ -32,7 +34,7 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
               children: [
                 Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(gradient: AppColors.getShuffledGradient()),
+                  decoration: BoxDecoration(gradient: _backgroundGradient),
                 ),
                 Center(
                   child: Column(

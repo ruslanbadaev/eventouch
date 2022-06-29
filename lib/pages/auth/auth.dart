@@ -24,6 +24,8 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
+  final _backgroundGradient = AppColors.getShuffledGradient();
+
   initState() {
     super.initState();
   }
@@ -70,7 +72,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               Container(
                 height: _screenHeight,
                 width: double.infinity,
-                decoration: BoxDecoration(gradient: AppColors.getShuffledGradient()),
+                decoration: BoxDecoration(gradient: _backgroundGradient),
               ),
               Positioned(
                 top: 36,

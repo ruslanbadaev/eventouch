@@ -31,6 +31,8 @@ class EventItemWidget extends StatefulWidget {
 }
 
 class _EventItemWidgetState extends State<EventItemWidget> {
+  final _backgroundGradient = AppColors.getShuffledGradient();
+
   @override
   void initState() {
     super.initState();
@@ -71,7 +73,7 @@ class _EventItemWidgetState extends State<EventItemWidget> {
                   height: 240,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    gradient: AppColors.getShuffledGradient(),
+                    gradient: _backgroundGradient,
                   ),
                   child: widget.image != null
                       ? Image.network(

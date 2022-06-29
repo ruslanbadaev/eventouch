@@ -18,13 +18,15 @@ class UserAvatarWidget extends StatelessWidget {
     this.color,
   }) : super(key: key);
 
+  final _backgroundGradient = AppColors.getShuffledGradient();
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: Container(
         decoration: BoxDecoration(
-          gradient: color == null ? AppColors.getShuffledGradient() : null,
+          gradient: color == null ? _backgroundGradient : null,
           color: color,
         ),
         width: radius ?? 56,
