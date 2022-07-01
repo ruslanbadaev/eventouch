@@ -51,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         );
       } else if (authType == AuthScreenType.emailVerification) {
         return EmailVerificationWidget(
-          onConfirm: () => Get.off(App()),
+          onConfirm: () => Get.close(2),
           onBack: () => {AppDialog.getInfoDialog('The confirmation code was sent again')},
         );
       } else if (authType == AuthScreenType.success) {

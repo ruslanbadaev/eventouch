@@ -2,6 +2,8 @@
 //   String? response;
 //   String? error;
 
+import 'dart:developer';
+
 import 'response_error.dart';
 
 class ResponseModel<T> {
@@ -20,18 +22,17 @@ class ResponseModel<T> {
     try {
       final response;
       if (fromJson == null) {
+        log(json.toString(), name: 'ResponseModel.fromJson');
+
         return ResponseModel(
           null,
           json['error'] == null
               ? (json['errors'] == null ? null : ErrorMessageModel.fromJson(json['errors']))
-              : ErrorMessageModel.fromJson(json['error']),
+              : ErrorMessageModel.fromJson(json['error'] is Map<String, dynamic> ? json['error'] : json),
         );
       }
-      print('-0-0-0');
 
-      print(json);
       response = fromJson(json['docs'] ?? json);
-      print('-0-0-0');
 
       // if (json['result']['docs'] != null) {
       //   response = fromJson(json['result']['docs']);
@@ -44,7 +45,9 @@ class ResponseModel<T> {
 
       return ResponseModel(
         response,
-        json['error'] == null ? null : ErrorMessageModel.fromJson(json['error']),
+        json['error'] == null
+            ? null
+            : ErrorMessageModel.fromJson(json['error'] is Map<String, dynamic> ? json['error'] : json),
       );
     } catch (e) {
       print('ResponseModel fromJson :: $e');

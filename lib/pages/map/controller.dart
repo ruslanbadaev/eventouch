@@ -181,10 +181,8 @@ class MapScreenController extends GetxController {
       }
     });
     positionStream.onData((data) {
-      if (data != null) {
-        _currentLocation = LatLng(data.latitude, data.longitude);
-        mapController.move(_currentLocation, 17);
-      }
+      _currentLocation = LatLng(data.latitude, data.longitude);
+      mapController.move(_currentLocation, 17);
       update();
       print(data);
     });

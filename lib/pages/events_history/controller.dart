@@ -34,6 +34,10 @@ class EventsHistoryScreenController extends GetxController {
       ResponseModel<List<EventModel>> result = await NetworkController().getEventsHistory(status: _selectedStatusTab);
       if (result.error == null) {
         events = result.response!;
+      } else {
+        AppDialog.getErrorDialog(
+          result.error!.messages!.first.toString(),
+        );
       }
       _isLoading = false;
       update();

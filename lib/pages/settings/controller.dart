@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 class SettingsController extends GetxController {
-  bool _isDarkTheme = false;
+  RxBool _isDarkTheme = false.obs;
 
-  bool get isDarkTheme => this._isDarkTheme;
+  bool get isDarkTheme => this._isDarkTheme.value;
 
   @override
   void onReady() {
@@ -16,12 +16,12 @@ class SettingsController extends GetxController {
   }
 
   void getThemeMode() async {
-    _isDarkTheme = AdaptiveThemeMode.dark == await AdaptiveTheme.getThemeMode();
+    _isDarkTheme.value = AdaptiveThemeMode.dark == await AdaptiveTheme.getThemeMode();
     update();
   }
 
   void toggleThemeMode(BuildContext context) {
-    _isDarkTheme ? AdaptiveTheme.of(context).setLight() : AdaptiveTheme.of(context).setDark();
+    _isDarkTheme.value ? AdaptiveTheme.of(context).setLight() : AdaptiveTheme.of(context).setDark();
     getThemeMode();
   }
 }

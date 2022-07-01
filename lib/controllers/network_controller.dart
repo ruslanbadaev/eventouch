@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
 import 'package:pres7t/models/user.dart';
+import 'package:pres7t/utils/app_errors.dart';
 
 import '../mixins/cache_manager.dart';
 import '../models/event.dart';
@@ -140,15 +141,11 @@ class NetworkController extends GetxController with CacheManager {
         fromJson: UserModel.fromJson,
       );
     } on DioError catch (error) {
-      log('||||||||||3 $error');
-
       return ResponseModel<UserModel>.fromJson(
         error.response?.data as Map<String, dynamic>,
         fromJson: null,
       );
     } catch (error) {
-      log('||||||||||2 $error');
-
       return ResponseModel<UserModel>.fromJson(
         {'error': error},
         fromJson: null,
@@ -166,7 +163,7 @@ class NetworkController extends GetxController with CacheManager {
       );
     } on DioError catch (error) {
       return ResponseModel<List<EventModel>>.fromJson(
-        error.response?.data as Map<String, dynamic>,
+        {'error': AppErrors.parseNetworkError(error)},
         fromJson: null,
       );
     }
