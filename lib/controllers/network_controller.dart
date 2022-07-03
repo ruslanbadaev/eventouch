@@ -162,6 +162,10 @@ class NetworkController extends GetxController with CacheManager {
         fromJson: EventModel.listFromJson,
       );
     } on DioError catch (error) {
+      log(error.message.toString(), name: 'error.message.toString()');
+      log(error.toString(), name: 'error.toString()');
+      log(error.error.toString(), name: 'error.error.toString()');
+      log(error.response.toString(), name: 'error.response.toString()');
       return ResponseModel<List<EventModel>>.fromJson(
         {'error': AppErrors.parseNetworkError(error)},
         fromJson: null,

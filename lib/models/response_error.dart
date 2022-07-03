@@ -1,44 +1,42 @@
-import 'dart:developer';
-
 abstract class ErrorMessage {
   String? get code;
-  List? get messages;
+  String? get message;
 }
 
 class ErrorMessageModel extends ErrorMessage {
   @override
   final String? code;
   @override
-  final List messages;
+  final String message;
 
   ErrorMessageModel({
     this.code,
-    required this.messages,
+    required this.message,
   });
 
   factory ErrorMessageModel.fromJson(Map<String, dynamic> data) {
     try {
-      log(data.toString(), name: 'ErrorMessageModel.fromJson');
-      if (data['msg'] is List) {}
-      if (data['msg'] is String) {
-        data['msg'] = [data['msg']];
-      }
-      if (data['msg'] == null) {}
-      log(data['error'] ?? data, name: '?? data');
+      // log(data.toString(), name: 'ErrorMessageModel.fromJson');
+      // if (data['msg'] is List) {}
+      // if (data['msg'] is String) {
+      //   data['msg'] = [data['msg']];
+      // }
+      // if (data['msg'] == null) {}
+      // log(data['error'] ?? data, name: '?? data');
       return ErrorMessageModel(
-        code: data['code'],
-        messages: [data['msg'] ?? data['error'] ?? data],
+        code: null,
+        message: data['error'],
       );
     } catch (e) {
       return ErrorMessageModel(
-        code: data['code'],
-        messages: [data.toString()],
+        code: null,
+        message: data.toString(),
       );
     }
   }
 
   @override
   String toString() {
-    return 'ErrorMessageModel{code: $code, messages: $messages}';
+    return 'ErrorMessageModel{code: $code, messages: $message}';
   }
 }

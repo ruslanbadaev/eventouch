@@ -41,7 +41,6 @@ class ResponseModel<T> {
       // } else {
       //   response = fromJson(json);
       // }
-      print(response);
 
       return ResponseModel(
         response,

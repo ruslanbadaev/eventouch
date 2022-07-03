@@ -103,6 +103,8 @@ class MyApp extends StatelessWidget {
         ),
         initial: savedThemeMode ?? AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => GetMaterialApp(
+          theme: theme,
+          darkTheme: darkTheme,
           builder: EasyLoading.init(),
           debugShowCheckedModeBanner: false,
           title: AppStrings.APP_NAME_TITLE,
@@ -115,15 +117,5 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _getAppScreen(bool? isAuthScreen) {
-    if (isAuthScreen == null) {
-      return Loading();
-    } else if (isAuthScreen) {
-      return App();
-    } else {
-      return AuthScreen();
-    }
   }
 }

@@ -44,8 +44,8 @@ class AuthScreenController extends GetxController with Validation {
       );
       if (result.response != null) {
         user = result.response!;
-      } else if (result.error?.messages?.first != null) {
-        throw result.error?.messages?.first;
+      } else if (result.error?.message != null) {
+        throw result.error?.message ?? 'UNKNOWN_ERROR';
       } else if (result.error == null) {
         throw 'UNKNOWN_ERROR';
       } else {
@@ -80,8 +80,8 @@ class AuthScreenController extends GetxController with Validation {
       );
       if (result.response != null) {
         user = result.response!;
-      } else if (result.error?.messages?.first != null) {
-        throw result.error?.messages?.first;
+      } else if (result.error?.message != null) {
+        throw result.error?.message ?? 'UNKNOWN_ERROR';
       } else if (result.error == null) {
         throw 'UNKNOWN_ERROR';
       } else {

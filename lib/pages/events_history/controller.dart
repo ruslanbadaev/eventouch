@@ -36,7 +36,7 @@ class EventsHistoryScreenController extends GetxController {
         events = result.response!;
       } else {
         AppDialog.getErrorDialog(
-          result.error!.messages!.first.toString(),
+          result.error!.message ?? 'Oops! Unknown error. Please try again later.',
         );
       }
       _isLoading = false;
