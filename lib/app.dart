@@ -42,7 +42,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
           child: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
+              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor,
               elevation: 0,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,7 +93,12 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                   FadeIndexedStack(
                     index: controller.tabIndex,
                     duration: Duration(milliseconds: 800),
-                    children: _screens,
+                    children: [
+                      MapScreen(),
+                      FriendsScreen(),
+                      EventsHistoryScreen(),
+                      SettingsScreen(),
+                    ],
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -106,7 +111,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
               iconSize: 36.0,
               opacity: 1,
               strokeColor: _bottomSheetBackgroundColor,
-              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor!,
+              backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor ?? Colors.red,
               currentIndex: controller.tabIndex,
               scaleFactor: .5,
               items: [

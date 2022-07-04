@@ -21,8 +21,8 @@ class SettingsController extends GetxController {
   }
 
   void toggleThemeMode(BuildContext context) {
-    AdaptiveTheme.of(context).toggleThemeMode();
-    // _isDarkTheme.value ? AdaptiveTheme.of(context).setLight() : AdaptiveTheme.of(context).setDark();
+    // AdaptiveTheme.of(context).toggleThemeMode();
+    _isDarkTheme.value ? AdaptiveTheme.of(context).setLight() : AdaptiveTheme.of(context).setDark();
     getThemeMode();
   }
 }

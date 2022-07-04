@@ -1,8 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/pages/auth/auth.dart';
 
+import '../pages/auth/auth.dart';
 import '../pages/auth/widgets/auth_confirm_button.dart';
 import '../utils/constants/colors.dart';
 

@@ -48,11 +48,11 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with SingleTi
                             'Visited',
                             style: controller.selectedStatusTab == EventStatus.visited
                                 ? TextStyle(
-                                    color: AppColors.WHITE,
+                                    color: AppColors.PURPLE,
                                     fontWeight: FontWeight.w600,
                                   )
                                 : TextStyle(
-                                    color: AppColors.PURPLE,
+                                    color: AdaptiveTheme.of(context).theme.accentColor,
                                     fontWeight: FontWeight.w400,
                                   ),
                           ),
@@ -68,11 +68,11 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with SingleTi
                               'Created',
                               style: controller.selectedStatusTab == EventStatus.created
                                   ? TextStyle(
-                                      color: AppColors.WHITE,
+                                      color: AppColors.PURPLE,
                                       fontWeight: FontWeight.w600,
                                     )
                                   : TextStyle(
-                                      color: AppColors.PURPLE,
+                                      color: AdaptiveTheme.of(context).theme.accentColor,
                                       fontWeight: FontWeight.w400,
                                     ),
                             ),
