@@ -14,12 +14,15 @@ class EventMarkerModel {
     required this.latLng,
     required this.eventType,
   });
+  static List<EventMarkerModel> listFromJson(List<dynamic> list) {
+    return list.map((json) => EventMarkerModel.fromJson(json)).toList();
+  }
 
   factory EventMarkerModel.fromJson(Map<String, dynamic> json) {
     return EventMarkerModel(
-      id: json['id'],
+      id: json['_id'],
       title: json['title'],
-      latLng: LatLng(double.parse(json['lat']), double.parse(json['lng'])),
+      latLng: LatLng(json['location']['lat'], json['location']['lng']),
       eventType: getEventTypeFromString(json['type']),
     );
   }

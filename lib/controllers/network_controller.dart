@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
+import 'package:pres7t/models/event_marker.dart';
 import 'package:pres7t/models/user.dart';
 import 'package:pres7t/utils/app_errors.dart';
 
@@ -155,18 +156,44 @@ class NetworkController extends GetxController with CacheManager {
 
   Future<ResponseModel<List<EventModel>>> getEventsHistory({required EventStatus status}) async {
     try {
+      log('${AppLinks.HOST}/events?status=${status.name}');
       Response response = await dio.get('${AppLinks.HOST}/events?status=${status.name}');
+      print(response.data);
 
       return ResponseModel<List<EventModel>>.fromJson(
         response.data as Map<String, dynamic>,
         fromJson: EventModel.listFromJson,
       );
     } on DioError catch (error) {
-      log(error.message.toString(), name: 'error.message.toString()');
-      log(error.toString(), name: 'error.toString()');
-      log(error.error.toString(), name: 'error.error.toString()');
-      log(error.response.toString(), name: 'error.response.toString()');
       return ResponseModel<List<EventModel>>.fromJson(
+        {'error': AppErrors.parseNetworkError(error)},
+        fromJson: null,
+      );
+    }
+  }
+
+  Future<ResponseModel<List<EventMarkerModel>>> getEventsByPosition({
+    required double lat,
+    required double lng,
+  }) async {
+    try {
+      log('${AppLinks.HOST}/events/position', name: 'R --->');
+      Response response = await dio.get(
+        '${AppLinks.HOST}/events/position',
+        queryParameters: {
+          "lat": 13,
+          "lng": 109,
+        },
+      );
+
+      print(response.data);
+
+      return ResponseModel<List<EventMarkerModel>>.fromJson(
+        response.data as Map<String, dynamic>,
+        fromJson: EventMarkerModel.listFromJson,
+      );
+    } on DioError catch (error) {
+      return ResponseModel<List<EventMarkerModel>>.fromJson(
         {'error': AppErrors.parseNetworkError(error)},
         fromJson: null,
       );

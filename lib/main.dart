@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     this.savedThemeMode,
   });
 
-  ThemeData lightTheme = ThemeData(
+  ThemeData _lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.WHITE,
     accentColor: AppColors.PRIMARY,
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
     cardColor: AppColors.WHITE,
   );
 
-  ThemeData darkTheme = ThemeData(
+  ThemeData _darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.PRIMARY,
     accentColor: AppColors.WHITE,
@@ -103,61 +103,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: () => AdaptiveTheme(
-        light: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: AppColors.WHITE,
-          accentColor: AppColors.PRIMARY,
-          textTheme: TextTheme(
-            headline1: TextStyle(
-              color: AppColors.PRIMARY,
-              fontSize: 24,
-            ),
-            bodyText1: TextStyle(
-              color: AppColors.PRIMARY,
-              fontWeight: FontWeight.w600,
-            ),
-            bodyText2: TextStyle(
-              color: AppColors.PRIMARY_DARK,
-            ),
-          ),
-          iconTheme: IconThemeData(color: AppColors.PRIMARY),
-          backgroundColor: AppColors.WHITE,
-          appBarTheme: AppBarTheme(
-            backgroundColor: AppColors.WHITE,
-          ),
-          bottomSheetTheme: BottomSheetThemeData(
-            backgroundColor: AppColors.WHITE,
-          ),
-          cardColor: AppColors.WHITE,
-        ),
-        dark: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: AppColors.PRIMARY,
-          accentColor: AppColors.WHITE,
-          textTheme: TextTheme(
-            headline1: TextStyle(
-              color: AppColors.WHITE,
-              fontSize: 24,
-            ),
-            bodyText1: TextStyle(
-              color: AppColors.WHITE,
-              fontWeight: FontWeight.w600,
-            ),
-            bodyText2: TextStyle(
-              color: AppColors.WHITE,
-            ),
-          ),
-          iconTheme: IconThemeData(color: AppColors.WHITE),
-          backgroundColor: AppColors.PRIMARY_DARK,
-          bottomAppBarColor: AppColors.PRIMARY,
-          appBarTheme: AppBarTheme(
-            backgroundColor: AppColors.PRIMARY,
-          ),
-          bottomSheetTheme: BottomSheetThemeData(
-            backgroundColor: AppColors.PRIMARY,
-          ),
-          cardColor: AppColors.PRIMARY,
-        ),
+        light: _lightTheme,
+        dark: _darkTheme,
         initial: savedThemeMode ?? AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => GetMaterialApp(
           theme: theme,

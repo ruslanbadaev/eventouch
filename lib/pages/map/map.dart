@@ -57,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   MarkerLayerOptions(
                     markers: [
-                      for (EventMarkerModel event in controller.fetchEvents(latLng.LatLng(51.52, -0.093)))
+                      for (EventMarkerModel event in controller.events)
                         if (controller.selectedEventFilter == event.eventType || controller.selectedEventFilter == null)
                           Marker(
                             width: 156.0,

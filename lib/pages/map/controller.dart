@@ -9,7 +9,10 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../controllers/network_controller.dart';
 import '../../models/event_marker.dart';
+import '../../models/response.dart';
+import '../../models/user.dart';
 import '../../utils/app_dialog.dart';
 import '../../utils/event_type.dart';
 
@@ -24,62 +27,31 @@ class MapScreenController extends GetxController {
   void onInit() {
     super.onInit();
     determinePositionStream();
-    fetchEvents(LatLng(51.521, -0.083));
+
+    fetchEvents(_currentLocation);
   }
 
   EventType? get selectedEventFilter => _selectedEventFilter;
   LatLng get currentLocation => _currentLocation;
 
-  List<EventMarkerModel> fetchEvents(LatLng center) {
-    List<EventMarkerModel> events = [];
-    List<Map<String, dynamic>> jsonData = [
-      {
-        "id": "1",
-        "title": "Title Example First",
-        "lat": "51.52",
-        "lng": "-0.093",
-        "type": "tourist",
-      },
-      {
-        "id": "2",
-        "title": "Title Example Second",
-        "lat": "51.521",
-        "lng": "-0.083",
-        "type": "extravert",
-      },
-      {
-        "id": "3",
-        "title": "Title Example",
-        "lat": "51.526",
-        "lng": "-0.088",
-        "type": "nurd",
-      },
-      {
-        "id": "4",
-        "title": "Title Example",
-        "lat": "51.511",
-        "lng": "-0.086",
-        "type": "politic",
-      },
-      {
-        "id": "5",
-        "title": "Title Example",
-        "lat": "51.516",
-        "lng": "-0.08",
-        "type": "nurd",
-      },
-      {
-        "id": "6",
-        "title": "Title Example Last",
-        "lat": "51.526",
-        "lng": "-0.07",
-        "type": "extravert",
-      },
-    ];
+  void fetchEvents(LatLng center) async {
+    ResponseModel<List<EventMarkerModel>> result = await NetworkController().getEventsByPosition(
+      lat: center.latitude,
+      lng: center.longitude,
+    );
+    if (result.response != null) {
+      events = result.response!;
 
-    for (Map<String, dynamic> event in jsonData) events.add(EventMarkerModel.fromJson(event));
+      update();
+    } else if (result.error?.message != null) {
+      throw result.error?.message ?? 'UNKNOWN_ERROR';
+    } else if (result.error == null) {
+      throw 'UNKNOWN_ERROR';
+    } else {
+      throw result.error.toString();
+    }
 
-    return events;
+    update();
   }
 
   void selectEventFilter(EventType event) {
