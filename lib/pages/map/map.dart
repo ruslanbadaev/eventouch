@@ -5,13 +5,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart' as latLng;
-import 'package:pres7t/utils/constants/icons.dart';
 
 import '../../models/event_marker.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/constants/icons.dart';
 import '../../utils/event_type.dart';
-import '../create_event/create_event.dart';
 import '../event/event.dart';
 import 'controller.dart';
 import 'widgets/cloud_marker.dart';

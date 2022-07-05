@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/utils/validator.dart';
 
 import '../../../utils/app_dialog.dart';
+import '../../../utils/validator.dart';
+import '../../../widgets/custom_text_field.dart';
 import '../controller.dart';
 import 'auth_confirm_button.dart';
-import 'password_field.dart';
 
 class SignUpWidget extends StatefulWidget {
   Function onConfirm;
@@ -43,62 +43,56 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
+                  CustomTextFieldWidget(
+                    label: 'Name',
+                    isPassword: true,
                     controller: controller.nameController,
-                    style: TextStyle(fontSize: 24),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      labelText: "Name",
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      errorText: Validator.nameError(
-                        controller.nameController.text,
-                      ),
+                    keyboardType: TextInputType.name,
+                    onChanged: () => setState(() {}),
+                    errorText: Validator.nameError(
+                      controller.nameController.text,
                     ),
                   ),
                   SizedBox(
                     height: 24,
                   ),
-                  TextFormField(
+                  CustomTextFieldWidget(
+                    label: 'Email',
+                    isPassword: true,
                     controller: controller.emailController,
-                    style: TextStyle(fontSize: 24),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      errorText: Validator.emailError(
-                        controller.emailController.text,
-                      ),
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: () => setState(() {}),
+                    errorText: Validator.emailError(
+                      controller.emailController.text,
                     ),
                   ),
                   SizedBox(
                     height: 24,
                   ),
-                  PasswordFieldWidget(
-                    labelText: 'Password',
-                    errorText: Validator.passwordError(
-                      controller.passwordController.text,
-                      controller.repeatPasswordController.text,
-                    ),
+                  CustomTextFieldWidget(
+                    label: 'Password',
+                    isPassword: true,
                     controller: controller.passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     onChanged: () => setState(() {}),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  PasswordFieldWidget(
-                    labelText: 'Repeat password',
                     errorText: Validator.passwordError(
                       controller.passwordController.text,
                       controller.repeatPasswordController.text,
                     ),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  CustomTextFieldWidget(
+                    label: 'Repeat password',
+                    isPassword: true,
                     controller: controller.repeatPasswordController,
+                    keyboardType: TextInputType.visiblePassword,
                     onChanged: () => setState(() {}),
+                    errorText: Validator.passwordError(
+                      controller.passwordController.text,
+                      controller.repeatPasswordController.text,
+                    ),
                   ),
                   SizedBox(
                     height: 24,
