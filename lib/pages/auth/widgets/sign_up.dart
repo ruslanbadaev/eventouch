@@ -45,7 +45,6 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                 children: [
                   CustomTextFieldWidget(
                     label: 'Name',
-                    isPassword: true,
                     controller: controller.nameController,
                     keyboardType: TextInputType.name,
                     onChanged: () => setState(() {}),
@@ -58,7 +57,6 @@ class _SignUpWidgetState extends State<SignUpWidget> with TickerProviderStateMix
                   ),
                   CustomTextFieldWidget(
                     label: 'Email',
-                    isPassword: true,
                     controller: controller.emailController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: () => setState(() {}),

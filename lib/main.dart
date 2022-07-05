@@ -7,8 +7,6 @@ import 'package:get_storage/get_storage.dart';
 
 import 'app.dart';
 import 'controllers/session_controller.dart';
-import 'pages/auth/auth.dart';
-import 'pages/loading.dart';
 import 'utils/constants/colors.dart';
 import 'utils/constants/strings.dart';
 

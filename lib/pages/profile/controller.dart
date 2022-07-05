@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
   }
 
   UserModel getUserData() {
-    return GetStorage().read(CacheManagerKey.USER.toString()) ??
+    return GetStorage().read(CacheManagerKey.USER.name.toString()) ??
         UserModel(
           id: '0',
           name: '--',

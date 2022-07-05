@@ -2,16 +2,15 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:get_storage/get_storage.dart';
-import 'package:pres7t/models/event_marker.dart';
-import 'package:pres7t/models/user.dart';
-import 'package:pres7t/utils/app_errors.dart';
 
 import '../mixins/cache_manager.dart';
 import '../models/event.dart';
+import '../models/event_marker.dart';
 import '../models/response.dart';
 import '../models/token.dart';
+import '../models/user.dart';
 import '../pages/events_history/controller.dart';
+import '../utils/app_errors.dart';
 import '../utils/constants/links.dart';
 
 class NetworkController extends GetxController with CacheManager {
@@ -94,6 +93,8 @@ class NetworkController extends GetxController with CacheManager {
           'password': password,
         },
       );
+
+      log('||||||||||1 ${response.data}');
 
       if (response.data['token'] == null) throw 'TOKEN_IS_EMPTY';
       saveToken(response.data['token']);

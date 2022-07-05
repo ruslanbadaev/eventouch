@@ -3,16 +3,14 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pres7t/pages/auth/widgets/auth_success.dart';
-import 'package:pres7t/pages/auth/widgets/sign_in.dart';
 
-import '../../app.dart';
 import '../../controllers/session_controller.dart';
 import '../../utils/app_dialog.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
+import 'widgets/auth_success.dart';
 import 'widgets/email_verification.dart';
-
+import 'widgets/sign_in.dart';
 import 'widgets/sign_up.dart';
 import 'widgets/welcome.dart';
 
@@ -56,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         );
       } else if (authType == AuthScreenType.success) {
         return AuthSuccessWidget(
-          onConfirm: () => Get.back(),
+          onConfirm: () => Get.close(2),
         );
       } else {
         return WelcomeWidget();

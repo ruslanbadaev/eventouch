@@ -5,7 +5,7 @@ import '../models/user.dart';
 
 class AppStorage {
   static UserModel getCurrentUserData() {
-    return GetStorage().read(CacheManagerKey.USER.toString()) ??
+    return GetStorage().read(CacheManagerKey.USER.name.toString()) ??
         UserModel(
           id: '0',
           name: '--',
