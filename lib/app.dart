@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
+import 'controllers/session_controller.dart';
 import 'pages/events_history/events_history.dart';
 import 'pages/friends/friends.dart';
 import 'pages/map/map.dart';
@@ -21,7 +22,10 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> with TickerProviderStateMixin {
   Color _bottomSheetBackgroundColor = AppColors.PURPLE!;
+  final SessionController sessionController = Get.put(SessionController());
+
   initState() {
+    sessionController.checkLogged();
     super.initState();
   }
 
