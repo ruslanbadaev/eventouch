@@ -58,6 +58,16 @@ class NetworkController extends GetxController with CacheManager {
 
       if (response.data['token'] == null) throw 'TOKEN_IS_EMPTY';
       saveToken(response.data['token']);
+
+      UserModel.saveCurrentUser(
+        id: UserModel.fromJson(response.data['user']).id,
+        name: UserModel.fromJson(response.data['user']).name,
+        email: UserModel.fromJson(response.data['user']).email,
+        role: UserModel.fromJson(response.data['user']).role,
+        description: UserModel.fromJson(response.data['user']).description,
+        verified: UserModel.fromJson(response.data['user']).verified,
+        avatar: UserModel.fromJson(response.data['user']).avatar,
+      );
       log('||||||||||4 ${response.data}');
 
       return ResponseModel<UserModel>.fromJson(
@@ -98,7 +108,16 @@ class NetworkController extends GetxController with CacheManager {
 
       if (response.data['token'] == null) throw 'TOKEN_IS_EMPTY';
       saveToken(response.data['token']);
-      saveUser(UserModel.fromJson(response.data['user']));
+
+      UserModel.saveCurrentUser(
+        id: UserModel.fromJson(response.data['user']).id,
+        name: UserModel.fromJson(response.data['user']).name,
+        email: UserModel.fromJson(response.data['user']).email,
+        role: UserModel.fromJson(response.data['user']).role,
+        description: UserModel.fromJson(response.data['user']).description,
+        verified: UserModel.fromJson(response.data['user']).verified,
+        avatar: UserModel.fromJson(response.data['user']).avatar,
+      );
 
       return ResponseModel<UserModel>.fromJson(
         response.data['user'] as Map<String, dynamic>,

@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       builder: (controller) {
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
-          body: !sessionController.isLogged.value
+          body: controller.currentUser == null
               ? UnauthWidget(onPressed: () => {})
               : SafeArea(
                   child: Column(
@@ -67,8 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                       ),
                       SizedBox(height: 28),
                       EditebleField(
-                        title: controller.getUserData().name,
-                        subtitle: controller.getUserData().description ?? '',
+                        title: controller.currentUser?.name ?? '',
+                        subtitle: controller.currentUser?.description ?? '',
                       ),
                       SingleLineTile(
                         id: '1',

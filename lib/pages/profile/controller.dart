@@ -1,41 +1,21 @@
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:pres7t/models/user.dart';
 
-import '../../mixins/cache_manager.dart';
-import '../../models/profile.dart';
+import '../../models/user.dart';
 
 class ProfileController extends GetxController {
-  Map<String, dynamic> profileJson = {
-    "id": "1",
-    "name": "1",
-    "email": "1",
-    "avatarUrl": "1",
-  };
-
-  ProfileModel? _profileData;
+  UserModel? _currentUser;
 
   @override
   void onInit() {
+    getUserData();
     super.onInit();
   }
 
-  ProfileModel? get profileData => _profileData;
+  UserModel? get currentUser => _currentUser;
 
-  fetchProfileData() {
-    _profileData = ProfileModel.fromJson(profileJson);
+  void getUserData() async {
+    _currentUser = await UserModel.getCurrentUser();
+    update();
   }
-
-  UserModel getUserData() {
-    return GetStorage().read(CacheManagerKey.USER.name.toString()) ??
-        UserModel(
-          id: '0',
-          name: '--',
-          email: '--',
-          role: '--',
-        );
-  }
-
-  void updateProfile() {}
 }
