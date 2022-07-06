@@ -2,7 +2,6 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/session_controller.dart';
 import '../../utils/constants/colors.dart';
 import '../../widgets/editible_field.dart';
 import '../../widgets/single_line_tile.dart';
@@ -10,10 +9,12 @@ import '../../widgets/unauth_widget.dart';
 import 'controller.dart';
 
 class ProfileScreen extends StatefulWidget {
-  String id;
+  String? id;
+  Function? onClose;
   ProfileScreen({
     Key? key,
-    required this.id,
+    this.id,
+    this.onClose,
   }) : super(key: key);
 
   @override
@@ -21,7 +22,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
-  final SessionController sessionController = Get.put(SessionController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         return Scaffold(
           backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
           body: controller.currentUser == null
-              ? UnauthWidget(onPressed: () => {})
+              ? UnauthWidget(onPressed: () => {controller.getUserData()})
               : SafeArea(
                   child: Column(
                     children: [
@@ -43,7 +43,10 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               color: AppColors.PINK,
                               size: 36,
                             ),
-                            onPressed: () => {Get.back()},
+                            onPressed: () => {
+                              Get.back(),
+                              (widget.onClose ?? () => {})(),
+                            },
                           ),
                           GestureDetector(
                             onTap: () => {},

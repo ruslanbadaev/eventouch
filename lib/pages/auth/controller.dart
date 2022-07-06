@@ -15,8 +15,8 @@ class AuthScreenController extends GetxController with Validation {
   UserModel? _selectedUser;
   AuthScreenType _authType = AuthScreenType.welcome;
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: 'r.badaeff@gmail.com');
+  TextEditingController passwordController = TextEditingController(text: 'Password!1');
   TextEditingController repeatPasswordController = TextEditingController();
 
   bool get isAuthScreen => _isAuthScreen;
@@ -61,10 +61,6 @@ class AuthScreenController extends GetxController with Validation {
         e.toString(),
       );
 
-      // AppDialog.getErrorDialog(
-      //   'Oops! Unknown error. Please try again later.',
-      //   details: e.toString(),
-      // );
       _isLoading = false;
       update();
     }

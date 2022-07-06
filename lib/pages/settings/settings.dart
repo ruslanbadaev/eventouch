@@ -7,6 +7,7 @@ import '../../controllers/session_controller.dart';
 import '../../utils/app_dialog.dart';
 import '../../utils/constants/colors.dart';
 import '../../widgets/editible_field.dart';
+import '../auth/auth.dart';
 import 'controller.dart';
 import 'languages.dart';
 
@@ -66,19 +67,23 @@ class _SettingsScreensState extends State<SettingsScreen> with TickerProviderSta
                 ),
                 ListTile(
                   onTap: () async {
-                    AppDialog.getSelectDialog(
-                      text: 'Logout?',
-                      onSuccess: () => {
-                        Get.back(),
-                        sessionController.logOut(),
-                        EasyLoading.showSuccess('Great Success!'),
-                      },
-                    );
+                    controller.currentUser == null
+                        ? Get.to(AuthScreen(
+                            onClose: () => controller.getCurrentUser(),
+                          ))
+                        : AppDialog.getSelectDialog(
+                            text: 'Logout?',
+                            onSuccess: () => {
+                              Get.back(),
+                              sessionController.logOut(),
+                              EasyLoading.showSuccess('Great Success!').then((value) => controller.getCurrentUser()),
+                            },
+                          );
                   },
                   title: Text(
-                    'Logout',
+                    controller.currentUser == null ? 'Login' : 'Logout',
                     style: Theme.of(context).textTheme.headline2?.copyWith(
-                          color: AppColors.ORANGE,
+                          color: controller.currentUser == null ? AppColors.BLUE : AppColors.ORANGE,
                           fontSize: 24,
                         ),
                   ),

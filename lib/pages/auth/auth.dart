@@ -15,7 +15,11 @@ import 'widgets/sign_up.dart';
 import 'widgets/welcome.dart';
 
 class AuthScreen extends StatefulWidget {
-  AuthScreen({Key? key}) : super(key: key);
+  Function? onClose;
+  AuthScreen({
+    Key? key,
+    this.onClose,
+  }) : super(key: key);
 
   @override
   _AuthScreenState createState() => _AuthScreenState();
@@ -49,13 +53,18 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         );
       } else if (authType == AuthScreenType.emailVerification) {
         return EmailVerificationWidget(
-          onConfirm: () => Get.close(2),
+          onConfirm: () => {
+            Get.close(1),
+            (widget.onClose ?? () => {})(),
+          },
           onBack: () => {AppDialog.getInfoDialog('The confirmation code was sent again')},
         );
       } else if (authType == AuthScreenType.success) {
         return AuthSuccessWidget(
-          onConfirm: () => Get.close(2),
-        );
+            onConfirm: () => {
+                  Get.close(1),
+                  (widget.onClose ?? () => {})(),
+                });
       } else {
         return WelcomeWidget();
       }
@@ -81,7 +90,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                     color: AppColors.PRIMARY,
                     size: 36,
                   ),
-                  onPressed: () => {Get.close(2)},
+                  onPressed: () => {
+                    Get.close(1),
+                    (widget.onClose ?? () => {})(),
+                  },
                 ),
               ),
               Align(

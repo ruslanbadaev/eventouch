@@ -43,7 +43,9 @@ class UnauthWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: AuthConfirmWidget(
               confirmTitle: 'Go to login',
-              onConfirm: () => Get.to(AuthScreen()),
+              onConfirm: () => Get.to(AuthScreen(
+                onClose: onPressed,
+              )),
               onBack: () => Get.back(),
             ),
           ),

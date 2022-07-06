@@ -1,12 +1,20 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:pres7t/models/user.dart';
 
 import '../mixins/cache_manager.dart';
+import '../models/user.dart';
 
 class SessionController extends GetxController with CacheManager {
   final isLogged = false.obs;
+  UserModel? _currentUser;
+
+  UserModel? get currentUser => _currentUser;
+
+  Future<void> getCurrentUser() async {
+    _currentUser = await UserModel.getCurrentUser();
+    update();
+  }
 
   void logOut() {
     isLogged.value = false;

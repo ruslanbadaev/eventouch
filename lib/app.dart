@@ -2,6 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/pages/settings/controller.dart';
 
 import 'controller.dart';
 import 'controllers/session_controller.dart';
@@ -23,6 +24,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with TickerProviderStateMixin {
   Color _bottomSheetBackgroundColor = AppColors.PURPLE!;
   final SessionController sessionController = Get.put(SessionController());
+  final SettingsController settingsController = Get.put(SettingsController());
 
   initState() {
     sessionController.checkLogged();
@@ -77,6 +79,9 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                       Get.to(
                         () => ProfileScreen(
                           id: 'xxx',
+                          onClose: () => {
+                            settingsController.getCurrentUser(),
+                          },
                         ),
                         transition: Transition.upToDown,
                       ),
