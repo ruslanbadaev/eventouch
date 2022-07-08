@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
-import '../../../utils/name_parser.dart';
+import '../../../utils/constants/strings.dart';
 
 class UserWidget extends StatefulWidget {
   String id;
@@ -52,12 +52,10 @@ class _UserWidgetState extends State<UserWidget> {
                   child: CircleAvatar(
                     backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
                     radius: 36,
-                    child: getAbbreviation(widget.name) == null
-                        ? Icon(Icons.person_rounded)
-                        : Text(
-                            getAbbreviation(widget.name)!,
-                            style: TextStyle(fontWeight: FontWeight.w700),
-                          ),
+                    child: Text(
+                      AppStrings.getInitials(widget.name),
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
                 Container(

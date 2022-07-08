@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:blobs/blobs.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,39 +118,43 @@ class _AppState extends State<App> with TickerProviderStateMixin {
               ),
             ),
             bottomNavigationBar: CustomNavigationBar(
-              iconSize: 36.0,
+              iconSize: 76.0,
               opacity: 1,
               strokeColor: _bottomSheetBackgroundColor,
               backgroundColor: AdaptiveTheme.of(context).theme.bottomSheetTheme.backgroundColor ?? Colors.red,
               currentIndex: controller.tabIndex,
-              scaleFactor: .5,
+              scaleFactor: .2,
               items: [
                 CustomNavigationBarItem(
-                  icon: Icon(
-                    Icons.map_rounded,
-                    size: controller.tabIndex == 0 ? 42 : 36,
-                    color: AppColors.PURPLE!.withOpacity(controller.tabIndex == 0 ? 1 : .5),
+                  icon: _navBarIcon(
+                    controller,
+                    iconData: Icons.map_rounded,
+                    color: AppColors.PURPLE!,
+                    index: 0,
                   ),
                 ),
                 CustomNavigationBarItem(
-                  icon: Icon(
-                    Icons.people_alt_rounded,
-                    size: controller.tabIndex == 1 ? 42 : 36,
-                    color: AppColors.PINK!.withOpacity(controller.tabIndex == 1 ? 1 : .5),
+                  icon: _navBarIcon(
+                    controller,
+                    iconData: Icons.people_alt_rounded,
+                    color: AppColors.PINK!,
+                    index: 1,
                   ),
                 ),
                 CustomNavigationBarItem(
-                  icon: Icon(
-                    Icons.menu_book_rounded,
-                    size: controller.tabIndex == 2 ? 42 : 36,
-                    color: AppColors.BLUE!.withOpacity(controller.tabIndex == 2 ? 1 : .5),
+                  icon: _navBarIcon(
+                    controller,
+                    iconData: Icons.menu_book_rounded,
+                    color: AppColors.BLUE!,
+                    index: 2,
                   ),
                 ),
                 CustomNavigationBarItem(
-                  icon: Icon(
-                    Icons.settings_rounded,
-                    size: controller.tabIndex == 3 ? 42 : 36,
-                    color: AppColors.ORANGE!.withOpacity(controller.tabIndex == 3 ? 1 : .5),
+                  icon: _navBarIcon(
+                    controller,
+                    iconData: Icons.settings_rounded,
+                    color: AppColors.ORANGE!,
+                    index: 3,
                   ),
                 ),
               ],
@@ -181,6 +186,34 @@ class _AppState extends State<App> with TickerProviderStateMixin {
           ),
         );
       },
+    );
+  }
+
+  Widget _navBarIcon(
+    AppController controller, {
+    required Color color,
+    required IconData iconData,
+    required int index,
+  }) {
+    return Stack(
+      children: [
+        Center(
+          child: Blob.random(
+            size: 76,
+            minGrowth: 6,
+            styles: BlobStyles(
+              color: color.withOpacity(controller.tabIndex == index ? .2 : .0),
+            ),
+          ),
+        ),
+        Center(
+          child: Icon(
+            iconData,
+            size: controller.tabIndex == index ? 42 : 36,
+            color: color.withOpacity(controller.tabIndex == index ? 1 : .5),
+          ),
+        ),
+      ],
     );
   }
 }

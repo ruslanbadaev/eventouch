@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class AppStrings {
   static const String APP_NAME_TITLE = "PRES7T";
   static const String APP_NAME = "pres7t";
@@ -15,6 +17,7 @@ class AppStrings {
         initials = name.length > 2 ? '${name[0]}${name[1]}' : name[0];
       }
     }
+    log(initials);
     return initials;
   }
 }

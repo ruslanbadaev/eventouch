@@ -98,9 +98,9 @@ class UserModel {
         name: await prefs.getString('name')!,
         email: await prefs.getString('email')!,
         role: await prefs.getString('role')!,
-        description: await prefs.getString('description') ?? '--',
-        verified: await prefs.getBool('verified') ?? false,
-        avatar: await prefs.getString('avatar') ?? '--',
+        description: await prefs.getString('description'),
+        verified: await prefs.getBool('verified'),
+        avatar: await prefs.getString('avatar'),
       );
     }
   }

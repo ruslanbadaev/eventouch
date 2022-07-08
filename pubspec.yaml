@@ -33,6 +33,7 @@ dependencies:
   date_time_picker: 2.1.0
   flutter_secure_storage: 5.0.2
   shared_preferences: 2.0.15
+  blobs: 2.0.0
 
 dev_dependencies:
   flutter_test:
