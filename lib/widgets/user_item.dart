@@ -39,7 +39,6 @@ class UserItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('====$onPressed');
         if (onPressed != null) {
           onPressed!();
         }
