@@ -86,8 +86,11 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
                               child: Container(
                                 padding: EdgeInsets.symmetric(vertical: 24, horizontal: 36),
                                 width: double.infinity,
-                                decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+                                // decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
                                 child: DateTimePicker(
+                                  style: TextStyle(
+                                    color: AppColors.PRIMARY,
+                                  ),
                                   cursorRadius: Radius.circular(36),
                                   controller: controller.dateTimeController,
                                   type: DateTimePickerType.dateTimeSeparate,
@@ -95,7 +98,7 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
                                   firstDate: DateTime(2022),
                                   lastDate: DateTime(2040),
                                   dateLabelText: 'Date',
-                                  timeLabelText: "Time",
+                                  timeLabelText: 'Time',
                                   selectableDayPredicate: (date) {
                                     return true;
                                   },
@@ -112,6 +115,19 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Positioned(
+                  top: 48,
+                  child: FadeInLeft(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.chevron_left_rounded,
+                        color: AppColors.PRIMARY!.withOpacity(.6),
+                        size: 48,
+                      ),
+                      onPressed: () => {Get.back()},
+                    ),
                   ),
                 ),
               ],

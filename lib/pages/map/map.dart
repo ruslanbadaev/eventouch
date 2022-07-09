@@ -46,14 +46,8 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 layers: [
                   TileLayerOptions(
-                    // urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                     urlTemplate:
                         'https://api.mapbox.com/styles/v1/ruslanbadaev/cl5ajqicy000214lib6iwbrjh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVzbGFuYmFkYWV2IiwiYSI6ImNsNWFqNzVvcjA1bzIzaW9kOTNsNno0aXUifQ.q0yLIKTEKmLuqLSYXLsSEQ',
-                    // additionalOptions: {
-                    //   'accessToken':
-                    //       'pk.eyJ1IjoicnVzbGFuYmFkYWV2IiwiYSI6ImNsNWFqNzVvcjA1bzIzaW9kOTNsNno0aXUifQ.q0yLIKTEKmLuqLSYXLsSEQ',
-                    //   'id': 'cl5ajqicy000214lib6iwbrjh',
-                    // },
                     subdomains: ['a', 'b', 'c'],
                     backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
                     retinaMode: true,

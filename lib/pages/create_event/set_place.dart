@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:lottie/lottie.dart' hide Marker;
 import 'package:pres7t/pages/create_event/set_datetime.dart';
-import 'package:pres7t/utils/app_storage.dart';
 
 import '../../utils/constants/colors.dart';
 import '../../utils/constants/icons.dart';
 import '../../utils/event_type.dart';
 import 'controller.dart';
-import 'event_demonstration.dart';
 
 class SetPlaceScreen extends StatefulWidget {
   SetPlaceScreen({
@@ -24,7 +23,8 @@ class SetPlaceScreen extends StatefulWidget {
 
 class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStateMixin {
   MapController _mapController = MapController();
-
+  final String _mapUrl =
+      'https://api.mapbox.com/styles/v1/ruslanbadaev/cl5ajqicy000214lib6iwbrjh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVzbGFuYmFkYWV2IiwiYSI6ImNsNWFqNzVvcjA1bzIzaW9kOTNsNno0aXUifQ.q0yLIKTEKmLuqLSYXLsSEQ';
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateEventController>(
@@ -36,7 +36,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
               'Set place for event',
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.PRIMARY,
+                color: AdaptiveTheme.of(context).theme.accentColor,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -56,8 +56,9 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                   ),
                   layers: [
                     TileLayerOptions(
-                      urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      urlTemplate: _mapUrl,
                       subdomains: ['a', 'b', 'c'],
+                      backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
                     ),
                     MarkerLayerOptions(
                       markers: [
@@ -146,20 +147,6 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                             ),
                           ),
                           SizedBox(height: 14),
-                          // FloatingActionButton.extended(
-                          //   onPressed: () => {Get.to(SetDatetimeScreen())},
-                          //   backgroundColor: AppColors.ORANGE,
-                          //   extendedPadding: EdgeInsets.all(24),
-                          //   elevation: 4,
-                          //   label: Text(
-                          //     'Set date',
-                          //     style: TextStyle(
-                          //       fontSize: 16,
-                          //       color: AppColors.PRIMARY,
-                          //       fontWeight: FontWeight.w600,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
@@ -187,25 +174,9 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
                   ),
                 ),
                 Align(
-                  child: Container(
-                    height: 128,
-                    width: 128,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                      gradient: RadialGradient(
-                        colors: [
-                          AppColors.WHITE.withOpacity(.8),
-                          AppColors.WHITE.withOpacity(.5),
-                          _getColorBySelectedType(controller.selectedEventType),
-                        ],
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.place_rounded,
-                      size: 36,
-                      color: AppColors.RED,
-                    ),
+                  child: Lottie.asset(
+                    'assets/animations/${_getColorNameBySelectedType(controller.selectedEventType)}_point.json',
+                    width: 256,
                   ),
                 ),
               ],
@@ -223,68 +194,37 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
               ),
               child: TextButton(
                 onPressed: () => {
-                  Get.to(() => SetPlaceScreen()),
+                  Get.to(() => SetDatetimeScreen()),
                 },
                 child: Text(
                   'Done',
                   style: TextStyle(
                     fontSize: 18,
-                    color: AppColors.PRIMARY,
+                    color: AdaptiveTheme.of(context).theme.accentColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
           ),
-
-          // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          // floatingActionButton: FadeInUpBig(
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(
-          //       horizontal: 12,
-          //     ),
-          //     child: TextButton(
-          //       onPressed: () async => {
-          //         Get.to(
-          //           () => EventDemonstrationScreen(
-          //             creatorName: AppStorage.getCurrentUserData().name,
-          //             creatorDescription: AppStorage.getCurrentUserData().description ?? '',
-          //             eventName: controller.nameController.text,
-          //             aboutEvent: controller.aboutEventController.text,
-          //             aboutYou: controller.aboutYouController.text,
-          //             aboutLocation: controller.aboutLocationController.text,
-          //           ),
-          //         ),
-          //       },
-          //       child: Text(
-          //         'Check result',
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: AppColors.PRIMARY,
-          //           fontWeight: FontWeight.w600,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         );
       },
     );
   }
 
-  Color _getColorBySelectedType(EventType type) {
+  String _getColorNameBySelectedType(EventType type) {
     switch (type) {
       case EventType.extravert:
-        return AppColors.PURPLE!;
+        return 'purple';
       case EventType.politic:
-        return AppColors.PINK!;
+        return 'pink';
       case EventType.tourist:
-        return AppColors.BLUE!;
+        return 'blue';
       case EventType.nurd:
-        return AppColors.ORANGE!;
+        return 'orange';
 
       default:
-        return AppColors.PURPLE!;
+        return 'purple';
     }
   }
 }

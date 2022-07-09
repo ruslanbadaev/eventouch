@@ -80,4 +80,20 @@ class Validator {
     }
     return errorText;
   }
+
+  static String? eventNameError(String text) {
+    String? errorText;
+    if (text.length < 4) {
+      errorText = 'EVENT_NAME_LENGTH_IS_NOT_ALLOWED';
+    }
+    return errorText;
+  }
+
+  static String? eventAboutError(String text) {
+    String? errorText;
+    if (text.length < 24) {
+      errorText = 'EVENT_DESCRIPTION_LENGTH_IS_NOT_ALLOWED';
+    }
+    return errorText;
+  }
 }

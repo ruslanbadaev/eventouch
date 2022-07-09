@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_storage.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
-import 'event_demonstration.dart';
 import 'set_place.dart';
 import 'widgets/image_icon.dart';
 import 'widgets/text_box_field.dart';
@@ -175,7 +173,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                   'Set place',
                   style: TextStyle(
                     fontSize: 18,
-                    color: AppColors.PRIMARY,
+                    color: AdaptiveTheme.of(context).theme.accentColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

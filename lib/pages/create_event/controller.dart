@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
+import '../../models/user.dart';
 import '../../utils/event_type.dart';
 
 class CreateEventController extends GetxController {
@@ -13,9 +14,19 @@ class CreateEventController extends GetxController {
   EventType _selectedEventType = EventType.tourist;
 
   bool _isLoading = false;
+  UserModel? _currentUser;
+
   @override
   void onInit() {
+    getUserData();
     super.onInit();
+  }
+
+  UserModel? get currentUser => _currentUser;
+
+  void getUserData() async {
+    _currentUser = await UserModel.getCurrentUser();
+    update();
   }
 
   bool get isLoading => this._isLoading;
