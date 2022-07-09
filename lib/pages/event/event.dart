@@ -44,7 +44,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
             children: [
               Stack(
                 children: [
-                  FadeInDown(
+                  FadeInDownBig(
                     child: Container(
                       child: CarouselSlider(
                         options: CarouselOptions(
@@ -142,10 +142,12 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 24),
-                        Text(
-                          'Python hackathone',
-                          style: AdaptiveTheme.of(context).theme.textTheme.headline1,
-                          // textAlign: TextAlign.center,
+                        FadeInDown(
+                          child: Text(
+                            'Python hackathone',
+                            style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+                            // textAlign: TextAlign.center,
+                          ),
                         ),
                         SizedBox(height: 12),
                         // Text(
@@ -167,40 +169,42 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                         //   ),
                         // ),
                         // SizedBox(height: 12),
-                        InkWell(
-                          onTap: () {},
-                          overlayColor: MaterialStateProperty.all(AppColors.PURPLE),
-                          child: Container(
-                            // padding: EdgeInsets.symmetric(vertical: 8),
-                            // margin: EdgeInsets.all(8),
-                            width: double.infinity,
-                            child: ListTile(
-                              leading: UserAvatarWidget(
-                                name: 'Ruslan Badaev',
-                                // imageUrl: 'imageUrl',
-                              ),
-                              title: Text(
-                                'Ruslan Badaev',
-                                style: AdaptiveTheme.of(context)
-                                    .theme
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: AdaptiveTheme.of(context).theme.accentColor),
-                              ),
-                              subtitle: Text(
-                                'Description or user status here',
-                                style: AdaptiveTheme.of(context)
-                                    .theme
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(color: AdaptiveTheme.of(context).theme.accentColor),
+                        FadeInDown(
+                          child: InkWell(
+                            onTap: () {},
+                            overlayColor: MaterialStateProperty.all(AppColors.PURPLE),
+                            child: Container(
+                              // padding: EdgeInsets.symmetric(vertical: 8),
+                              // margin: EdgeInsets.all(8),
+                              width: double.infinity,
+                              child: ListTile(
+                                leading: UserAvatarWidget(
+                                  name: 'Ruslan Badaev',
+                                  // imageUrl: 'imageUrl',
+                                ),
+                                title: Text(
+                                  'Ruslan Badaev',
+                                  style: AdaptiveTheme.of(context)
+                                      .theme
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(color: AdaptiveTheme.of(context).theme.accentColor),
+                                ),
+                                subtitle: Text(
+                                  'Description or user status here',
+                                  style: AdaptiveTheme.of(context)
+                                      .theme
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(color: AdaptiveTheme.of(context).theme.accentColor),
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 24),
 
-                        FadeInRight(
+                        FadeInUp(
                           child: TextBoxWidget(
                             title: 'About event',
                             body:
@@ -210,7 +214,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                           ),
                         ),
                         SizedBox(height: 24),
-                        FadeInLeft(
+                        FadeInUp(
                           child: TextBoxWidget(
                             title: 'About you',
                             body:
@@ -220,7 +224,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                           ),
                         ),
                         SizedBox(height: 24),
-                        FadeInLeft(
+                        FadeInUp(
                           child: TextBoxWidget(
                             title: 'About location',
                             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',

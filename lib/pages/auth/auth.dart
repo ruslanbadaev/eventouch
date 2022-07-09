@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../controllers/session_controller.dart';
 import '../../utils/app_dialog.dart';
@@ -99,10 +100,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 146),
+                  padding: EdgeInsets.only(top: 96),
                   child: Column(
                     children: [
-                      FadeInDown(
+                      FadeInDownBig(
                         child: RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(
@@ -126,13 +127,41 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      FadeInUp(
-                        child: Text(
-                          _getSubtitle(controller.authType),
-                          style: TextStyle(
-                              color: AppColors.WHITE.withOpacity(.7), fontWeight: FontWeight.w400, fontSize: 24),
-                        ),
+                      FadeInUpBig(
+                        child: Lottie.asset('assets/animations/login2.json'),
                       ),
+
+                      // FadeInDown(
+                      //   child: RichText(
+                      //     textAlign: TextAlign.center,
+                      //     text: TextSpan(
+                      //       style: TextStyle(
+                      //         fontSize: 48.0,
+                      //       ),
+                      //       children: <TextSpan>[
+                      //         TextSpan(
+                      //           text: 'PRES',
+                      //           style: TextStyle(color: AppColors.WHITE.withOpacity(.7), fontWeight: FontWeight.w400),
+                      //         ),
+                      //         TextSpan(
+                      //           text: '7',
+                      //           style: TextStyle(color: AppColors.WHITE, fontWeight: FontWeight.w600),
+                      //         ),
+                      //         TextSpan(
+                      //           text: 'T',
+                      //           style: TextStyle(color: AppColors.WHITE.withOpacity(.7), fontWeight: FontWeight.w400),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // FadeInUp(
+                      //   child: Text(
+                      //     _getSubtitle(controller.authType),
+                      //     style: TextStyle(
+                      //         color: AppColors.WHITE.withOpacity(.7), fontWeight: FontWeight.w400, fontSize: 24),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

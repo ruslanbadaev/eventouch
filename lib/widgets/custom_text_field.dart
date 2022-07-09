@@ -41,7 +41,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       decoration: InputDecoration(
         labelText: widget.label,
         filled: true,
-        labelStyle: TextStyle(fontSize: 24, color: widget.color ?? AppColors.PURPLE),
+        labelStyle: TextStyle(fontSize: 24, color: widget.color ?? AppColors.PRIMARY!.withOpacity(.6)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18.0),
           borderSide: BorderSide(
