@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app_storage.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
+import 'event_demonstration.dart';
 import 'set_place.dart';
 import 'widgets/image_icon.dart';
 import 'widgets/text_box_field.dart';
@@ -22,14 +24,6 @@ class CreateEventScreen extends StatefulWidget {
 }
 
 class _CreateEventScreenState extends State<CreateEventScreen> with TickerProviderStateMixin {
-  List<BoxShadow> shadow = [
-    BoxShadow(
-      color: AppColors.PRIMARY!.withOpacity(0.3),
-      spreadRadius: 1,
-      blurRadius: 3,
-      offset: Offset(3, 3),
-    )
-  ];
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateEventController>(
@@ -126,40 +120,33 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                           title: 'Event name',
                           controller: controller.nameController,
                           color: AppColors.ORANGE!,
-                          shadow: shadow,
                           maxLines: 1,
                         ),
                       ),
-                      SizedBox(height: 12),
                       FadeInRight(
                         child: FadeInRight(
                           child: TextBoxFieldWidget(
                             title: 'About event',
                             controller: controller.aboutEventController,
                             color: AppColors.PURPLE!,
-                            shadow: shadow,
                           ),
                         ),
                       ),
-                      SizedBox(height: 12),
                       FadeInLeft(
                         child: FadeInLeft(
                           child: TextBoxFieldWidget(
                             title: 'About you',
                             controller: controller.aboutYouController,
                             color: AppColors.BLUE!,
-                            shadow: shadow,
                           ),
                         ),
                       ),
-                      SizedBox(height: 12),
                       FadeInRight(
                         child: FadeInRight(
                           child: TextBoxFieldWidget(
                             title: 'About location',
                             controller: controller.aboutLocationController,
                             color: AppColors.PINK!,
-                            shadow: shadow,
                           ),
                         ),
                       ),
@@ -170,20 +157,27 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
               ),
             ],
           ),
-          floatingActionButton: FadeInRight(
-            child: FloatingActionButton.extended(
-              onPressed: () => {
-                Get.to(() => SetPlaceScreen()),
-              },
-              backgroundColor: AdaptiveTheme.of(context).theme.accentColor,
-              extendedPadding: EdgeInsets.all(24),
-              elevation: 4,
-              label: Text(
-                'Set place',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AdaptiveTheme.of(context).theme.primaryColor,
-                  fontWeight: FontWeight.w600,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FadeInUpBig(
+            child: Container(
+              decoration: BoxDecoration(
+                color: AdaptiveTheme.of(context).theme.backgroundColor.withOpacity(.8),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
+              child: TextButton(
+                onPressed: () => {
+                  Get.to(() => SetPlaceScreen()),
+                },
+                child: Text(
+                  'Set place',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.PRIMARY,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),

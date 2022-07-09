@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../utils/app_storage.dart';
 import '../../utils/constants/colors.dart';
@@ -40,6 +41,10 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      FadeInDownBig(
+                        child: LottieBuilder.asset('assets/animations/calendar.json'),
+                      ),
+                      SizedBox(height: 12),
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -73,7 +78,7 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
                       ),
                       FadeInUpBig(
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                          margin: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(36),
                             child: BackdropFilter(
@@ -112,28 +117,33 @@ class _SetDatetimeScreenState extends State<SetDatetimeScreen> with TickerProvid
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () async => {
-              Get.to(
-                () => EventDemonstrationScreen(
-                  creatorName: AppStorage.getCurrentUserData().name,
-                  creatorDescription: AppStorage.getCurrentUserData().description ?? '',
-                  eventName: controller.nameController.text,
-                  aboutEvent: controller.aboutEventController.text,
-                  aboutYou: controller.aboutYouController.text,
-                  aboutLocation: controller.aboutLocationController.text,
-                ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FadeInUpBig(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
               ),
-            },
-            backgroundColor: AppColors.ORANGE,
-            extendedPadding: EdgeInsets.all(24),
-            elevation: 4,
-            label: Text(
-              'Check result',
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.PRIMARY,
-                fontWeight: FontWeight.w600,
+              child: TextButton(
+                onPressed: () async => {
+                  Get.to(
+                    () => EventDemonstrationScreen(
+                      creatorName: AppStorage.getCurrentUserData().name,
+                      creatorDescription: AppStorage.getCurrentUserData().description ?? '',
+                      eventName: controller.nameController.text,
+                      aboutEvent: controller.aboutEventController.text,
+                      aboutYou: controller.aboutYouController.text,
+                      aboutLocation: controller.aboutLocationController.text,
+                    ),
+                  ),
+                },
+                child: Text(
+                  'Check result',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.PRIMARY,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ),

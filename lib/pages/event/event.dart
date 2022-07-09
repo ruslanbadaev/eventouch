@@ -1,6 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:blobs/blobs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../utils/constants/colors.dart';
-import '../../widgets/user_avatar.dart';
-import '../../widgets/user_item.dart';
-import 'controller.dart';
 import '../../widgets/text_box.dart';
+import '../../widgets/user_avatar.dart';
+import 'controller.dart';
 
 class EventScreen extends StatefulWidget {
   String id;
@@ -172,6 +170,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                         FadeInDown(
                           child: InkWell(
                             onTap: () {},
+                            borderRadius: BorderRadius.circular(18),
                             overlayColor: MaterialStateProperty.all(AppColors.PURPLE),
                             child: Container(
                               // padding: EdgeInsets.symmetric(vertical: 8),
@@ -202,6 +201,7 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
                             ),
                           ),
                         ),
+
                         SizedBox(height: 24),
 
                         FadeInUp(

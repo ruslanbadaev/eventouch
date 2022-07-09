@@ -4,14 +4,14 @@ class TextBoxFieldWidget extends StatefulWidget {
   String title;
   TextEditingController controller;
   Color color;
-  List<BoxShadow>? shadow;
+  String? errorText;
   int? maxLines;
   TextBoxFieldWidget({
     Key? key,
     required this.title,
     required this.controller,
     required this.color,
-    required this.shadow,
+    this.errorText,
     this.maxLines,
   }) : super(key: key);
 
@@ -29,26 +29,14 @@ class _TextBoxFieldWidgetState extends State<TextBoxFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          widget.title,
-          style: TextStyle(
-            fontSize: 18,
-            color: widget.color,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-          margin: EdgeInsets.all(8),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: widget.color,
-            boxShadow: widget.shadow,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: TextField(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+      margin: EdgeInsets.all(8),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
             onChanged: (String value) => {
               setState(() {
                 if (value == '') {
@@ -60,6 +48,14 @@ class _TextBoxFieldWidgetState extends State<TextBoxFieldWidget> {
             },
             controller: widget.controller,
             decoration: InputDecoration(
+              label: Text(
+                widget.title,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: widget.color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               suffixIcon: IconButton(
                 onPressed: () => {
                   setState(() {
@@ -79,10 +75,11 @@ class _TextBoxFieldWidgetState extends State<TextBoxFieldWidget> {
                       ),
               ),
             ),
+            minLines: 1,
             maxLines: widget.maxLines ?? 5,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
