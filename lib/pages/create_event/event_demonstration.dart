@@ -151,6 +151,18 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: FadeInDown(
+                    child: Text(
+                      controller.dateTimeController.text,
+                      style: AdaptiveTheme.of(context).theme.textTheme.headline6!.copyWith(
+                            color: AdaptiveTheme.of(context).theme.accentColor.withOpacity(.7),
+                          ),
+                      // textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
                 SizedBox(height: 12),
                 FadeInDown(
                   child: Padding(
@@ -165,7 +177,7 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                         width: double.infinity,
                         child: ListTile(
                           leading: UserAvatarWidget(
-                            name: widget.creatorName,
+                            name: controller.currentUser?.name,
                             // imageUrl: 'imageUrl',
                           ),
                           title: Text(
@@ -174,12 +186,14 @@ class _EventDemonstrationScreenState extends State<EventDemonstrationScreen> wit
                                   color: AdaptiveTheme.of(context).theme.accentColor,
                                 ),
                           ),
-                          subtitle: Text(
-                            controller.currentUser?.description ?? '--',
-                            style: AdaptiveTheme.of(context).theme.textTheme.bodyText2!.copyWith(
-                                  color: AdaptiveTheme.of(context).theme.accentColor,
-                                ),
-                          ),
+                          subtitle: controller.currentUser?.description != null
+                              ? Text(
+                                  controller.currentUser!.description!,
+                                  style: AdaptiveTheme.of(context).theme.textTheme.bodyText2!.copyWith(
+                                        color: AdaptiveTheme.of(context).theme.accentColor,
+                                      ),
+                                )
+                              : null,
                         ),
                       ),
                     ),

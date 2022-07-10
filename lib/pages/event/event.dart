@@ -134,17 +134,20 @@ class _EventScreenState extends State<EventScreen> with TickerProviderStateMixin
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 24),
                         FadeInDown(
-                          child: Text(
-                            'Python hackathone',
-                            style: AdaptiveTheme.of(context).theme.textTheme.headline1,
-                            // textAlign: TextAlign.center,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              'Python hackathone',
+                              style: AdaptiveTheme.of(context).theme.textTheme.headline1,
+                              // textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         SizedBox(height: 12),

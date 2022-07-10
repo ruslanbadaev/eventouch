@@ -6,6 +6,7 @@ class TextBoxFieldWidget extends StatefulWidget {
   Color color;
   String? errorText;
   int? maxLines;
+  Function? onChanged;
   TextBoxFieldWidget({
     Key? key,
     required this.title,
@@ -13,6 +14,7 @@ class TextBoxFieldWidget extends StatefulWidget {
     required this.color,
     this.errorText,
     this.maxLines,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class _TextBoxFieldWidgetState extends State<TextBoxFieldWidget> {
         children: [
           TextField(
             onChanged: (String value) => {
+              (widget.onChanged ?? () => {})(),
               setState(() {
                 if (value == '') {
                   latestText = null;
@@ -74,6 +77,7 @@ class _TextBoxFieldWidgetState extends State<TextBoxFieldWidget> {
                         Icons.undo_rounded,
                       ),
               ),
+              errorText: widget.errorText,
             ),
             minLines: 1,
             maxLines: widget.maxLines ?? 5,

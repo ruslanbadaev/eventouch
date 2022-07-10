@@ -34,54 +34,54 @@ class _EventsHistoryScreenState extends State<EventsHistoryScreen> with SingleTi
         return controller.isLoading
             ? LoadingScreen()
             : Scaffold(
-                appBar: AppBar(
-                  backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      InkWell(
-                        onTap: () => {controller.changeTab(EventStatus.visited)},
-                        borderRadius: BorderRadius.circular(10),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
-                          child: Text(
-                            'Visited',
-                            style: controller.selectedStatusTab == EventStatus.visited
-                                ? TextStyle(
-                                    color: AppColors.PURPLE,
-                                    fontWeight: FontWeight.w600,
-                                  )
-                                : TextStyle(
-                                    color: AdaptiveTheme.of(context).theme.accentColor,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => {controller.changeTab(EventStatus.created)},
-                        borderRadius: BorderRadius.circular(10),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
-                          child: Container(
-                            child: Text(
-                              'Created',
-                              style: controller.selectedStatusTab == EventStatus.created
-                                  ? TextStyle(
-                                      color: AppColors.PURPLE,
-                                      fontWeight: FontWeight.w600,
-                                    )
-                                  : TextStyle(
-                                      color: AdaptiveTheme.of(context).theme.accentColor,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // appBar: AppBar(
+                //   backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
+                //   title: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       InkWell(
+                //         onTap: () => {controller.changeTab(EventStatus.visited)},
+                //         borderRadius: BorderRadius.circular(10),
+                //         child: Padding(
+                //           padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                //           child: Text(
+                //             'Visited',
+                //             style: controller.selectedStatusTab == EventStatus.visited
+                //                 ? TextStyle(
+                //                     color: AppColors.PURPLE,
+                //                     fontWeight: FontWeight.w600,
+                //                   )
+                //                 : TextStyle(
+                //                     color: AdaptiveTheme.of(context).theme.accentColor,
+                //                     fontWeight: FontWeight.w400,
+                //                   ),
+                //           ),
+                //         ),
+                //       ),
+                //       InkWell(
+                //         onTap: () => {controller.changeTab(EventStatus.created)},
+                //         borderRadius: BorderRadius.circular(10),
+                //         child: Padding(
+                //           padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                //           child: Container(
+                //             child: Text(
+                //               'Created',
+                //               style: controller.selectedStatusTab == EventStatus.created
+                //                   ? TextStyle(
+                //                       color: AppColors.PURPLE,
+                //                       fontWeight: FontWeight.w600,
+                //                     )
+                //                   : TextStyle(
+                //                       color: AdaptiveTheme.of(context).theme.accentColor,
+                //                       fontWeight: FontWeight.w400,
+                //                     ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
                 body: controller.events.isEmpty
                     ? EmptyWidget(onPressed: () => controller.getEventsHistory())

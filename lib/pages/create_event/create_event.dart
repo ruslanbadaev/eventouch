@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:pres7t/utils/validator.dart';
 
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
@@ -119,6 +120,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                           controller: controller.nameController,
                           color: AppColors.ORANGE!,
                           maxLines: 1,
+                          errorText: Validator.eventNameError(controller.nameController.text),
+                          onChanged: () => setState(() {}),
                         ),
                       ),
                       FadeInRight(
@@ -127,6 +130,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                             title: 'About event',
                             controller: controller.aboutEventController,
                             color: AppColors.PURPLE!,
+                            errorText: Validator.eventAboutError(controller.aboutEventController.text),
+                            onChanged: () => setState(() {}),
                           ),
                         ),
                       ),
@@ -136,6 +141,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                             title: 'About you',
                             controller: controller.aboutYouController,
                             color: AppColors.BLUE!,
+                            errorText: Validator.eventAboutError(controller.aboutYouController.text),
+                            onChanged: () => setState(() {}),
                           ),
                         ),
                       ),
@@ -145,6 +152,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
                             title: 'About location',
                             controller: controller.aboutLocationController,
                             color: AppColors.PINK!,
+                            errorText: Validator.eventAboutError(controller.aboutLocationController.text),
+                            onChanged: () => setState(() {}),
                           ),
                         ),
                       ),
@@ -167,7 +176,17 @@ class _CreateEventScreenState extends State<CreateEventScreen> with TickerProvid
               ),
               child: TextButton(
                 onPressed: () => {
-                  Get.to(() => SetPlaceScreen()),
+                  if (Validator.eventNameError(controller.nameController.text) == null &&
+                      Validator.eventAboutError(controller.aboutEventController.text) == null &&
+                      Validator.eventAboutError(controller.aboutYouController.text) == null &&
+                      Validator.eventAboutError(controller.aboutLocationController.text) == null)
+                    {
+                      Get.to(() => SetPlaceScreen()),
+                    }
+                  else
+                    {
+                      setState(() {}),
+                    }
                 },
                 child: Text(
                   'Set place',

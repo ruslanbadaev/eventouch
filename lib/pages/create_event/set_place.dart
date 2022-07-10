@@ -194,6 +194,7 @@ class _SetPlaceScreenState extends State<SetPlaceScreen> with TickerProviderStat
               ),
               child: TextButton(
                 onPressed: () => {
+                  controller.selectPlace(_mapController.center),
                   Get.to(() => SetDatetimeScreen()),
                 },
                 child: Text(
