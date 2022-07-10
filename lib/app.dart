@@ -90,7 +90,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
                     child: CircleAvatar(
                       backgroundColor: AppColors.BLUE,
                       backgroundImage: NetworkImage(
-                        'https://yt3.ggpht.com/a/AATXAJxQ-ZsPQu79yvh7ybjxkbu_R75dPcX-uuBEbw=s900-c-k-c0xffffffff-no-rj-mo',
+                        'https://avatarko.ru/img/kartinka/13/multfilm_Griffins_12389.jpg',
                       ),
                     ),
                   ),

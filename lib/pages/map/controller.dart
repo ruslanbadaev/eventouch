@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -12,7 +11,6 @@ import 'package:latlong2/latlong.dart';
 import '../../controllers/network_controller.dart';
 import '../../models/event_marker.dart';
 import '../../models/response.dart';
-import '../../models/user.dart';
 import '../../utils/app_dialog.dart';
 import '../../utils/event_type.dart';
 
@@ -21,7 +19,7 @@ class MapScreenController extends GetxController {
 
   late LocationSettings locationSettings;
   EventType? _selectedEventFilter;
-  LatLng _currentLocation = LatLng(0, 0);
+  LatLng _currentLocation = LatLng(12.2807445, 109.2018961);
   List<EventMarkerModel> events = [];
   @override
   void onInit() {
@@ -40,7 +38,35 @@ class MapScreenController extends GetxController {
       lng: center.longitude,
     );
     if (result.response != null) {
-      events = result.response!;
+      List<EventMarkerModel> testEvents = [
+        EventMarkerModel(
+          id: 'id',
+          title: 'Hiking in the mountains',
+          latLng: LatLng(12.29, 109.18),
+          eventType: EventType.tourist,
+        ),
+        EventMarkerModel(
+          id: 'id',
+          title: 'Beach party',
+          latLng: LatLng(12.243, 109.207),
+          eventType: EventType.extravert,
+        ),
+        EventMarkerModel(
+          id: 'id',
+          title: 'Annual Hackathon',
+          latLng: LatLng(12.24, 109.178),
+          eventType: EventType.nurd,
+        ),
+        EventMarkerModel(
+          id: 'id',
+          title: 'Sports jogging',
+          latLng: LatLng(12.26, 109.19),
+          eventType: EventType.tourist,
+        ),
+      ];
+
+      events = testEvents;
+      // events = result.response!;
 
       update();
     } else if (result.error?.message != null) {
